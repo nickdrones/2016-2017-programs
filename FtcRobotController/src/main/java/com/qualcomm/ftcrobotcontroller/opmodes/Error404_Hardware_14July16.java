@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by optim on 7/13/2016.
  * This is a test comment inserted by coach Belbas.  hello
- * 
+ *
  */
 public class Error404_Hardware_14July16 extends OpMode {
     DcMotor leftFront;
@@ -306,47 +306,43 @@ public class Error404_Hardware_14July16 extends OpMode {
             rightRear.setPower(power);
         }
     }
-    ///////////////////////////////////////////////////
-    // These set mode methods take a motor as a      //
-    // parameter and will first check if the motor   //
-    // is null. If not, it will set the desired mode.//
-    ///////////////////////////////////////////////////
-
-    void set_mode_withEncoders(DcMotor motor) {
-        if (motor != null) {
-            motor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        }
-
-    }
-
-    void set_mode_withoutEncoders(DcMotor motor) {
-        if (motor != null) {
-            motor.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
-        }
-    }
-
-    void set_mode_runtoposition(DcMotor motor) {
-        if (motor != null) {
-            motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+    ///////////////////////////////////////////////////////
+    // This set mode method uses two parameters:         //
+    // motor and a 3-4 letter mode abbreviation.         //
+    // If the motor is not null, the mode will be set to://
+    //RTP= Run to Position       //////////////////////////
+    //RUE= Run using encoders    //
+    //RWOE= Run without encoders //
+    ///////////////////////////////
+    void set_mode(DcMotor motor, String modetoset){
+        if (motor != null){
+            if (modetoset.equals("RTP")){
+                motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            }
+            if (modetoset.equals("RUE")){
+                motor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+            }
+            if (modetoset.equals("RWOE")){
+                motor.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
+            }
         }
     }
-
     ///////////////////////////////////////////////////////////
-    //This set direction method takes a parameter for        //
-    //the motor and a boolean. True if the motor is reversed,//
-    //false if the motor is going forward.                   //
+    //This set direction method takes two parameters: Motor  //
+    // and direction. The direction is set as F for forward  //
+    // and R for reversed. If the motor is not null, the     //
+    //direction is set.                                      //
     ///////////////////////////////////////////////////////////
-    void set_direction(DcMotor motor, boolean reversed) {
+    void set_direction(DcMotor motor, String direction) {
         if (motor != null) {
-            if (reversed) {
+            direction=direction.toLowerCase();
+            if (direction.equals("r")) {
                 motor.setDirection(DcMotor.Direction.REVERSE);
             }
-            else {
+            if (direction.equals("f")) {
                 motor.setDirection(DcMotor.Direction.FORWARD);
             }
         }
-
-
     }
     //////////////////////////////////////////
     //This method takes two parameters, one //
