@@ -594,10 +594,10 @@ public class Error404_Hardware_14July16 extends OpMode {
     //drive the distance input.                     //
     //////////////////////////////////////////////////
     int distance2encoder(int inches, int wheel_diameter, double gear_ratio) {
-    int temp =0;
-        temp= (int)(((3.14159265)*(wheel_diameter))/1140);
+    double temp =0;
+        temp= (int)(((3.14159265)*(wheel_diameter)));
         temp=(int)(temp*gear_ratio);
-        temp*=inches;
-        return temp;
+        temp=inches/temp;
+        return (int)temp*1140;
     }
 }
