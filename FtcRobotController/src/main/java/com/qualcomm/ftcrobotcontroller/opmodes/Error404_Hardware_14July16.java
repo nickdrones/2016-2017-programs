@@ -281,29 +281,9 @@ public class Error404_Hardware_14July16 extends OpMode {
     //If it is not null, the power is set //
     //to that motor.                      //
     ////////////////////////////////////////
-    void rf_set_power(double power)
-
-    {
-        if (rightFront != null) {
-            rightFront.setPower(power);
-        }
-    }
-
-    void lf_set_power(double power) {
-        if (leftFront != null) {
-            leftFront.setPower(power);
-        }
-    }
-
-    void lr_set_power(double power) {
-        if (leftRear != null) {
-            leftRear.setPower(power);
-        }
-    }
-
-    void rr_set_power(double power) {
-        if (rightRear != null) {
-            rightRear.setPower(power);
+      void set_power(double power, DcMotor motor){
+        if (motor != null) {
+            motor.setPower(power);
         }
     }
     ///////////////////////////////////////////////////////
