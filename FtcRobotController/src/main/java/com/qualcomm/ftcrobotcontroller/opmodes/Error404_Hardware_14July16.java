@@ -25,10 +25,10 @@ public class Error404_Hardware_14July16 extends OpMode {
     }
 
     public void loop() {
-        telemetry.addData("00 rf Power", rf_Get_Power());
-        telemetry.addData("02 rf Direction", rf_Get_Direction());
-        telemetry.addData("03 rf Mode", rf_Get_Mode());
-        telemetry.addData("01 rf Position", rf_Get_Position());
+        telemetry.addData("00 rf Power", rf_Get_Power_Tele());
+        telemetry.addData("02 rf Direction", rf_Get_Direction_Tele());
+        telemetry.addData("03 rf Mode", rf_Get_Mode_Tele());
+        telemetry.addData("01 rf Position", rf_Get_Position_Tele());
     }
 
     public void stop() {
@@ -39,7 +39,7 @@ public class Error404_Hardware_14July16 extends OpMode {
     //  driver station.  If device isn't found   //
     //      the telemetry will print "null".     //
     *//////////////////////////////////////////////
-    String lf_Get_Power() {
+    public String lf_Get_Power_Tele() {
         String motor_return = "";
 
         if (leftFront != null) {
@@ -51,7 +51,7 @@ public class Error404_Hardware_14July16 extends OpMode {
 
     }  //get power for leftFront motor
 
-    String rf_Get_Power() {
+    public String rf_Get_Power_Tele() {
 
         String motor_return = "";
         if (rightFront != null) {
@@ -63,7 +63,7 @@ public class Error404_Hardware_14July16 extends OpMode {
 
     }  //get power for rightFront motor
 
-    String lr_Get_Power() {
+    public String lr_Get_Power_tele() {
 
         String motor_return = "";
 
@@ -76,7 +76,7 @@ public class Error404_Hardware_14July16 extends OpMode {
 
     }  //get power for leftRear motor
 
-    String rr_Get_Power() {
+    public String rr_Get_Power_Tele() {
         String motor_return = "";
         if (rightRear != null) {
             motor_return += rightRear.getPower();
@@ -86,7 +86,7 @@ public class Error404_Hardware_14July16 extends OpMode {
         return motor_return;
     }  //get power for rightRear motor
 
-    public String lf_Get_Position() {
+    public String lf_Get_Position_Tele() {
         String motor_return = "";
 
         if (leftFront != null) {
@@ -97,7 +97,7 @@ public class Error404_Hardware_14July16 extends OpMode {
         return motor_return;
     }
 
-    public String rf_Get_Position() {
+    public String rf_Get_Position_Tele() {
         String motor_return = "";
 
         if (rightFront != null) {
@@ -108,7 +108,7 @@ public class Error404_Hardware_14July16 extends OpMode {
         return motor_return;
     }
 
-    public String lr_Get_Position() {
+    public String lr_Get_Position_Tele() {
         String motor_return = "";
 
         if (leftRear != null) {
@@ -120,7 +120,7 @@ public class Error404_Hardware_14July16 extends OpMode {
     }
 
 
-    public String rr_Get_Position() {
+    public String rr_Get_Position_Tele() {
         String motor_return = "";
 
         if (rightRear != null) {
@@ -128,6 +128,168 @@ public class Error404_Hardware_14July16 extends OpMode {
             return motor_return;
         }
         motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String lf_Get_Mode_Tele() {
+        String motor_return = "";
+        if (leftFront != null) {
+            motor_return += leftFront.getMode();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String rf_Get_Mode_Tele() {
+        String motor_return = "";
+        if (rightFront != null) {
+            motor_return += rightFront.getMode();
+            return motor_return;
+        }
+        motor_return += "null";
+        return motor_return;
+    }
+
+    public String lr_Get_Mode_Tele() {
+        String motor_return = "";
+        if (leftRear != null) {
+            motor_return += leftRear.getMode();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String rr_Get_Mode_Tele() {
+        String motor_return = "";
+        if (rightRear != null) {
+            motor_return += rightRear.getMode();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String lf_Get_Direction_Tele() {
+        String motor_return = "";
+        if (leftFront != null) {
+            motor_return += leftFront.getDirection();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String rf_Get_Direction_Tele() {
+        String motor_return = "";
+        if (rightFront != null) {
+            motor_return += rightFront.getDirection();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String lr_Get_Direction_Tele() {
+        String motor_return = "";
+        if (leftRear != null) {
+            motor_return += leftRear.getDirection();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String rr_Get_Direction_Tele() {
+        String motor_return = "";
+        if (rightRear != null) {
+            motor_return += rightRear.getDirection();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    ////////////////////////////////////////////
+    /*methods that are the hidden versions of //
+    // the get methods above, doing the same  //
+    //      things, but not printed out.      //
+    *///////////////////////////////////////////
+
+    int lf_Get_Power() {
+        int motor_return = 0;
+        if (leftFront != null) {
+            motor_return += leftFront.getPower();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    int rf_Get_Power() {
+        int motor_return = 0;
+        if (rightFront != null) {
+            motor_return += rightFront.getPower();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    int lr_Get_Power() {
+        int motor_return = 0;
+        if (leftRear != null) {
+            motor_return += leftRear.getPower();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    int rr_Get_Power() {
+        int motor_return = 0;
+        if (rightRear != null) {
+            motor_return += rightRear.getPower();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    public int lf_Get_Position() {
+        int motor_return = 0;
+
+        if (leftFront != null) {
+            motor_return += leftFront.getCurrentPosition();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    public int rf_Get_Position() {
+        int motor_return = 0;
+
+        if (rightFront != null) {
+            motor_return += rightFront.getCurrentPosition();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    public int lr_Get_Position() {
+        int motor_return = 0;
+
+        if (leftRear != null) {
+            motor_return += leftRear.getCurrentPosition();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    public int rr_Get_Position() {
+        int motor_return = 0;
+
+        if (rightRear != null) {
+            motor_return += rightRear.getCurrentPosition();
+            return motor_return;
+        }
         return motor_return;
     }
 
@@ -147,7 +309,7 @@ public class Error404_Hardware_14July16 extends OpMode {
             motor_return += rightFront.getMode();
             return motor_return;
         }
-        motor_return += "null";
+        motor_return += "NULL";
         return motor_return;
     }
 
@@ -209,6 +371,87 @@ public class Error404_Hardware_14July16 extends OpMode {
         }
         motor_return += "NULL";
         return motor_return;
+    }
+
+    //////////////////////////////////////////
+    /*methods that check if the motor has   //
+    // reached it's goal if found, else     //
+    //          returns false.              //
+    */////////////////////////////////////////
+
+    public boolean lf_Is_Encoder_Reached(int goal)
+    {
+            int encoder_count = lf_Get_Position();
+            if(encoder_count == goal)
+            {return true;}
+            else
+            {return false;}
+    }
+
+    public boolean rf_Is_Encoder_Reached(int goal)
+    {
+            int encoder_count = rf_Get_Position();
+            if(encoder_count == goal)
+            {return true;}
+            else
+            {return false;}
+    }
+
+    public boolean lr_Is_Encoder_Reached(int goal)
+    {
+            int encoder_count = lr_Get_Position();
+            if(encoder_count == goal)
+            {return true;}
+            else
+            {return false;}
+    }
+
+    public boolean rr_Is_Encoder_Reached(int goal)
+    {
+            int encoder_count = rr_Get_Position();
+            if(encoder_count == goal)
+            {return true;}
+            else
+            {return false;}
+    }
+
+    //////////////////////////////////////////////
+    /*  methods that check if motors are reset  //
+    //      if found, else returns false        //
+    */////////////////////////////////////////////
+
+
+    public boolean lf_Is_Encoder_Reset()
+    {
+            if(lf_Get_Position() == 0)
+            {return true;}
+            else
+            {return false;}
+    }
+
+    public boolean rf_Is_Encoder_Reset()
+    {
+            if(rf_Get_Position() == 0)
+            {return true;}
+            else
+            {return false;}
+    }
+
+
+    public boolean lr_Is_Encoder_Reset()
+    {
+            if(lr_Get_Position() == 0)
+            {return true;}
+            else
+            {return false;}
+    }
+
+    public boolean rr_Is_Encoder_Reset()
+    {
+            if(rr_Get_Position() == 0)
+            {return true;}
+            else
+            {return false;}
     }
 
 
