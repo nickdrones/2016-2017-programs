@@ -22,6 +22,13 @@ public class Error404_Hardware_14July16 extends OpMode {
     }
 
     public void start() {
+        set_direction(rightFront, "F");
+        set_power(1.0, rightFront);
+        set_mode(rightFront, "RTP");
+        set_position(rightFront, 1140);
+        rf_Reset_Encoder();
+        set_power(.2, rightFront);
+        set_position(rightFront, 1140);
     }
 
     public void loop() {
@@ -525,7 +532,7 @@ public class Error404_Hardware_14July16 extends OpMode {
     //to that motor.                      //
     ////////////////////////////////////////
       void set_power(double power, DcMotor motor){
-        if (motor != null) {
+          if (motor != null) {
             motor.setPower(power);
         }
     }
