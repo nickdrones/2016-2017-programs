@@ -7,10 +7,10 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 public class Error404_Hardware_14July16 extends OpMode {
-    DcMotor leftFront;
-    DcMotor rightFront;
-    DcMotor leftRear;
-    DcMotor rightRear;
+    private DcMotor leftFront;
+    private DcMotor rightFront;
+    private DcMotor leftRear;
+    private DcMotor rightRear;
 
     public void init() {
     }
