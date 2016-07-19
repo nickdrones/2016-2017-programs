@@ -15,8 +15,55 @@ public class Error404_Hardware_Tier1 extends OpMode {
     public void loop() { }
     public void stop() { }
 
+    ////////////////////////////////////////////
+    /*     raw data methods that are used     //
+    //           for decision making          //
+    *///////////////////////////////////////////
+
+    public double get_Power(DcMotor motor)
+    {
+        double motor_return = 0;
+        if(motor != null)
+        {
+            motor_return = motor.getPower();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    public int get_Position(DcMotor motor)
+    {
+        int motor_return = 0;
+        if (motor != null)
+        {
+            motor_return = motor.getCurrentPosition();
+            return motor_return;
+        }
+        return motor_return;
+    }
+
+    public String get_Mode(DcMotor motor) {
+        String motor_return = "";
+        if (motor != null) {
+            motor_return += motor.getMode();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
+    public String get_Direction(DcMotor motor) {
+        String motor_return = "";
+        if (motor != null) {
+            motor_return += motor.getDirection();
+            return motor_return;
+        }
+        motor_return += "NULL";
+        return motor_return;
+    }
+
     ///////////////////////////////////////////////
-    /* all these "get" methods send telemetry to //
+    /*   These "get" methods send telemetry to   //
     //  driver station.  If device isn't found   //
     //      the telemetry will print "null".     //
     *//////////////////////////////////////////////
@@ -68,56 +115,8 @@ public class Error404_Hardware_Tier1 extends OpMode {
         return motor_return;
     }
 
-    ////////////////////////////////////////////
-    /*methods that are the hidden versions of //
-    // the get methods above, doing the same  //
-    //      things, but not printed out.      //
-    *///////////////////////////////////////////
-
-    public double get_Power(DcMotor motor)
-    {
-        double motor_return = 0;
-        if(motor != null)
-        {
-            motor_return = motor.getPower();
-            return motor_return;
-        }
-        return motor_return;
-    }
-
-    public int get_Position(DcMotor motor)
-    {
-        int motor_return = 0;
-        if (motor != null)
-        {
-            motor_return = motor.getCurrentPosition();
-            return motor_return;
-        }
-        return motor_return;
-    }
-
-    public String get_Mode(DcMotor motor) {
-        String motor_return = "";
-        if (motor != null) {
-            motor_return += motor.getMode();
-            return motor_return;
-        }
-        motor_return += "NULL";
-        return motor_return;
-    }
-
-    public String get_Direction(DcMotor motor) {
-        String motor_return = "";
-        if (motor != null) {
-            motor_return += motor.getDirection();
-            return motor_return;
-        }
-        motor_return += "NULL";
-        return motor_return;
-    }
-
     //////////////////////////////////////////
-    /*methods that check if the motor has   //
+    /*method that checks if the motor has   //
     // reached it's goal if found, else     //
     //          returns false.              //
     */////////////////////////////////////////
@@ -132,7 +131,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     }
 
     //////////////////////////////////////////////
-    /*  methods that check if motors are reset  //
+    /*  method that checks if motors are reset  //
     //      if found, else returns false        //
     */////////////////////////////////////////////
 
@@ -145,7 +144,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     }
 
     ///////////////////////////////////////////
-    /* methods that reset encoders if found, //
+    /* methods that resets encoders if found, //
     //          else does nothing.           //
     *//////////////////////////////////////////
 

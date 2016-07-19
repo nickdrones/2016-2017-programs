@@ -20,16 +20,16 @@ public class Error404_Hardware_Testing extends Error404_Hardware_Tier1 {
         set_power(1.0, rightFront);
         set_mode(rightFront, "RTP");
         set_position(rightFront, 1140);
-        rf_Reset_Encoder();
+        reset_Encoder(rightFront);
         set_power(.2, rightFront);
         set_position(rightFront, 1140);
     }
 
     public void loop() {
-        telemetry.addData("00 rf Power", rf_Get_Power_Tele());
-        telemetry.addData("02 rf Direction", rf_Get_Direction_Tele());
-        telemetry.addData("03 rf Mode", rf_Get_Mode_Tele());
-        telemetry.addData("01 rf Position", rf_Get_Position_Tele());
+        telemetry.addData("00 rf Power", get_Power_Tele(rightFront));
+        telemetry.addData("02 rf Direction", get_Direction_Tele(rightFront));
+        telemetry.addData("03 rf Mode", get_Mode_Tele(rightFront));
+        telemetry.addData("01 rf Position", get_Position_Tele(rightFront));
     }
 
     public void stop() {
