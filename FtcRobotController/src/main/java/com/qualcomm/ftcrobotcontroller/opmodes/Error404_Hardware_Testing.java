@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
-public class Error404_Hardware_Testing extends Error404_Hardware_Tier1 {
+public class Error404_Hardware_Testing extends Error404_Hardware_Tier2 {
 
     private DcMotor leftFront;
     private DcMotor rightFront;
