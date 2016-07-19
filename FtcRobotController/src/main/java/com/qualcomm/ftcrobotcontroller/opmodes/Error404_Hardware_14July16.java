@@ -13,7 +13,6 @@ public class Error404_Hardware_14July16 extends OpMode {
     DcMotor rightRear;
 
     public void init() {
-        hardware_map();
     }
 
     public void start() {
