@@ -12,8 +12,20 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
     public void init() {}
     public void start() {}
-    public void loop() { }
-    public void stop() { }
+    public void loop() {}
+    public void stop() {}
+
+    public void left_Set_Power(double power)
+    {
+        set_power(power, leftFront);
+        set_power(power, leftRear);
+    }
+
+    public void right_Set_Power(double power)
+    {
+        set_power(power, rightFront);
+        set_power(power, rightRear);
+    }
 
 
 }
