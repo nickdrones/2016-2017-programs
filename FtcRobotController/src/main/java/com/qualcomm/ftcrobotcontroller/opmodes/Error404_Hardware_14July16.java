@@ -481,8 +481,7 @@ public class Error404_Hardware_14July16 extends OpMode {
         }
         try {
             rightFront = hardwareMap.dcMotor.get("rightFront");
-            rightFront.setDirection(DcMotor.Direction.REVERSE);
-        } catch (Exception p_exeception) {
+           } catch (Exception p_exeception) {
             telemetry.addData("rightFront not found in config file", 0);
             rightFront = null;
         }
@@ -521,6 +520,7 @@ public class Error404_Hardware_14July16 extends OpMode {
     //RWOE= Run without encoders //
     ///////////////////////////////
     void set_mode(DcMotor motor, String modetoset){
+        modetoset=modetoset.toUpperCase();
         if (motor != null){
             if (modetoset.equals("RTP")){
                 motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
