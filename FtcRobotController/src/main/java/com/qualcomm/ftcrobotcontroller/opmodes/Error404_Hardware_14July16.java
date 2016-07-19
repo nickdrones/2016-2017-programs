@@ -12,17 +12,10 @@ public class Error404_Hardware_14July16 extends OpMode {
     private DcMotor leftRear;
     private DcMotor rightRear;
 
-    public void init() {
-    }
-
-    public void start() {
-    }
-
-    public void loop() {
-    }
-
-    public void stop() {
-    }
+    public void init() {}
+    public void start() {}
+    public void loop() { }
+    public void stop() { }
 
     ///////////////////////////////////////////////
     /* all these "get" methods send telemetry to //
