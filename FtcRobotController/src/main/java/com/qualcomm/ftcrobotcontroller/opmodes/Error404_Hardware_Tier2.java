@@ -15,7 +15,32 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     public void loop() {}
     public void stop() {}
 
-    public void left_Set_Power(double power)
+    public void driveStright(String mode, double power, String direction, int position) {
+        if (direction.toLowerCase().equals("f")) {
+            set_direction(leftFront, "f");
+            set_direction(leftRear, "f");
+            set_direction(rightFront, "r");
+            set_direction(rightRear, "r");
+        }
+        if (direction.toLowerCase().equals("r")) {
+            set_direction(leftFront, "r");
+            set_direction(leftRear, "r");
+            set_direction(rightFront, "f");
+            set_direction(rightRear, "f");
+        }
+            set_mode(leftFront, mode);
+            set_mode(leftRear, mode);
+            set_mode(rightFront, mode);
+            set_mode(rightRear, mode);
+            set_position(leftFront, position);
+            set_position(leftRear,position);
+            set_position(rightFront,position);
+            set_position(rightRear,position);
+            left_Set_Power(power);
+            right_Set_Power(power);
+
+        }
+        public void left_Set_Power(double power)
     {
         set_power(power, leftFront);
         set_power(power, leftRear);
