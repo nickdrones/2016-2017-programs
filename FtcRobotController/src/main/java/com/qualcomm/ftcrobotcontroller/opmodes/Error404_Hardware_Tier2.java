@@ -68,7 +68,28 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     }
     //Direction is either l for left or r for right, instead of F for forward and B for backward
     public void pointTurn(String mode, double power, String direction, int position){
-
+        if (direction.toLowerCase().equals("r")) {
+            set_direction(leftFront, "f");
+            set_direction(leftRear, "f");
+            set_direction(rightFront, "f");
+            set_direction(rightRear, "f");
+        }
+        if (direction.toLowerCase().equals("l")) {
+            set_direction(leftFront, "r");
+            set_direction(leftRear, "r");
+            set_direction(rightFront, "r");
+            set_direction(rightRear, "r");
+        }
+        set_mode(leftFront, mode);
+        set_mode(leftRear, mode);
+        set_mode(rightFront, mode);
+        set_mode(rightRear, mode);
+        set_position(leftFront, position);
+        set_position(leftRear,position);
+        set_position(rightFront,position);
+        set_position(rightRear,position);
+        left_Set_Power(power);
+        right_Set_Power(power);
     }
 
 }
