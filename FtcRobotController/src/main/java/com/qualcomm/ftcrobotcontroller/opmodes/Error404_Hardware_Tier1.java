@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.util.Range;
 
 public class Error404_Hardware_Tier1 extends OpMode {
     private DcMotor leftFront;
@@ -265,5 +266,45 @@ public class Error404_Hardware_Tier1 extends OpMode {
         temp=(int)(temp*gear_ratio);
         temp=inches/temp;
         return (int)temp*1140;
+    }
+    ///////////////////////////////////
+    //This scale motor power method  //
+    //takes the raw power input from //
+    //joysticks and converts it to   //
+    //floats. With these set values, //
+    //the motor power will ramp up   //
+    //instead of being sudden & jerky//
+    //////////////////////////////// //
+    float scale_motor_power (float p_power)
+    {
+        float l_scale = 0.0f;
+        float l_power = Range.clip(p_power, -1, 1);
+        float[] l_array =
+                { 0.00f, 0.05f, 0.09f, 0.10f, 0.12f
+                        , 0.15f, 0.18f, 0.24f, 0.30f, 0.36f
+                        , 0.43f, 0.50f, 0.60f, 0.72f, 0.85f
+                        , 1.00f, 1.00f
+                };
+        int l_index = (int)(l_power * 16.0);
+        if (l_index < 0)
+        {
+            l_index = -l_index;
+        }
+        else if (l_index > 16)
+        {
+            l_index = 16;
+        }
+
+        if (l_power < 0)
+        {
+            l_scale = -l_array[l_index];
+        }
+        else
+        {
+            l_scale = l_array[l_index];
+        }
+
+        return l_scale;
+
     }
 }
