@@ -15,6 +15,45 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     public void loop() {}
     public void stop() {}
 
+    public void left_Set_Power(double power)
+    {
+        set_power(power, leftFront);
+        set_power(power, leftRear);
+    }
+
+    public void right_Set_Power(double power)
+    {
+        set_power(power, rightFront);
+        set_power(power, rightRear);
+    }
+
+    /////////////////////////////////////////////////
+    // Do not use this method in a looping OpMode. //
+    // Could be used in a Linear opMode.           //
+    ////////////////////////////////////////////////
+
+    public void resetAllEncoders_withWait(){
+        reset_Encoder(rightFront);
+        reset_Encoder(rightRear);
+        reset_Encoder(leftFront);
+        reset_Encoder(leftRear);
+        while (get_Position(rightFront)!= 0 && get_Position(rightRear)!= 0
+            && get_Position(leftFront)!= 0 && get_Position(leftRear)!= 0){ }
+    }
+
+    /////////////////////////////////////////////////////
+    // User's final OpMode should provide conditional  //
+    // to ensure time for resetting to complete.       //
+    /////////////////////////////////////////////////////
+
+    public void resetAllEncoders_noWait(){
+        reset_Encoder(rightFront);
+        reset_Encoder(rightRear);
+        reset_Encoder(leftFront);
+        reset_Encoder(leftRear);
+    }
+    //////////  Need comments for this method ////////////
+
     public void driveStright(String mode, double power, String direction, int position) {
         if (direction.toLowerCase().equals("f")) {
             set_direction(leftFront, "f");
@@ -28,47 +67,23 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_direction(rightFront, "f");
             set_direction(rightRear, "f");
         }
-            set_mode(leftFront, mode);
-            set_mode(leftRear, mode);
-            set_mode(rightFront, mode);
-            set_mode(rightRear, mode);
-            set_position(leftFront, position);
-            set_position(leftRear,position);
-            set_position(rightFront,position);
-            set_position(rightRear,position);
-            left_Set_Power(power);
-            right_Set_Power(power);
-
-        }
-        public void left_Set_Power(double power)
-    {
-        set_power(power, leftFront);
-        set_power(power, leftRear);
+        set_mode(leftFront, mode);
+        set_mode(leftRear, mode);
+        set_mode(rightFront, mode);
+        set_mode(rightRear, mode);
+        set_position(leftFront, position);
+        set_position(leftRear,position);
+        set_position(rightFront,position);
+        set_position(rightRear,position);
+        left_Set_Power(power);
+        right_Set_Power(power);
     }
 
-    public void right_Set_Power(double power)
-    {
-        set_power(power, rightFront);
-        set_power(power, rightRear);
-    }
-    public void resetAllEncoders_withWait(){
-        reset_Encoder(rightFront);
-        reset_Encoder(rightRear);
-        reset_Encoder(leftFront);
-        reset_Encoder(leftRear);
-        while (get_Position(rightFront)!= 0 && get_Position(rightRear)!= 0 && get_Position(leftFront)!= 0 && get_Position(leftRear)!= 0){
 
-        }
-    }
-    public void resetAllEncoders_noWait(){
-        reset_Encoder(rightFront);
-        reset_Encoder(rightRear);
-        reset_Encoder(leftFront);
-        reset_Encoder(leftRear);
-    }
     //Direction is either l for left or r for right, instead of F for forward and B for backward
     public void pointTurn(String mode, double power, String direction, int position){
 
     }
+
 
 }

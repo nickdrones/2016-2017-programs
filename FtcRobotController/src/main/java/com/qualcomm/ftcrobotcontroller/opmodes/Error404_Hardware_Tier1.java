@@ -260,6 +260,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
         temp=inches/temp;
         return (int)temp*1140;
     }
+
     ///////////////////////////////////
     //This scale motor power method  //
     //takes the raw power input from //
