@@ -82,7 +82,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
     //Direction is either l for left or r for right, instead of F for forward and B for backward
     public void pointTurn(String mode, double power, String direction, int position){
-
+    //put stuff here
     }
 
     public void swingTurn(String mode, double powerLeft, double powerRight, String direction, int position)
