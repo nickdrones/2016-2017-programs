@@ -66,6 +66,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         reset_Encoder(leftFront);
         reset_Encoder(leftRear);
     }
+    
     //Direction is either l for left or r for right, instead of F for forward and B for backward
     public void pointTurn(String mode, double power, String direction, int position){
         if (direction.toLowerCase().equals("r")) {
