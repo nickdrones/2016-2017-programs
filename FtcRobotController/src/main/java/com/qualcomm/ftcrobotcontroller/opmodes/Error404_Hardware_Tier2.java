@@ -30,15 +30,15 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     /////////////////////////////////////////////////
     // Do not use this method in a looping OpMode. //
     // Could be used in a Linear opMode.           //
-    ////////////////////////////////////////////////
+    /////////////////////////////////////////////////
 
     public void resetAllEncoders_withWait(){
-        reset_Encoder(rightFront);
-        reset_Encoder(rightRear);
-        reset_Encoder(leftFront);
-        reset_Encoder(leftRear);
-        while (get_Position(rightFront)!= 0 && get_Position(rightRear)!= 0
-            && get_Position(leftFront)!= 0 && get_Position(leftRear)!= 0){ }
+        reset_encoder(rightFront);
+        reset_encoder(rightRear);
+        reset_encoder(leftFront);
+        reset_encoder(leftRear);
+        while (get_position(rightFront)!= 0 && get_position(rightRear)!= 0
+            && get_position(leftFront)!= 0 && get_position(leftRear)!= 0){ }
     }
 
     /////////////////////////////////////////////////////
@@ -47,10 +47,10 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     /////////////////////////////////////////////////////
 
     public void resetAllEncoders_noWait(){
-        reset_Encoder(rightFront);
-        reset_Encoder(rightRear);
-        reset_Encoder(leftFront);
-        reset_Encoder(leftRear);
+        reset_encoder(rightFront);
+        reset_encoder(rightRear);
+        reset_encoder(leftFront);
+        reset_encoder(leftRear);
     }
     //////////  Need comments for this method ////////////
 
@@ -85,5 +85,55 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
     }
 
+    public void swingTurn(String mode, double powerLeft, double powerRight, String direction, int position)
+        {
+            set_direction(leftFront, "f");
+            set_direction(leftRear, "f");
+            set_direction(rightFront, "f");
+            set_direction(rightRear, "f");
+            set_mode(leftFront, mode);
+            set_mode(leftRear, mode);
+            set_mode(rightFront, mode);
+            set_mode(rightRear, mode);
+            if(direction.toLowerCase().equals("l"))
+                {
+                    double temp = powerRight - powerLeft;
+                    temp += 1;
+                    position *= temp;
+                }
+            if(direction.toLowerCase().equals("r"))
+                {
+                    double temp = powerLeft - powerRight;
+                    temp += 1;
+                    position *= temp;
+                }
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            left_Set_Power(powerLeft);
+            right_Set_Power(powerRight);
+    }
+
+    public void pivotTurn(String mode, double power, String direction, int position){
+        set_direction(leftFront, "f");
+        set_direction(leftRear, "f");
+        set_direction(rightFront, "f");
+        set_direction(rightRear, "f");
+        set_mode(leftFront, mode);
+        set_mode(leftRear, mode);
+        set_mode(rightFront, mode);
+        set_mode(rightRear, mode);
+        if (direction.toLowerCase().equals("l")) {
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            right_Set_Power(power);
+        }
+        if (direction.toLowerCase().equals("r")) {
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            left_Set_Power(power);
+        }
+    }
 
 }
