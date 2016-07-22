@@ -57,7 +57,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         reset_Encoder(leftFront);
         reset_Encoder(leftRear);
         while (get_Position(rightFront)!= 0 && get_Position(rightRear)!= 0 && get_Position(leftFront)!= 0 && get_Position(leftRear)!= 0){
-            { }
+
         }
     }
     public void resetAllEncoders_noWait(){
