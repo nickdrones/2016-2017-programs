@@ -92,5 +92,57 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         left_Set_Power(power);
         right_Set_Power(power);
     }
+    
+
+    public void swingTurn(String mode, double powerLeft, double powerRight, String direction, int position)
+        {
+            set_direction(leftFront, "f");
+            set_direction(leftRear, "f");
+            set_direction(rightFront, "f");
+            set_direction(rightRear, "f");
+            set_mode(leftFront, mode);
+            set_mode(leftRear, mode);
+            set_mode(rightFront, mode);
+            set_mode(rightRear, mode);
+            if(direction.toLowerCase().equals("l"))
+                {
+                    double temp = powerRight - powerLeft;
+                    temp += 1;
+                    position *= temp;
+                }
+            if(direction.toLowerCase().equals("r"))
+                {
+                    double temp = powerLeft - powerRight;
+                    temp += 1;
+                    position *= temp;
+                }
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            left_Set_Power(powerLeft);
+            right_Set_Power(powerRight);
+    }
+
+    public void pivotTurn(String mode, double power, String direction, int position){
+        set_direction(leftFront, "f");
+        set_direction(leftRear, "f");
+        set_direction(rightFront, "f");
+        set_direction(rightRear, "f");
+        set_mode(leftFront, mode);
+        set_mode(leftRear, mode);
+        set_mode(rightFront, mode);
+        set_mode(rightRear, mode);
+        if (direction.toLowerCase().equals("l")) {
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            right_Set_Power(power);
+        }
+        if (direction.toLowerCase().equals("r")) {
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            left_Set_Power(power);
+        }
+    }
 
 }
