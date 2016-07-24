@@ -17,103 +17,75 @@ public class Error404_Hardware_Tier1 extends OpMode {
     public void stop() { }
 
     ////////////////////////////////////////////
-    /*     raw data methods that are used     //
-    //           for decision making          //
+    /*   Methods that return raw data use     //
+    //       for decision making and          //
+    //  and String versions for printing to   //
+    //        Driver's Station phone          //
     *///////////////////////////////////////////
 
-    public double get_Power(DcMotor motor)
+    public double get_power(DcMotor motor)
     {
-        double motor_return = 0;
+        double motorReturn = 0;
         if(motor != null)
         {
-            motor_return = motor.getPower();
-            return motor_return;
+            motorReturn = motor.getPower();
+            return motorReturn;
         }
-        return motor_return;
+        return motorReturn;
     }
 
-    public int get_Position(DcMotor motor)
+    public String get_power_tele(DcMotor motor)
     {
-        int motor_return = 0;
+        String motorReturn = "";
+        if(motor != null){
+            motorReturn += motor.getPower();
+            return motorReturn;
+        }
+        motorReturn += "NULL";
+        return motorReturn;
+    }
+
+    public int get_position(DcMotor motor)
+    {
+        int motorReturn = 0;
         if (motor != null)
         {
-            motor_return = motor.getCurrentPosition();
-            return motor_return;
+            motorReturn = motor.getCurrentPosition();
+            return motorReturn;
         }
-        return motor_return;
+        return motorReturn;
     }
 
-    public String get_Mode(DcMotor motor) {
-        String motor_return = "";
+    public String get_position_tele(DcMotor motor)
+    {
+        String motorReturn = "";
+        if(motor != null)
+        {
+            motorReturn += motor.getCurrentPosition();
+            return motorReturn;
+        }
+        motorReturn += "NULL";
+        return motorReturn;
+    }
+
+    public String get_mode(DcMotor motor) {
+        String motorReturn = "";
         if (motor != null) {
-            motor_return += motor.getMode();
-            return motor_return;
+            motorReturn += motor.getMode();
+            return motorReturn;
         }
-        motor_return += "NULL";
-        return motor_return;
+        motorReturn += "NULL";
+        return motorReturn;
     }
 
-    public String get_Direction(DcMotor motor) {
-        String motor_return = "";
+    public String get_direction(DcMotor motor) {
+        String motorReturn = "";
         if (motor != null) {
-            motor_return += motor.getDirection();
-            return motor_return;
+            motorReturn += motor.getDirection();
+            return motorReturn;
         }
-        motor_return += "NULL";
-        return motor_return;
-    }
-
-    ///////////////////////////////////////////////
-    /*   These "get" methods send telemetry to   //
-    //  driver station.  If device isn't found   //
-    //      the telemetry will print "null".     //
-    *//////////////////////////////////////////////
-
-    public String get_Power_Tele(DcMotor motor)
-    {
-        String motor_return = "";
-        if(motor != null){
-            motor_return += motor.getPower();
-            return motor_return;
-        }
-        motor_return += "NULL";
-        return motor_return;
-    }
-
-    public String get_Position_Tele(DcMotor motor)
-    {
-        String motor_return = "";
-        if(motor != null)
-        {
-            motor_return += motor.getCurrentPosition();
-            return motor_return;
-        }
-        motor_return += "NULL";
-        return motor_return;
-    }
-
-    public String get_Mode_Tele(DcMotor motor)
-    {
-        String motor_return = "";
-        if(motor != null)
-        {
-            motor_return += motor.getMode();
-            return motor_return;
-        }
-        motor_return += "NULL";
-        return motor_return;
-    }
-
-    public String get_Direction_Tele(DcMotor motor)
-    {
-        String motor_return = "";
-        if(motor != null)
-        {
-            motor_return += motor.getDirection();
-            return motor_return;
-        }
-        motor_return += "NULL";
-        return motor_return;
+        motorReturn += "NULL";
+        return motorReturn;
     }
 
     //////////////////////////////////////////
@@ -122,10 +94,12 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //          returns false.              //
     */////////////////////////////////////////
 
-    public boolean is_Encoder_Reached(int goal, DcMotor motor)
+    public boolean is_encoder_reached(int goal, DcMotor motor)
     {
-        int encoder_count = get_Position(motor);
-        if(encoder_count == goal)
+        int encoderCount = get_position(motor);
+        if(encoderCount == goal)
+        {return true;}
+        else if((encoderCount > (goal - 10)) && (encoderCount < (goal + 10)))
         {return true;}
         else
         {return false;}
@@ -136,9 +110,9 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //      if found, else returns false        //
     */////////////////////////////////////////////
 
-    public boolean is_Encoder_Reset(DcMotor motor)
+    public boolean is_encoder_reset(DcMotor motor)
     {
-        if(get_Position(motor) == 0)
+        if(get_position(motor) == 0)
         {return true;}
         else
         {return false;}
@@ -149,7 +123,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //          else does nothing.           //
     *//////////////////////////////////////////
 
-    public void reset_Encoder(DcMotor motor)
+    public void reset_encoder(DcMotor motor)
     {
         if(motor != null)
         {

@@ -37,35 +37,35 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_position(leftRear,position);
             set_position(rightFront,position);
             set_position(rightRear,position);
-            left_Set_Power(power);
-            right_Set_Power(power);
+            left_set_power(power);
+            right_set_power(power);
 
         }
-        public void left_Set_Power(double power)
+        public void left_set_power(double power)
     {
         set_power(power, leftFront);
         set_power(power, leftRear);
     }
 
-    public void right_Set_Power(double power)
+    public void right_set_power(double power)
     {
         set_power(power, rightFront);
         set_power(power, rightRear);
     }
     public void resetAllEncoders_withWait(){
-        reset_Encoder(rightFront);
-        reset_Encoder(rightRear);
-        reset_Encoder(leftFront);
-        reset_Encoder(leftRear);
-        while (get_Position(rightFront)!= 0 && get_Position(rightRear)!= 0 && get_Position(leftFront)!= 0 && get_Position(leftRear)!= 0){
+        reset_encoder(rightFront);
+        reset_encoder(rightRear);
+        reset_encoder(leftFront);
+        reset_encoder(leftRear);
+        while (get_position(rightFront)!= 0 && get_position(rightRear)!= 0 && get_position(leftFront)!= 0 && get_position(leftRear)!= 0){
 
         }
     }
     public void resetAllEncoders_noWait(){
-        reset_Encoder(rightFront);
-        reset_Encoder(rightRear);
-        reset_Encoder(leftFront);
-        reset_Encoder(leftRear);
+        reset_encoder(rightFront);
+        reset_encoder(rightRear);
+        reset_encoder(leftFront);
+        reset_encoder(leftRear);
     }
     
     //Direction is either l for left or r for right, instead of F for forward and B for backward
@@ -90,12 +90,12 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         set_position(leftRear,position);
         set_position(rightFront,position);
         set_position(rightRear,position);
-        left_Set_Power(power);
-        right_Set_Power(power);
+        left_set_power(power);
+        right_set_power(power);
     }
     
 
-    public void swingTurn(String mode, double powerLeft, double powerRight, String direction, int position)
+    public void swing_turn(String mode, double powerLeft, double powerRight, String direction, int position)
         {
             set_direction(leftFront, "f");
             set_direction(leftRear, "f");
@@ -105,27 +105,31 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_mode(leftRear, mode);
             set_mode(rightFront, mode);
             set_mode(rightRear, mode);
-            if(direction.toLowerCase().equals("l"))
-                {
-                    double temp = powerRight - powerLeft;
-                    temp += 1;
-                    position *= temp;
-                }
             if(direction.toLowerCase().equals("r"))
                 {
+                    set_position(rightFront, position);
+                    set_position(rightRear, position);
                     double temp = powerLeft - powerRight;
                     temp += 1;
                     position *= temp;
+                    set_position(leftFront, position);
+                    set_position(leftRear, position);
                 }
-            set_position(leftFront, position);
-            set_position(leftRear, position);
-            set_position(rightFront, position);
-            set_position(rightRear, position);
-            left_Set_Power(powerLeft);
-            right_Set_Power(powerRight);
+            if(direction.toLowerCase().equals("l"))
+                {
+                    set_position(leftFront, position);
+                    set_position(leftRear, position);
+                    double temp = powerRight - powerLeft;
+                    temp += 1;
+                    position *= temp;
+                    set_position(rightFront, position);
+                    set_position(rightRear, position);
+                }
+            left_set_power(powerLeft);
+            right_set_power(powerRight);
     }
 
-    public void pivotTurn(String mode, double power, String direction, int position){
+    public void pivot_turn(String mode, double power, String direction, int position){
         set_direction(leftFront, "f");
         set_direction(leftRear, "f");
         set_direction(rightFront, "f");
@@ -137,12 +141,12 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         if (direction.toLowerCase().equals("l")) {
             set_position(rightFront, position);
             set_position(rightRear, position);
-            right_Set_Power(power);
+            right_set_power(power);
         }
         if (direction.toLowerCase().equals("r")) {
             set_position(leftFront, position);
             set_position(leftRear, position);
-            left_Set_Power(power);
+            left_set_power(power);
         }
     }
 
