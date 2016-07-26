@@ -15,8 +15,8 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     public void loop() {}
     public void stop() {}
 
-    public void driveStright(String mode, double power, String direction, int position, int wheeldiameter) {
-        position=distance2encoder(position,wheeldiameter,1);
+    public void driveStright(String mode, double power, String direction, int position) {
+        position=distance2encoder(position,6,1);
         if (direction.toLowerCase().equals("f")) {
             set_direction(leftFront, "f");
             set_direction(leftRear, "f");
@@ -70,8 +70,8 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
     
     //Direction is either l for left or r for right, instead of F for forward and B for backward
-    public void pointTurn(String mode, double power, String direction, int position, int wheeldiameter){
-       position=distance2encoder(position,wheeldiameter,1);
+    public void pointTurn(String mode, double power, String direction, int position){
+       position=distance2encoder(position,6,1);
         if (direction.toLowerCase().equals("r")) {
             set_direction(leftFront, "f");
             set_direction(leftRear, "f");
