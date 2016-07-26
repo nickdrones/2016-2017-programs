@@ -234,12 +234,9 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //needed number of encoder ticks needed to      //
     //drive the distance input.                     //
     //////////////////////////////////////////////////
-    int distance2encoder(int desiredDistance, int wheel_diameter, double gear_ratio) {
-    double temp =0;
-        temp= (int)(((3.14159265)*(wheel_diameter)));
-        temp=(int)(temp*gear_ratio);
-        temp=desiredDistance/temp;
-        return (int)temp*1140;
+    int distance2encoder(int desiredDistance, double wheel_diameter, double gear_ratio) {
+        return (int) ( 1140*(desiredDistance/(((3.14159265)*(wheel_diameter))*gear_ratio)));
+
     }
     ///////////////////////////////////
     //This scale motor power method  //
