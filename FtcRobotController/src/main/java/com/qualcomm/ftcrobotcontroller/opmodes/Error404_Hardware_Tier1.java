@@ -150,18 +150,18 @@ public class Error404_Hardware_Tier1 extends OpMode {
             telemetry.addData("rightFront not found in config file", 0);
             rightFront = null;
         }
-        try {
-            leftRear = hardwareMap.dcMotor.get("leftRear");
-        } catch (Exception p_exeception) {
-            telemetry.addData("leftRear not found in config file", 0);
-            leftRear = null;
-        }
-        try {
-            rightRear = hardwareMap.dcMotor.get("rightRear");
-        } catch (Exception p_exeception) {
-            telemetry.addData("rightRear not found in config file", 0);
-            rightRear = null;
-        }
+//        try {
+//            leftRear = hardwareMap.dcMotor.get("leftRear");
+//        } catch (Exception p_exeception) {
+//            telemetry.addData("leftRear not found in config file", 0);
+//            leftRear = null;
+//        }
+//        try {
+//            rightRear = hardwareMap.dcMotor.get("rightRear");
+//        } catch (Exception p_exeception) {
+//            telemetry.addData("rightRear not found in config file", 0);
+//            rightRear = null;
+//        }
     }
 
     ////////////////////////////////////////

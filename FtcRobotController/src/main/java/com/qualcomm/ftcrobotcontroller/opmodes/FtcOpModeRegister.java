@@ -55,7 +55,7 @@ public class FtcOpModeRegister implements OpModeRegister {
      * If two or more op modes are registered with the same name, the app will display an error.
      */
 
-    manager.register("Hardware test", Error404_Hardware_14July16.class);
+   // manager.register("Hardware test", Error404_Hardware_14July16.class);
     manager.register("Runner program", Error404_Hardware_Testing.class);
     /*
      * Uncomment any of the following lines if you want to register an op mode.
