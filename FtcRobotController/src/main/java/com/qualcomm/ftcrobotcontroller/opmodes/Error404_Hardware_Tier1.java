@@ -234,11 +234,11 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //needed number of encoder ticks needed to      //
     //drive the distance input.                     //
     //////////////////////////////////////////////////
-    int distance2encoder(int inches, int wheel_diameter, double gear_ratio) {
+    int distance2encoder(int desiredDistance, int wheel_diameter, double gear_ratio) {
     double temp =0;
         temp= (int)(((3.14159265)*(wheel_diameter)));
         temp=(int)(temp*gear_ratio);
-        temp=inches/temp;
+        temp=desiredDistance/temp;
         return (int)temp*1140;
     }
     ///////////////////////////////////
