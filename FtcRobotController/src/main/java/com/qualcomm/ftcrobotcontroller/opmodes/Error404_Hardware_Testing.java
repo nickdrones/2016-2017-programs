@@ -23,10 +23,7 @@ public class Error404_Hardware_Testing extends Error404_Hardware_Tier2 {
     }
 
     public void loop() {
-        telemetry.addData("00 rf Power", get_power_tele(rightFront));
-        telemetry.addData("02 rf Direction", get_direction(rightFront));
-        telemetry.addData("03 rf Mode", get_mode(rightFront));
-        telemetry.addData("01 rf Position", get_position_tele(rightFront));
+        motor_telemetry(rightFront);
     }
 
     public void stop() {
