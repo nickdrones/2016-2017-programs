@@ -99,6 +99,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
     public void swing_turn(String mode, double powerLeft, double powerRight, String direction, int position)
         {
+            position = distance2encoder(position, 6, 1);
             set_direction(leftFront, "f");
             set_direction(leftRear, "f");
             set_direction(rightFront, "f");
@@ -132,6 +133,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     }
 
     public void pivot_turn(String mode, double power, String direction, int position){
+        position = distance2encoder(position, 6, 1);
         set_direction(leftFront, "f");
         set_direction(leftRear, "f");
         set_direction(rightFront, "f");
