@@ -154,4 +154,15 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         }
     }
 
+    public void motor_telemetry(DcMotor motor)
+        {
+            if(motor != null)
+                {
+                    telemetry.addData("00", get_direction(motor));
+                    telemetry.addData("01", get_mode(motor));
+                    telemetry.addData("02", get_power_tele(motor));
+                    telemetry.addData("03", get_position_tele(motor));
+                }
+        }
+
 }
