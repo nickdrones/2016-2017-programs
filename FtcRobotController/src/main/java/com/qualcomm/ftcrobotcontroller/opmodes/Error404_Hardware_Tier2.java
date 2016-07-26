@@ -102,8 +102,8 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             position = distance2encoder(position, 6, 1);
             set_direction(leftFront, "f");
             set_direction(leftRear, "f");
-            set_direction(rightFront, "f");
-            set_direction(rightRear, "f");
+            set_direction(rightFront, "r");
+            set_direction(rightRear, "r");
             set_mode(leftFront, mode);
             set_mode(leftRear, mode);
             set_mode(rightFront, mode);
@@ -136,8 +136,8 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         position = distance2encoder(position, 6, 1);
         set_direction(leftFront, "f");
         set_direction(leftRear, "f");
-        set_direction(rightFront, "f");
-        set_direction(rightRear, "f");
+        set_direction(rightFront, "r");
+        set_direction(rightRear, "r");
         set_mode(leftFront, mode);
         set_mode(leftRear, mode);
         set_mode(rightFront, mode);
