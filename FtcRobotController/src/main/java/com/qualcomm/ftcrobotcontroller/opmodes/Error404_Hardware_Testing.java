@@ -19,8 +19,7 @@ public class Error404_Hardware_Testing extends Error404_Hardware_Tier2 {
         set_mode(rightFront, "RTP");
         set_direction(rightFront, "F");
         set_power(1.0, rightFront);
-        set_position(rightFront, 1140);
-
+        set_position(rightFront, distance2encoder(1,1,1));
     }
 
     public void loop() {
