@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
 public class Error404_Hardware_Tier1 extends OpMode {
-    private DcMotor leftFront;
-    private DcMotor rightFront;
-    private DcMotor leftRear;
-    private DcMotor rightRear;
+    protected DcMotor leftFront;
+    protected DcMotor rightFront;
+    protected DcMotor leftRear;
+    protected DcMotor rightRear;
 
     @Override public void init() {
          /////////////////////////////////////////////////////////////////
@@ -42,6 +42,17 @@ public class Error404_Hardware_Tier1 extends OpMode {
                  rightRear = null;
             }
         }//init
+
+    public DcMotor convert(int mtr) {
+        if (mtr == 1) {
+            telemetry.addData("test",mtr);
+            return leftFront;
+        }
+        if (mtr == 2) return rightFront;
+        if (mtr == 3) return leftRear;
+        if (mtr == 4) return rightRear;
+        return null;
+    }
 
     public void start() {}
     public void loop() { }
@@ -200,6 +211,21 @@ public class Error404_Hardware_Tier1 extends OpMode {
         }
     }
 
+ /*   public void set_mode(DcMotor motor, String modetoset){
+        modetoset=modetoset.toUpperCase();
+        if (motor != null){
+            if (modetoset.equals("RTP")){
+                motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            }
+            if (modetoset.equals("RUE")){
+                motor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+            }
+            if (modetoset.equals("RWOE")){
+                motor.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
+            }
+        }
+    }
+*/
     ///////////////////////////////////////////////////////////
     //This set direction method takes two parameters: Motor  //
     // and direction. The direction is set as F for forward  //

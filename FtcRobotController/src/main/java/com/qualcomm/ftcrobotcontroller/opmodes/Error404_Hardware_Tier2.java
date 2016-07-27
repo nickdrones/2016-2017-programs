@@ -1,3 +1,4 @@
+/*
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -161,3 +162,4 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         }
 
 }
+*/
