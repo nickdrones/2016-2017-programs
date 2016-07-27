@@ -11,7 +11,38 @@ public class Error404_Hardware_Tier1 extends OpMode {
     private DcMotor leftRear;
     private DcMotor rightRear;
 
-    public void init() {}
+    @Override public void init() {
+         /////////////////////////////////////////////////////////////////
+        /* Attempting a hardware map of the motors, servos, and sensors//
+        //      If the device cannot be found in the config file,      //
+        //    an error message shows on the driver station telemetry.  //
+        *////////////////////////////////////////////////////////////////
+            try {
+                leftFront = hardwareMap.dcMotor.get("leftFront");
+            } catch (Exception p_exeception) {
+                telemetry.addData("leftFront not found in config file", 0);
+                leftFront = null;
+            }
+            try {
+                rightFront = hardwareMap.dcMotor.get("rightFront");
+            } catch (Exception p_exeception) {
+                telemetry.addData("rightFront not found in config file", 0);
+                rightFront = null;
+            }
+            try {
+                leftRear = hardwareMap.dcMotor.get("leftRear");
+            } catch (Exception p_exeception) {
+                 telemetry.addData("leftRear not found in config file", 0);
+                 leftRear = null;
+            }
+            try {
+                 rightRear = hardwareMap.dcMotor.get("rightRear");
+            } catch (Exception p_exeception) {
+                telemetry.addData("rightRear not found in config file", 0);
+                 rightRear = null;
+            }
+        }//init
+
     public void start() {}
     public void loop() { }
     public void stop() { }
@@ -131,38 +162,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
         }
     }
 
-    void hardware_map() {
 
-        /////////////////////////////////////////////////////////////////
-        /* Attempting a hardware map of the motors, servos, and sensors//
-        //      If the device cannot be found in the config file,      //
-        //    an error message shows on the driver station telemetry.  //
-        *////////////////////////////////////////////////////////////////
-        try {
-            leftFront = hardwareMap.dcMotor.get("leftFront");
-        } catch (Exception p_exeception) {
-            telemetry.addData("leftFront not found in config file", 0);
-            leftFront = null;
-        }
-        try {
-            rightFront = hardwareMap.dcMotor.get("rightFront");
-           } catch (Exception p_exeception) {
-            telemetry.addData("rightFront not found in config file", 0);
-            rightFront = null;
-        }
-//        try {
-//            leftRear = hardwareMap.dcMotor.get("leftRear");
-//        } catch (Exception p_exeception) {
-//            telemetry.addData("leftRear not found in config file", 0);
-//            leftRear = null;
-//        }
-//        try {
-//            rightRear = hardwareMap.dcMotor.get("rightRear");
-//        } catch (Exception p_exeception) {
-//            telemetry.addData("rightRear not found in config file", 0);
-//            rightRear = null;
-//        }
-    }
 
     ////////////////////////////////////////
     // In these set power methods, the    //
@@ -171,7 +171,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //If it is not null, the power is set //
     //to that motor.                      //
     ////////////////////////////////////////
-      void set_power(double power, DcMotor motor){
+      public void set_power(double power, DcMotor motor){
           if (motor != null) {
             motor.setPower(power);
         }
@@ -184,7 +184,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //RUE= Run using encoders    //
     //RWOE= Run without encoders //
     ///////////////////////////////
-    void set_mode(DcMotor motor, String modetoset){
+    public void set_mode(DcMotor motor, String modetoset){
         modetoset=modetoset.toUpperCase();
         if (motor != null){
             if (modetoset.equals("RTP")){
@@ -204,7 +204,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     // and R for reversed. If the motor is not null, the     //
     //direction is set.                                      //
     ///////////////////////////////////////////////////////////
-    void set_direction(DcMotor motor, String direction) {
+    public void set_direction(DcMotor motor, String direction) {
         if (motor != null) {
             direction=direction.toLowerCase();
             if (direction.equals("r")) {
@@ -221,7 +221,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //position. It then sets the position   //
     //to the motor if the motor is not null.//
     //////////////////////////////////////////
-    void set_position(DcMotor motor, int position)
+    public void set_position(DcMotor motor, int position)
     {
         if (motor != null){
             motor.setTargetPosition(position);
@@ -234,7 +234,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //needed number of encoder ticks needed to      //
     //drive the distance input.                     //
     //////////////////////////////////////////////////
-    int distance2encoder(int desiredDistance, double wheel_diameter, double gear_ratio) {
+    public int distance2encoder(int desiredDistance, double wheel_diameter, double gear_ratio) {
         return (int) ( 1140*(desiredDistance/(((3.14159265)*(wheel_diameter))*gear_ratio)));}
 
     ///////////////////////////////////
@@ -245,7 +245,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //the motor power will ramp up   //
     //instead of being sudden & jerky//
     //////////////////////////////// //
-    float scale_motor_power (float p_power)
+    public float scale_motor_power (float p_power)
     {
         float l_scale = 0.0f;
         float l_power = Range.clip(p_power, -1, 1);

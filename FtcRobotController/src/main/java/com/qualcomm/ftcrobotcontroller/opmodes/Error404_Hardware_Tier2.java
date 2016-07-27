@@ -10,12 +10,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
     private DcMotor leftRear;
     private DcMotor rightRear;
 
-    public void init() {}
-    public void start() {}
-    public void loop() {}
-    public void stop() {}
-
-    public void driveStright(String mode, double power, String direction, int position) {
+     public void driveStright(String mode, double power, String direction, int position) {
         position=distance2encoder(position,6,1);
         if (direction.toLowerCase().equals("f")) {
             set_direction(leftFront, "f");
