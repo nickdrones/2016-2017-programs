@@ -6,22 +6,17 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 
 public class Error404_Hardware_Testing extends Error404_Hardware_Tier1 {
 
-  //  private int LF=1;
- //   private int RF=2;
-  //  private int LR=3;
- //   private int RR=4;
-
-    public void start() {
+     public void start() {
         set_mode(rightFront, "RTP");
         set_direction(leftFront, "F");
         set_power(1.0, rightFront);
         set_position(rightFront, 1140);
-    }
+        }
 
     public void loop() {
         motor_telemetry(rightFront);
-    }
+        }
 
     public void stop() {
-    }
+       }
 }
