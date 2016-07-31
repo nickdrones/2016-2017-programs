@@ -135,11 +135,13 @@ public class Error404_Hardware_Tier1 extends OpMode {
     // reached it's goal if found, else     //
     //          returns false.              //
     */////////////////////////////////////////
-
+//Sorry Josh. I had to change the if(encoderCount==goal) to
+// if(encoderCount>=goal) because otherwise, the method has to be called at the exact moment
+//the encoder value is at the desired position. ;-)
     public boolean is_encoder_reached(int goal, DcMotor motor)
     {
         int encoderCount = get_position(motor);
-        if(encoderCount == goal)
+        if(encoderCount >= goal)
         {return true;}
         else if((encoderCount > (goal - 10)) && (encoderCount < (goal + 10)))
         {return true;}

@@ -44,12 +44,14 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         set_power(power, rightRear);
     }
     public void resetAllEncoders_withWait(){
+        int count=0;
         reset_encoder(rightFront);
         reset_encoder(rightRear);
         reset_encoder(leftFront);
         reset_encoder(leftRear);
         while (get_position(rightFront)!= 0 && get_position(rightRear)!= 0 && get_position(leftFront)!= 0 && get_position(leftRear)!= 0){
-
+            count++;
+        telemetry.addData("count: ", count);
         }
     }
     public void resetAllEncoders_noWait(){
