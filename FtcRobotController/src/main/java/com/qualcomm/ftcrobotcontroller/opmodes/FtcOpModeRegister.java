@@ -61,6 +61,7 @@ public class FtcOpModeRegister implements OpModeRegister {
    // manager.register("Linear", NickLinearAuto.lass);
     manager.register("Teleop", NickTeleop.class);
    // manager.register("State", NickStateMachine.class);
+    manager.register("Sensor Test",MRRGBExample.class );
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */
