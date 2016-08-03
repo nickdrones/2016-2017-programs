@@ -12,8 +12,8 @@ public class NickTeleop extends OpMode {
   public void init() {
     leftFront = hardwareMap.dcMotor.get("leftFront");
     rightFront = hardwareMap.dcMotor.get("rightFront");
-    leftFront.setDirection(DcMotor.Direction.REVERSE);
-    rightFront.setDirection(DcMotor.Direction.FORWARD);
+    leftFront.setDirection(DcMotor.Direction.FORWARD);
+    rightFront.setDirection(DcMotor.Direction.REVERSE);
   }
   @Override
   public void loop() {
@@ -26,6 +26,10 @@ public class NickTeleop extends OpMode {
     left = (float) scaleInput(left);
     rightFront.setPower(right);
     leftFront.setPower(left);
+    telemetry.addData( "01", "Left Drive: " + leftFront.getPower ());
+    telemetry.addData( "02", "Right Drive: " + rightFront.getPower ());
+    telemetry.addData ("05", "Gamepad1 Left: " + -gamepad1.left_stick_y);
+    telemetry.addData ("06", "Gamepad1 Right: " + -gamepad1.right_stick_y);
   }
   @Override
   public void stop() {
