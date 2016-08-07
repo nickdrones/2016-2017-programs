@@ -18,7 +18,7 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
  *
  * This is an example LinearOpMode that shows how to use
  * a Modern Robotics Sensors.  Includes portions from:
- * MRRGBExample
+ * MRRGBExample and others
  *
  * You can use the X button on either gamepad to turn the LED on and off.
  *
