@@ -56,12 +56,14 @@ public class FtcOpModeRegister implements OpModeRegister {
      */
 
    // manager.register("Nick test", NickStateMachine.class);
-    manager.register("Runner program", Error404_Hardware_Testing.class);
-    manager.register("PushBotTeleOp", PushBotTeleOp.class);
+   // manager.register("Runner program", Error404_Hardware_Testing.class);
+    //manager.register("PushBotTeleOp", PushBotTeleOp.class);
    // manager.register("Linear", NickLinearAuto.lass);
+    manager.register("Meccanum", meccanum.class);
     manager.register("Teleop", NickTeleop.class);
+    manager.register("Sensor", nickSensorTest.class);
    // manager.register("State", NickStateMachine.class);
-    manager.register("Sensor Test",Error404SensorTest.class );
+   // manager.register("Sensor Test",Error404SensorTest.class );
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */
