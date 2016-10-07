@@ -38,21 +38,21 @@ public class nickSensorTest extends LinearOpMode {
             //     Color sensor actions                            //
             ////////////////////////////////////////////////////////
             // check the status of the x button on gamepad1.
-//            bCurrState = gamepad1.x;
-//            // check for button state transitions.
-//            if (bCurrState == true && bCurrState != bPrevState)  {
-//                // button is transitioning to a pressed state.
-//                // update previous state variable.
-//                bPrevState = bCurrState;
-//                // turn on the LED.
-//                RGB.enableLed(true);
-//            } else if (bCurrState == false && bCurrState != bPrevState)  {
-//                // button is transitioning to a released state.
-//                // update previous state variable.
-//                bPrevState = bCurrState;
-//                // turn off the LED.
-//                RGB.enableLed(false);
-//            }
+            bCurrState = gamepad1.x;
+            // check for button state transitions.
+            if (bCurrState == true && bCurrState != bPrevState)  {
+                // button is transitioning to a pressed state.
+                // update previous state variable.
+                bPrevState = bCurrState;
+                // turn on the LED.
+                RGB.enableLed(true);
+            } else if (bCurrState == false && bCurrState != bPrevState)  {
+                // button is transitioning to a released state.
+                // update previous state variable.
+                bPrevState = bCurrState;
+                // turn off the LED.
+                RGB.enableLed(false);
+            }
             // convert the RGB values to HSV values.
             Color.RGBToHSV(RGB.red()*8, RGB.green()*8, RGB.blue()*8, hsvValues);
           /////////////////////////////////////////////////////////
@@ -60,18 +60,26 @@ public class nickSensorTest extends LinearOpMode {
         //    Note:%03d means format integer with 3 digits, left padding with zeroes
         ////////////////////////////////////////////////////////
       // send the info back to driver station using telemetry function.
-            if(hsvValues[0]<40||hsvValues[0]>320)
+//            if(hsvValues[0]<40||hsvValues[0]>320)
+//            {
+//                telemetry.addData("","It's Red");
+//            }
+//            else if(hsvValues[0]>170 && hsvValues[0]<260)
+//            {
+//                telemetry.addData("","It's Red");
+//            }
+            if(RGB.red()>RGB.blue())
             {
                 telemetry.addData("","It's Red");
             }
-            if(hsvValues[0]>170 && hsvValues[0]<260)
+            if(RGB.blue()>RGB.red())
             {
-                telemetry.addData("","It's Red");
+                telemetry.addData("","It's blue");
             }
-//      telemetry.addData("01 - White", RGB.alpha());
-//      telemetry.addData("02 - Red  ", RGB.red());
-//      telemetry.addData("03 - Green", RGB.green());
-//      telemetry.addData("04 - Blue ", RGB.blue());
+      telemetry.addData("01 - White", RGB.alpha());
+      telemetry.addData("02 - Red  ", RGB.red());
+      telemetry.addData("03 - Green", RGB.green());
+      telemetry.addData("04 - Blue ", RGB.blue());
       telemetry.addData("05 - Hue", hsvValues[0]);
             // wait a hardware cycle before iterating.
       waitOneFullHardwareCycle();
