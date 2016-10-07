@@ -4,11 +4,6 @@ import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.GyroSensor;
-import com.qualcomm.robotcore.hardware.IrSeekerSensor;
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
-import com.qualcomm.robotcore.hardware.TouchSensor;
-
 /*
  * You can use the X button on either gamepad to turn the LED on and off.
  */
@@ -65,10 +60,18 @@ public class nickSensorTest extends LinearOpMode {
         //    Note:%03d means format integer with 3 digits, left padding with zeroes
         ////////////////////////////////////////////////////////
       // send the info back to driver station using telemetry function.
-      telemetry.addData("01 - White", RGB.alpha());
-      telemetry.addData("02 - Red  ", RGB.red());
-      telemetry.addData("03 - Green", RGB.green());
-      telemetry.addData("04 - Blue ", RGB.blue());
+            if(hsvValues[0]<40||hsvValues[0]>320)
+            {
+                telemetry.addData("","It's Red");
+            }
+            if(hsvValues[0]>170 && hsvValues[0]<260)
+            {
+                telemetry.addData("","It's Red");
+            }
+//      telemetry.addData("01 - White", RGB.alpha());
+//      telemetry.addData("02 - Red  ", RGB.red());
+//      telemetry.addData("03 - Green", RGB.green());
+//      telemetry.addData("04 - Blue ", RGB.blue());
       telemetry.addData("05 - Hue", hsvValues[0]);
             // wait a hardware cycle before iterating.
       waitOneFullHardwareCycle();
