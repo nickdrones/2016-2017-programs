@@ -7,10 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 public class Error404_Hardware_Testing extends Error404_Hardware_Tier2 {
 
      public void start() {
-        set_mode(rightFront, "RTP");
-        set_direction(leftFront, "F");
-        set_power(1.0, rightFront);
-        set_position(rightFront, 1140);
+         slide_sideways("RTP",1,"r",5);
      }
 
     public void loop() {

@@ -150,6 +150,41 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             left_set_power(power);
         }
     }
+    public void slide_sideways(String mode, double power, String direction, int position){
+        position = distance2encoder(position, 4, 1);
+        position=position*2; //because the wheels on the meccanum wheels are at 45', multiply the encoder counts by 2
+        set_mode(leftFront, mode);
+        set_mode(leftRear, mode);
+        set_mode(rightFront, mode);
+        set_mode(rightRear, mode);
+        if (direction.toLowerCase().equals("r")) {
+            set_direction(leftFront, "f");
+            set_direction(rightRear, "r");
+            set_direction(rightFront, "f");
+            set_direction(leftRear, "r");
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            set_power(power, rightRear);
+            set_power(power, rightFront);
+            set_power(power, leftFront);
+            set_power(power, leftRear);
+
+        }
+        if (direction.toLowerCase().equals("l")) {
+            set_direction(leftFront, "r");
+            set_direction(rightRear, "r");
+            set_direction(rightFront, "f");
+            set_direction(leftRear, "f");
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            left_set_power(power);
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            right_set_power(power);
+        }
+    }
 
     public void motorTelemetry(DcMotor motor)
         {
