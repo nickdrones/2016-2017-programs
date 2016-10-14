@@ -4,11 +4,13 @@ import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 /*
  * You can use the X button on either gamepad to turn the LED on and off.
  */
 public class nickSensorTest extends LinearOpMode {
   ColorSensor RGB;
+    Servo tester;
     @Override
   public void runOpMode() throws InterruptedException {
     // write some device information (connection info, name and type)
@@ -17,6 +19,8 @@ public class nickSensorTest extends LinearOpMode {
     // Assumes config file matches these deignations
       //ie: mr, ods, touch, ir
      RGB = hardwareMap.colorSensor.get("mr");
+        tester = hardwareMap.servo.get("tester");
+
       //////////////////////////////////
       //    Color Sensor preps       //
       // turn the RGB LED on in the beginning, just so user will know that the sensor is active.
@@ -71,10 +75,12 @@ public class nickSensorTest extends LinearOpMode {
             if(RGB.red()>RGB.blue())
             {
                 telemetry.addData("","It's Red");
+                tester.setPosition(1);
             }
             if(RGB.blue()>RGB.red())
             {
                 telemetry.addData("","It's blue");
+                tester.setPosition(0);
             }
       telemetry.addData("01 - White", RGB.alpha());
       telemetry.addData("02 - Red  ", RGB.red());
