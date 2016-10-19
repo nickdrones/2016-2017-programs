@@ -5,14 +5,14 @@ import com.qualcomm.robotcore.util.Range;
 public class Error404_Method_Meccanum extends Error404_Hardware_Tier2 {
 
      public void start() {
-         set_mode(rightFront, "RTP");
-         set_mode(leftFront, "RTP");
-         set_mode(rightRear, "RTP");
-         set_mode(leftRear, "RTP");
-        set_direction(leftFront, "F");
+         set_mode(rightFront, "RWE");
+         set_mode(leftFront, "RWE");
+         set_mode(rightRear, "RWE");
+         set_mode(leftRear, "RWE");
          set_direction(leftFront, "F");
-         set_direction(leftFront, "F");
-         set_direction(leftFront, "F");
+         set_direction(rightFront, "R");
+         set_direction(leftRear, "F");
+         set_direction(rightRear, "R");
      }
 @Override
     public void loop() {
