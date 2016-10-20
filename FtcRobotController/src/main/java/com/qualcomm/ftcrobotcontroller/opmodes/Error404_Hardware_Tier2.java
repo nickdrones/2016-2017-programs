@@ -174,15 +174,17 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         }
         if (direction.toLowerCase().equals("l")) {
             set_direction(leftFront, "r");
-            set_direction(rightRear, "r");
-            set_direction(rightFront, "f");
+            set_direction(rightRear, "f");
+            set_direction(rightFront, "r");
             set_direction(leftRear, "f");
-            set_position(leftFront, position);
-            set_position(leftRear, position);
-            left_set_power(power);
             set_position(rightFront, position);
             set_position(rightRear, position);
-            right_set_power(power);
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            set_power(power, rightRear);
+            set_power(power, rightFront);
+            set_power(power, leftFront);
+            set_power(power, leftRear);
         }
     }
 
