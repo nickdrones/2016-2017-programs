@@ -2,6 +2,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
 public class meccanum extends OpMode {
@@ -15,10 +16,14 @@ public class meccanum extends OpMode {
   public void init() {
     leftFront = hardwareMap.dcMotor.get("leftFront");
     rightFront = hardwareMap.dcMotor.get("rightFront");
+    leftFront.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    rightFront.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftFront.setDirection(DcMotor.Direction.FORWARD);
     rightFront.setDirection(DcMotor.Direction.REVERSE);
     leftRear = hardwareMap.dcMotor.get("leftRear");
     rightRear = hardwareMap.dcMotor.get("rightRear");
+    rightRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    leftRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
   }

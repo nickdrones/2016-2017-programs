@@ -16,16 +16,11 @@ public class meccanumStateMachine10_19_16 extends Error404_Hardware_Tier2
     switch (state)
     {   case 0:
             resetAllEncoders_withWait();
-      try {
-        Thread.sleep(1000);                 //1000 milliseconds is one second.
-      } catch(InterruptedException ex) {
-        Thread.currentThread().interrupt();
-      }
       state++;
       break;
       case 1:
-
-        slide_sideways("RUE",0.5,"R",0);
+          driveStright("RUE",0.1,"f",0);
+       // slide_sideways("RUE",0.5,"R",0);
         if (is_encoder_reached(5000, leftFront)) {
           state++;
         }
