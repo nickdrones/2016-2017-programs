@@ -141,6 +141,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     public boolean is_encoder_reached(int goal, DcMotor motor)
     {
         int encoderCount = get_position(motor);
+        encoderCount=Math.abs(encoderCount);
         if(encoderCount >= goal)
         {return true;}
         else if((encoderCount > (goal - 10)) && (encoderCount < (goal + 10)))
