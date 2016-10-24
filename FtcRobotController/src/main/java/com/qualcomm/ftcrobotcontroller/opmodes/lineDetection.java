@@ -108,7 +108,7 @@ public class lineDetection extends LinearOpMode {
             // convert the RGB values to HSV values.
             Color.RGBToHSV(RGB.red()*8, RGB.green()*8, RGB.blue()*8, hsvValues);
 
-            if(RGB.alpha()>40)
+            if(RGB.alpha()>15)
             {
                 telemetry.addData("","It's a Line");
                // tester.setPosition(1);
