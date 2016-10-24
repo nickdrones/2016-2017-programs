@@ -19,9 +19,9 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
       state++;
       break;
       case 1:
-          driveStright("RUE",-0.2,"f",0);
+          driveStright("RUE",0.2,"r",0);
        // slide_sideways("RUE",0.5,"R",0);
-        if (is_encoder_reached(-3500, leftFront)) {
+        if (is_encoder_reached(3500, leftFront)) {
           state++;
         }
         break;
