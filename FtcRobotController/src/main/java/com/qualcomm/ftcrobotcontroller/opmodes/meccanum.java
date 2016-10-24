@@ -31,7 +31,7 @@ public class meccanum extends OpMode {
   public void loop() {
     float yL_val = -gamepad1.left_stick_y;            //reading raw values from the joysticks
     float xL_val = gamepad1.left_stick_x;            //reading raw values from the joysticks
-    float xR_val = gamepad1.right_stick_x;
+    float xR_val = gamepad1.right_stick_x/2;
     //clip the right/left values so that the values never exceed +/- 1.
     yL_val = Range.clip(yL_val, -1, 1);
     xL_val = Range.clip(xL_val, -1, 1);
