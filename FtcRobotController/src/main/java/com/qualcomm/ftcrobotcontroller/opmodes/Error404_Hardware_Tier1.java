@@ -1,8 +1,10 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.util.Range;
 
 public class Error404_Hardware_Tier1 extends OpMode {
@@ -10,6 +12,8 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor rightFront;
     protected DcMotor leftRear;
     protected DcMotor rightRear;
+    protected ColorSensor RGB;
+    protected OpticalDistanceSensor ODS;
 
     @Override public void init() {
          /////////////////////////////////////////////////////////////////
@@ -17,6 +21,18 @@ public class Error404_Hardware_Tier1 extends OpMode {
         //      If the device cannot be found in the config file,      //
         //    an error message shows on the driver station telemetry.  //
         *////////////////////////////////////////////////////////////////
+        try {
+            ODS = hardwareMap.opticalDistanceSensor.get("ods");
+        } catch (Exception p_exeception) {
+            telemetry.addData("ODS not found in config file", 0);
+            ODS = null;
+        }
+        try {
+                RGB = hardwareMap.colorSensor.get("mr");
+            } catch (Exception p_exeception) {
+                telemetry.addData("Color Sensor not found in config file", 0);
+                RGB = null;
+            }
             try {
                 leftFront = hardwareMap.dcMotor.get("leftFront");
             } catch (Exception p_exeception) {

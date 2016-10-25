@@ -10,10 +10,13 @@ public class meccanum extends OpMode {
   DcMotor leftFront;
   DcMotor rightRear;
   DcMotor leftRear;
+  DcMotor ballcollector;
   public meccanum() {
   }
   @Override
   public void init() {
+    ballcollector = hardwareMap.dcMotor.get("ballcollector");
+    ballcollector.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftFront = hardwareMap.dcMotor.get("leftFront");
     rightFront = hardwareMap.dcMotor.get("rightFront");
     leftFront.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -26,6 +29,7 @@ public class meccanum extends OpMode {
     leftRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
+
   }
   @Override
   public void loop() {
@@ -49,6 +53,12 @@ public class meccanum extends OpMode {
     RR = Range.clip(RR, -1, 1);
     LR = Range.clip(LR, -1, 1);
 
+    float ballcollectorspeed = gamepad1.right_trigger-gamepad1.left_trigger;
+
+    ballcollectorspeed = Range.clip(ballcollectorspeed, -1, 1);
+    ballcollectorspeed = (float) scaleInput(ballcollectorspeed);
+
+    ballcollector.setPower(ballcollectorspeed);
     rightFront.setPower(RF);
     leftFront.setPower(LF);
     rightRear.setPower(RR);
