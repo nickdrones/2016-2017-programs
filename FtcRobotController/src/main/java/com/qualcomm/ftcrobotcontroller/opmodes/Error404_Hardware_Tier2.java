@@ -188,6 +188,48 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         }
     }
 
+    public void slide_sideways_gyro(String mode, double power, String direction, int position){
+        position = distance2encoder(position, 4, 1);
+        position=position*2; //because the wheels on the meccanum wheels are at 45', multiply the encoder counts by 2
+        double before=gyro.getHeading();
+        set_mode(leftFront, mode);
+        set_mode(leftRear, mode);
+        set_mode(rightFront, mode);
+        set_mode(rightRear, mode);
+        double frontPower=1;
+        double rearPower=1;
+        if (direction.toLowerCase().equals("r")) {
+            set_direction(leftFront, "f");
+            set_direction(rightRear, "r");
+            set_direction(rightFront, "f");
+            set_direction(leftRear, "r");
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            set_power(power, rightRear);
+            set_power(power, rightFront);
+            set_power(power, leftFront);
+            set_power(power, leftRear);
+
+        }
+        if (direction.toLowerCase().equals("l")) {
+            set_direction(leftFront, "r");
+            set_direction(rightRear, "f");
+            set_direction(rightFront, "r");
+            set_direction(leftRear, "f");
+            set_position(rightFront, position);
+            set_position(rightRear, position);
+            set_position(leftFront, position);
+            set_position(leftRear, position);
+            set_power(power, rightRear);
+            set_power(power, rightFront);
+            set_power(power, leftFront);
+            set_power(power, leftRear);
+        }
+    }
+
+
     public void motorTelemetry(DcMotor motor)
         {
             if(motor != null)

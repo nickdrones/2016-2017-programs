@@ -4,7 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.Range;
 
 public class Error404_Hardware_Tier1 extends OpMode {
@@ -14,6 +16,8 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor rightRear;
     protected ColorSensor RGB;
     protected OpticalDistanceSensor ODS;
+    protected GyroSensor gyro;
+    protected TouchSensor touch;
 
     @Override public void init() {
          /////////////////////////////////////////////////////////////////
@@ -21,6 +25,18 @@ public class Error404_Hardware_Tier1 extends OpMode {
         //      If the device cannot be found in the config file,      //
         //    an error message shows on the driver station telemetry.  //
         *////////////////////////////////////////////////////////////////
+        try {
+            touch = hardwareMap.touchSensor.get("touch");
+        } catch (Exception p_exeception) {
+            telemetry.addData("Touch not found in config file", 0);
+            touch = null;
+        }
+        try {
+            gyro = hardwareMap.gyroSensor.get("gyro");
+        } catch (Exception p_exeception) {
+            telemetry.addData("Gyro not found in config file", 0);
+            gyro = null;
+        }
         try {
             ODS = hardwareMap.opticalDistanceSensor.get("ods");
         } catch (Exception p_exeception) {
