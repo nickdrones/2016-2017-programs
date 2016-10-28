@@ -3,21 +3,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
 
 {
-  @Override public void init()
-  {
-    super.init();
-    double before=gyro.getHeading();
-
-    gyro.calibrate();
-    //while (gyro.isCalibrating()) telemetry.addData("Gyro: ", gyro.getHeading());
-    while(gyro.getHeading()!=0)
-    {
-      telemetry.addData("Gyro: ", gyro.getHeading());
-    }
-    telemetry.addData("Gyro Calibrated","");
-    telemetry.addData("Before: ",before);
-    telemetry.addData("After: ", gyro.getHeading());
-  }
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
   private int encoder=0;

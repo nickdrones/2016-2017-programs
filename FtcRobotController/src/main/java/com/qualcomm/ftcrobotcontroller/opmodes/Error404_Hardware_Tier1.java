@@ -80,6 +80,18 @@ public class Error404_Hardware_Tier1 extends OpMode {
             telemetry.addData("ballcollector not found in config file", 0);
             leftFront = null;
         }
+
+        double before=gyro.getHeading();
+
+        gyro.calibrate();
+        //while (gyro.isCalibrating()) telemetry.addData("Gyro: ", gyro.getHeading());
+        while(gyro.getHeading()!=0)
+        {
+            telemetry.addData("Gyro: ", gyro.getHeading());
+        }
+        telemetry.addData("Gyro Calibrated","");
+        telemetry.addData("Before: ",before);
+        telemetry.addData("After: ", gyro.getHeading());
         }//init
 
     public DcMotor convert(int mtr) {
