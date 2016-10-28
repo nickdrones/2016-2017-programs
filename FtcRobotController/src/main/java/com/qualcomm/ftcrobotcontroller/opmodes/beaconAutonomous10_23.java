@@ -20,6 +20,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
   }
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
+  private int encoder=0;
   public beaconAutonomous10_23()
   {
   }
@@ -36,8 +37,11 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
       break;
       case 1:
           driveStright("RUE",0.2,"r",0); //drive away from line
+
         if (is_encoder_reached(200, leftFront)) {
+
           state++;
+          encoder=leftFront.getCurrentPosition();
         }
         break;
      case 2:
@@ -58,8 +62,9 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
+        encoder=leftFront.getCurrentPosition();
         break;
 //    case 4:
 //      resetAllEncoders_noWait();
@@ -67,7 +72,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
 //        break;
       case 5:
         driveStright("RUE",0.2,"r",0); //drive to line's general area
-        if (is_encoder_reached(2500, leftFront)) {
+        if (is_encoder_reached((2500+encoder), leftFront)) {
           state++;
         }
         break;
@@ -79,7 +84,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         state++;
         break;
       case 7:
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
         break;
       case 8:
@@ -94,7 +99,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
         break;
       case 10:
@@ -117,12 +122,12 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
         break;
       case 15:
         pointTurn("RUE",0.1,"r",0); //turn onto line
-        if (gyro.getHeading()>88) {
+        if (gyro.getHeading()>85) {
           state++;
         }
         break;
@@ -131,7 +136,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
         break;
       case 17:
@@ -150,37 +155,47 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
         break;
       case 20:
         driveStright("RUE",0,"f",0);
+        //resetAllEncoders_noWait();
         state++;
+        encoder=leftFront.getCurrentPosition();
         break;
       case 21:
         driveStright("RUE",0.1,"f",0); //drive to line's general area
-        if (is_encoder_reached(500, leftFront)) {
+        if (is_encoder_reached((encoder+200), leftFront)) {
           state++;
         }
-        state++;
         break;
       case 22:
         set_power(0,rightFront);
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        resetAllEncoders_noWait();
+        //resetAllEncoders_noWait();
         state++;
         break;
       case 23:
         driveStright("RUE",0,"f",0);
-        state++;
+        encoder=leftFront.getCurrentPosition();
+        //resetAllEncoders_withWait();
+       state++;
         break;
       case 24:
-        slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-        if (is_encoder_reached(400, leftFront)) {
+        slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+        if (is_encoder_reached(100+encoder, leftFront)) {
           state++;
         }
+        break;
+      case 25:
+        set_power(0,rightFront);
+        set_power(0,leftFront);
+        set_power(0,rightRear);
+        set_power(0,leftRear);
+        //resetAllEncoders_noWait();
         state++;
         break;
       default:
