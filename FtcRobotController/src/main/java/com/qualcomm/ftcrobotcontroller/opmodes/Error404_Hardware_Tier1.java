@@ -14,6 +14,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor rightFront;
     protected DcMotor leftRear;
     protected DcMotor rightRear;
+    protected DcMotor ballCollector;
     protected ColorSensor RGB;
     protected OpticalDistanceSensor ODS;
     protected GyroSensor gyro;
@@ -73,6 +74,12 @@ public class Error404_Hardware_Tier1 extends OpMode {
                 telemetry.addData("rightRear not found in config file", 0);
                  rightRear = null;
             }
+        try {
+            ballCollector = hardwareMap.dcMotor.get("ballcollector");
+        } catch (Exception p_exeception) {
+            telemetry.addData("ballcollector not found in config file", 0);
+            leftFront = null;
+        }
         }//init
 
     public DcMotor convert(int mtr) {
