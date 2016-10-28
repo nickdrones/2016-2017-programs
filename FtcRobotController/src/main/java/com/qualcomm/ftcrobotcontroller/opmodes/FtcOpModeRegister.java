@@ -64,7 +64,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Sensor Distance", distanceSensor.class);
     manager.register("Line Detect", lineDetection.class);
     manager.register("Autonomous to Beacon",beaconAutonomous10_23.class );
-    manager.register("Cap Ball Autonomous", mecanumBigBallStateMachine10_28_16.class);
+    manager.register("Cap Ball Autonomous", mecanumCapBallStateMachine10_28_16.class);
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */
