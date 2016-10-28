@@ -18,7 +18,7 @@ public class mecanumBigBallStateMachine10_28_16 extends Error404_Hardware_Tier2
             state++;
             break;
             case 1:
-                driveStright("RUE",0.1,"f",0);
+                driveStright("RUE",0.2,"f",0);
                 if (is_encoder_reached(distance2encoder(36,4,1.5), leftFront)) {
                     state++;
                 }
@@ -33,8 +33,8 @@ public class mecanumBigBallStateMachine10_28_16 extends Error404_Hardware_Tier2
                     state++;
                 break;
             case 3:
-                pointTurn("RUE", .3, "l", 0);
-                if (is_encoder_reached(distance2encoder(9,4,1.5), leftFront))
+                pointTurn("RUE", .15, "l", 0);
+                if (gyro.getHeading()<= 330 && gyro.getHeading() > 10)
                 {
                     state++;
                 }
@@ -51,7 +51,7 @@ public class mecanumBigBallStateMachine10_28_16 extends Error404_Hardware_Tier2
             case 5:
                 driveStright("RUE",.1,"f",0);
                 set_power(1,ballCollector);
-                if (is_encoder_reached(distance2encoder(18,4,1.5), leftFront))
+                if (is_encoder_reached(distance2encoder(13,4,1.5), leftFront))
                 {
                     state++;
                 }
