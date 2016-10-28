@@ -58,7 +58,7 @@ public class FtcOpModeRegister implements OpModeRegister {
    // manager.register("Nick test", NickStateMachine.class);
    // manager.register("Runner program", Error404_Hardware_Testing.class);
     //manager.register("PushBotTeleOp", PushBotTeleOp.class);
-   // manager.register("Linear", NickLinearAuto.lass);
+   // manager.register("Slide left with gyro", strafeSidewaysTestStateMachine.class);
     manager.register("Meccanum", meccanum.class);
     manager.register("Teleop Gyro", nickSensorTest.class);
     manager.register("Sensor Distance", distanceSensor.class);

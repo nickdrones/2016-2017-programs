@@ -35,8 +35,8 @@ public class strafeSidewaysTestStateMachine extends Error404_Hardware_Tier2
       state++;
       break;
       case 1:
-          driveStright("RUE",0.2,"r",0); //drive away from line
-        if (is_encoder_reached(200, leftFront)) {
+          slide_sideways_gyro("RUE",0.1,"l",0); //drive away from line
+        if (is_encoder_reached(2000, leftFront)) {
           state++;
         }
         break;
@@ -59,7 +59,8 @@ public class strafeSidewaysTestStateMachine extends Error404_Hardware_Tier2
     telemetry.addData("State: ", state);
     telemetry.addData("Alpha: ", RGB.alpha());
     telemetry.addData("Gyro: ", gyro.getHeading());
-
+    telemetry.addData("right rear power: ",rightRear.getPower());
+    telemetry.addData("right front power: ",rightFront.getPower());
   } // loop
 
 

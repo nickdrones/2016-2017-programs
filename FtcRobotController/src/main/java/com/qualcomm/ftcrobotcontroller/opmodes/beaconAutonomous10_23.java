@@ -49,7 +49,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         break;
       case 3:
         pointTurn("RUE",0.1,"r",0); //turn towards line
-        if (gyro.getHeading()>33) {
+        if (gyro.getHeading()>30) {
           state++;
         }
         break;
@@ -155,6 +155,32 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         break;
       case 20:
         driveStright("RUE",0,"f",0);
+        state++;
+        break;
+      case 21:
+        driveStright("RUE",0.1,"f",0); //drive to line's general area
+        if (is_encoder_reached(500, leftFront)) {
+          state++;
+        }
+        state++;
+        break;
+      case 22:
+        set_power(0,rightFront);
+        set_power(0,leftFront);
+        set_power(0,rightRear);
+        set_power(0,leftRear);
+        resetAllEncoders_noWait();
+        state++;
+        break;
+      case 23:
+        driveStright("RUE",0,"f",0);
+        state++;
+        break;
+      case 24:
+        slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+        if (is_encoder_reached(400, leftFront)) {
+          state++;
+        }
         state++;
         break;
       default:

@@ -196,9 +196,12 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         set_mode(leftRear, mode);
         set_mode(rightFront, mode);
         set_mode(rightRear, mode);
-        double frontPower=1;
-        double rearPower=1;
+        double frontPower=power;
+        double rearPower=power;
+        double rawgyro=(gyro.getHeading()-before)/36000;
         if (direction.toLowerCase().equals("r")) {
+            frontPower=power+rawgyro;
+            rearPower=power-rawgyro;
             set_direction(leftFront, "f");
             set_direction(rightRear, "r");
             set_direction(rightFront, "f");
@@ -207,13 +210,15 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_position(rightRear, position);
             set_position(leftFront, position);
             set_position(leftRear, position);
-            set_power(power, rightRear);
-            set_power(power, rightFront);
-            set_power(power, leftFront);
-            set_power(power, leftRear);
+            set_power(rearPower, rightRear);
+            set_power(frontPower, rightFront);
+            set_power(frontPower, leftFront);
+            set_power(rearPower, leftRear);
 
         }
         if (direction.toLowerCase().equals("l")) {
+            frontPower=power-rawgyro;
+            rearPower=power+rawgyro;
             set_direction(leftFront, "r");
             set_direction(rightRear, "f");
             set_direction(rightFront, "r");
@@ -222,10 +227,10 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_position(rightRear, position);
             set_position(leftFront, position);
             set_position(leftRear, position);
-            set_power(power, rightRear);
-            set_power(power, rightFront);
-            set_power(power, leftFront);
-            set_power(power, leftRear);
+            set_power(rearPower, rightRear);
+            set_power(frontPower, rightFront);
+            set_power(frontPower, leftFront);
+            set_power(rearPower, leftRear);
         }
     }
 
