@@ -12,6 +12,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
   @Override public void start(){
     driveStright("RWOE", 0.0, "F", 0);
     resetAllEncoders_withWait();
+    gyroCalibrate();
   }
   @Override public void loop ()
   {
@@ -38,7 +39,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         break;
       case 3:
         pointTurn("RUE",0.1,"r",0); //turn towards line
-        if (gyro.getHeading()>30) {
+        if (gyro.getHeading()>24) {
           state++;
         }
         break;
@@ -112,7 +113,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         break;
       case 15:
         pointTurn("RUE",0.1,"r",0); //turn onto line
-        if (gyro.getHeading()>85) {
+        if (gyro.getHeading()>80) {
           state++;
         }
         break;
@@ -162,16 +163,21 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,leftRear);
         //resetAllEncoders_noWait();
         state++;
+        telemetry.addData("Just finished state 22","");
         break;
       case 23:
-        driveStright("RUE",0,"f",0);
+        telemetry.addData("Just started state 23","");
+        slide_sideways("RUE",0,"l",0);
         encoder=leftFront.getCurrentPosition();
+        telemetry.addData("Case 23 Encoder: ",encoder);
+
         //resetAllEncoders_withWait();
        state++;
         break;
       case 24:
+        telemetry.addData("Just started state 24","");
         slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-        if (is_encoder_reached(100+encoder, leftFront)) {
+        if (is_encoder_reached(encoder+200, leftFront)) {
           state++;
         }
         break;
@@ -181,8 +187,16 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
         set_power(0,rightRear);
         set_power(0,leftRear);
         //resetAllEncoders_noWait();
-        state++;
+        telemetry.addData("Case 25 Encoder: ",encoder);
+
+        //state++;
         break;
+//      case 26:
+//        driveStright("RUE",0,"f",0);
+//        encoder=leftFront.getCurrentPosition();
+//        //resetAllEncoders_withWait();
+//        state++;
+//        break;
       default:
         break;
 
@@ -192,7 +206,7 @@ public class beaconAutonomous10_23 extends Error404_Hardware_Tier2
     telemetry.addData("LeftFront: ", get_position(leftFront));
     telemetry.addData("RightRear: ", get_position(rightRear));
     telemetry.addData("LeftRear: ", get_position(leftRear));
-    telemetry.addData("State: ", state);
+    telemetry.addData("1. State: ", state);
     telemetry.addData("Alpha: ", RGB.alpha());
     telemetry.addData("Gyro: ", gyro.getHeading());
 

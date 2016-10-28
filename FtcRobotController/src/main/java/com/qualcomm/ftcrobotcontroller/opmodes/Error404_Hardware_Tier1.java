@@ -21,7 +21,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected TouchSensor touch;
 
     @Override public void init() {
-         /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
         /* Attempting a hardware map of the motors, servos, and sensors//
         //      If the device cannot be found in the config file,      //
         //    an error message shows on the driver station telemetry.  //
@@ -45,35 +45,35 @@ public class Error404_Hardware_Tier1 extends OpMode {
             ODS = null;
         }
         try {
-                RGB = hardwareMap.colorSensor.get("mr");
-            } catch (Exception p_exeception) {
-                telemetry.addData("Color Sensor not found in config file", 0);
-                RGB = null;
-            }
-            try {
-                leftFront = hardwareMap.dcMotor.get("leftFront");
-            } catch (Exception p_exeception) {
-                telemetry.addData("leftFront not found in config file", 0);
-                leftFront = null;
-            }
-            try {
-                rightFront = hardwareMap.dcMotor.get("rightFront");
-            } catch (Exception p_exeception) {
-                telemetry.addData("rightFront not found in config file", 0);
-                rightFront = null;
-            }
-            try {
-                leftRear = hardwareMap.dcMotor.get("leftRear");
-            } catch (Exception p_exeception) {
-                 telemetry.addData("leftRear not found in config file", 0);
-                 leftRear = null;
-            }
-            try {
-                 rightRear = hardwareMap.dcMotor.get("rightRear");
-            } catch (Exception p_exeception) {
-                telemetry.addData("rightRear not found in config file", 0);
-                 rightRear = null;
-            }
+            RGB = hardwareMap.colorSensor.get("mr");
+        } catch (Exception p_exeception) {
+            telemetry.addData("Color Sensor not found in config file", 0);
+            RGB = null;
+        }
+        try {
+            leftFront = hardwareMap.dcMotor.get("leftFront");
+        } catch (Exception p_exeception) {
+            telemetry.addData("leftFront not found in config file", 0);
+            leftFront = null;
+        }
+        try {
+            rightFront = hardwareMap.dcMotor.get("rightFront");
+        } catch (Exception p_exeception) {
+            telemetry.addData("rightFront not found in config file", 0);
+            rightFront = null;
+        }
+        try {
+            leftRear = hardwareMap.dcMotor.get("leftRear");
+        } catch (Exception p_exeception) {
+            telemetry.addData("leftRear not found in config file", 0);
+            leftRear = null;
+        }
+        try {
+            rightRear = hardwareMap.dcMotor.get("rightRear");
+        } catch (Exception p_exeception) {
+            telemetry.addData("rightRear not found in config file", 0);
+            rightRear = null;
+        }
         try {
             ballCollector = hardwareMap.dcMotor.get("ballcollector");
         } catch (Exception p_exeception) {
@@ -81,18 +81,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
             leftFront = null;
         }
 
-        double before=gyro.getHeading();
-
-        gyro.calibrate();
-        //while (gyro.isCalibrating()) telemetry.addData("Gyro: ", gyro.getHeading());
-        while(gyro.getHeading()!=0)
-        {
-            telemetry.addData("Gyro: ", gyro.getHeading());
-        }
-        telemetry.addData("Gyro Calibrated","");
-        telemetry.addData("Before: ",before);
-        telemetry.addData("After: ", gyro.getHeading());
-        }//init
+    }
 
     public DcMotor convert(int mtr) {
         if (mtr == 1) {

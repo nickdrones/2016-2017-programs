@@ -7,6 +7,21 @@ import com.qualcomm.robotcore.util.Range;
 
 public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
+
+    public void gyroCalibrate()
+    {
+        double before = gyro.getHeading();
+        gyro.calibrate();
+        //while (gyro.isCalibrating()) telemetry.addData("Gyro: ", gyro.getHeading());
+        while (gyro.getHeading() != 0) {
+            telemetry.addData("Gyro: ", gyro.getHeading());
+        }
+        telemetry.addData("Gyro Calibrated", "");
+        telemetry.addData("Before: ", before);
+        telemetry.addData("After: ", gyro.getHeading());
+
+    }
+
      public void driveStright(String mode, double power, String direction, int position) {
         position=distance2encoder(position,6,1);
         if (direction.toLowerCase().equals("f")) {
