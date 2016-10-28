@@ -51,7 +51,7 @@ public class mecanumBigBallStateMachine10_28_16 extends Error404_Hardware_Tier2
             case 5:
                 driveStright("RUE",.1,"f",0);
                 set_power(1,ballCollector);
-                if (is_encoder_reached(distance2encoder(13,4,1.5), leftFront))
+                if (is_encoder_reached(distance2encoder(18,4,1.5), leftFront))
                 {
                     state++;
                 }
