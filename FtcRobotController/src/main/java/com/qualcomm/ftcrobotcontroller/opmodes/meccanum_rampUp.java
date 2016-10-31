@@ -1,17 +1,16 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
-public class meccanum extends OpMode {
+public class meccanum_rampUp extends Error404_Hardware_Tier2 {
   DcMotor rightFront;
   DcMotor leftFront;
   DcMotor rightRear;
   DcMotor leftRear;
   DcMotor ballcollector;
-  public meccanum() {
+  public meccanum_rampUp() {
   }
   @Override
   public void init() {
@@ -33,6 +32,11 @@ public class meccanum extends OpMode {
   }
   @Override
   public void loop() {
+
+    double LFPOWER=0;
+    double RFPOWER=0;
+    double LRPOWER=0;
+    double RRPOWER=0;
 
     float yL_val = -gamepad1.left_stick_y/2;            //reading raw values from the joysticks
     float xL_val = gamepad1.left_stick_x/2;            //reading raw values from the joysticks
@@ -61,11 +65,16 @@ public class meccanum extends OpMode {
 
     ballcollector.setPower(ballcollectorspeed);
 
+    RF=(float)(ramp_up(rightFront.getPower(),RF,RFPOWER));
+    LF=(float)(ramp_up(leftFront.getPower(),LF,LFPOWER));
+    RR=(float)(ramp_up(rightRear.getPower(),RR,RRPOWER));
+    LR=(float)(ramp_up(leftRear.getPower(),LR,LRPOWER));
 
     rightFront.setPower(RF);
     leftFront.setPower(LF);
     rightRear.setPower(RR);
     leftRear.setPower(LR);
+
     telemetry.addData( "01", "Left Drive: " + leftFront.getPower ());
     telemetry.addData( "02", "Right Drive: " + rightFront.getPower ());
     telemetry.addData ("05", "Gamepad1 Left: " + -gamepad1.left_stick_y);

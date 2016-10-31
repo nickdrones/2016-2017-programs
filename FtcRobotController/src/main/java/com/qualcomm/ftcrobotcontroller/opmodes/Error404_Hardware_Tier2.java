@@ -248,7 +248,21 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_power(rearPower, leftRear);
         }
     }
-
+    public double ramp_up(double powerBegin, double powerEnd, double powerToWrite){
+        if (powerBegin<powerEnd)
+        {
+            powerToWrite+=0.001;
+        }
+        else if (powerBegin>powerEnd)
+        {
+            powerToWrite-=0.001;
+        }
+        else if (powerEnd==0)
+        {
+            powerToWrite=0;
+        }
+        return powerToWrite;
+    }
 
     public void motorTelemetry(DcMotor motor)
         {
