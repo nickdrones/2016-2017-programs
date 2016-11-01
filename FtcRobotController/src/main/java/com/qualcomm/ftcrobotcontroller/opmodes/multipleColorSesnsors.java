@@ -35,7 +35,7 @@ public class multipleColorSesnsors extends LinearOpMode {
 //        beacon = hardwareMap.colorSensor.get("beacon");
 //        beacon.setI2cAddress(0x26);
 
-       RGB.enableLed(false);
+       RGB.enableLed(false); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
        beacon.enableLed(false);
 
         // wait one cycle.
