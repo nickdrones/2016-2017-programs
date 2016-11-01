@@ -152,7 +152,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         break;
       case 21:
         driveStright("RUE",0.1,"f",0); //drive to line's general area
-        if (is_encoder_reached((encoder+200), leftFront)) {
+        if (is_encoder_reached((encoder+300), leftFront)) {
           state++;
         }
         break;
@@ -163,21 +163,16 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         set_power(0,leftRear);
         //resetAllEncoders_noWait();
         state++;
-        telemetry.addData("Just finished state 22","");
         break;
       case 23:
-        telemetry.addData("Just started state 23","");
         slide_sideways("RUE",0,"l",0);
         encoder=leftFront.getCurrentPosition();
-        telemetry.addData("Case 23 Encoder: ",encoder);
-
         //resetAllEncoders_withWait();
        state++;
         break;
       case 24:
-        telemetry.addData("Just started state 24","");
         slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-        if (is_encoder_reached(encoder+200, leftFront)) {
+        if (is_encoder_reached(encoder+260, leftFront)) {
           state++;
         }
         break;
@@ -187,16 +182,31 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         set_power(0,rightRear);
         set_power(0,leftRear);
         //resetAllEncoders_noWait();
-        telemetry.addData("Case 25 Encoder: ",encoder);
-
-        //state++;
-        break;
+        state++;
 //      case 26:
-//        driveStright("RUE",0,"f",0);
+//        driveStright("RUE",0,"l",0);
 //        encoder=leftFront.getCurrentPosition();
 //        //resetAllEncoders_withWait();
 //        state++;
 //        break;
+//      case 27:
+//        driveStright("RUE",0.05,"l",0); //drive to line's general area
+//        if (is_encoder_reached(encoder+100, leftFront)) {
+//          state++;
+//        }
+//        break;
+//      case 28:
+//        if(beaconSense.red()>beaconSense.blue())
+//        {
+//          driveStright("RUE",0.05,"l",0); //drive to line's general area
+//          if (is_encoder_reached(encoder+100, leftFront)) {
+//            state++;
+//          }
+//        }
+//        if(beaconSense.blue()>beaconSense.red())
+//        {
+//          telemetry.addData("","It's blue");
+//        }
       default:
         break;
 

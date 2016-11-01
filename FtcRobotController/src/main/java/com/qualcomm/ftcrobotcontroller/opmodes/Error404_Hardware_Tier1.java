@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.Range;
+//import com.qualcomm.robotcore.hardware.I2cDevice;
 
 public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor leftFront;
@@ -16,6 +17,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor rightRear;
     protected DcMotor ballCollector;
     protected ColorSensor RGB;
+    protected ColorSensor beaconSense;
     protected OpticalDistanceSensor ODS;
     protected GyroSensor gyro;
     protected TouchSensor touch;
@@ -49,6 +51,12 @@ public class Error404_Hardware_Tier1 extends OpMode {
         } catch (Exception p_exeception) {
             telemetry.addData("Color Sensor not found in config file", 0);
             RGB = null;
+        }
+        try {
+            beaconSense = hardwareMap.colorSensor.get("beacon");
+        } catch (Exception p_exeception) {
+            telemetry.addData("Beacon Color Sensor not found in config file", 0);
+            beaconSense = null;
         }
         try {
             leftFront = hardwareMap.dcMotor.get("leftFront");
