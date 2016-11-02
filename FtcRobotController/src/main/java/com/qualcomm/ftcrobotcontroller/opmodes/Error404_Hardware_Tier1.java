@@ -17,7 +17,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor rightRear;
     protected DcMotor ballCollector;
     protected ColorSensor RGB;
-    protected ColorSensor beaconSense;
+    protected ColorSensor beacon;
     protected OpticalDistanceSensor ODS;
     protected GyroSensor gyro;
     protected TouchSensor touch;
@@ -53,10 +53,10 @@ public class Error404_Hardware_Tier1 extends OpMode {
             RGB = null;
         }
         try {
-            beaconSense = hardwareMap.colorSensor.get("beacon");
+            beacon = hardwareMap.colorSensor.get("beacon");
         } catch (Exception p_exeception) {
             telemetry.addData("Beacon Color Sensor not found in config file", 0);
-            beaconSense = null;
+            beacon = null;
         }
         try {
             leftFront = hardwareMap.dcMotor.get("leftFront");
@@ -88,6 +88,10 @@ public class Error404_Hardware_Tier1 extends OpMode {
             telemetry.addData("ballcollector not found in config file", 0);
             leftFront = null;
         }
+        RGB.setI2cAddress(0x3C);       //30 is the decimal conversion from 7 bit hexadecimal value 0x1e converted from 8 bit hexadecimal 0x3c
+        beacon.setI2cAddress(0x4C);
+        RGB.enableLed(false); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
+        beacon.enableLed(false);
 
     }
 
