@@ -34,8 +34,8 @@ public class meccanum extends OpMode {
   @Override
   public void loop() {
 
-    float yL_val = -gamepad1.left_stick_y/2;            //reading raw values from the joysticks
-    float xL_val = gamepad1.left_stick_x/2;            //reading raw values from the joysticks
+    float yL_val = -gamepad1.left_stick_y;            //reading raw values from the joysticks
+    float xL_val = gamepad1.left_stick_x;            //reading raw values from the joysticks
     float xR_val = gamepad1.right_stick_x/2;
     //clip the right/left values so that the values never exceed +/- 1.
 //    yL_val = Range.clip(yL_val, -1, 1);
@@ -54,7 +54,7 @@ public class meccanum extends OpMode {
     RR = Range.clip(RR, -1, 1);
     LR = Range.clip(LR, -1, 1);
 
-    float ballcollectorspeed = gamepad1.right_trigger-gamepad1.left_trigger;
+    float ballcollectorspeed = gamepad2.right_trigger-gamepad2.left_trigger;
 
     ballcollectorspeed = Range.clip(ballcollectorspeed, -1, 1);
     ballcollectorspeed = (float) scaleInput(ballcollectorspeed);
