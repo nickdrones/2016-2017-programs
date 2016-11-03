@@ -264,6 +264,14 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         return powerToWrite;
     }
 
+    double rampUpMethod (double motorOut, double analogIn, double slewRate) {
+        if (slewRate < (Math.abs(motorOut - analogIn))) {
+            if (motorOut - analogIn < 0) return (motorOut + slewRate);
+            else return (motorOut - slewRate);
+        }
+        else return analogIn;
+    }
+
     public void motorTelemetry(DcMotor motor)
         {
             if(motor != null)

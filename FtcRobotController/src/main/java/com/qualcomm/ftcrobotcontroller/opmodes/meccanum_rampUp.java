@@ -14,7 +14,7 @@ public class meccanum_rampUp extends Error404_Hardware_Tier2 {
   }
   @Override
   public void init() {
-    ballcollector = hardwareMap.dcMotor.get("ballcollector");
+   // ballcollector = hardwareMap.dcMotor.get("ballcollector");
     ballcollector.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftFront = hardwareMap.dcMotor.get("leftFront");
     rightFront = hardwareMap.dcMotor.get("rightFront");
@@ -65,11 +65,15 @@ public class meccanum_rampUp extends Error404_Hardware_Tier2 {
 
     ballcollector.setPower(ballcollectorspeed);
 
-    RF=(float)(ramp_up(rightFront.getPower(),RF,RFPOWER));
-    LF=(float)(ramp_up(leftFront.getPower(),LF,LFPOWER));
-    RR=(float)(ramp_up(rightRear.getPower(),RR,RRPOWER));
-    LR=(float)(ramp_up(leftRear.getPower(),LR,LRPOWER));
+//    RF=(float)(ramp_up(rightFront.getPower(),RF,RFPOWER));
+//    LF=(float)(ramp_up(leftFront.getPower(),LF,LFPOWER));
+//    RR=(float)(ramp_up(rightRear.getPower(),RR,RRPOWER));
+//    LR=(float)(ramp_up(leftRear.getPower(),LR,LRPOWER));
 
+    RF=(float)(rampUpMethod(rightFront.getPower(),RF,0.1));
+    LF=(float)(rampUpMethod(leftFront.getPower(),RF,0.1));
+    RR=(float)(rampUpMethod(rightRear.getPower(),RF,0.1));
+    LR=(float)(rampUpMethod(leftRear.getPower(),RF,0.1));
     rightFront.setPower(RF);
     leftFront.setPower(LF);
     rightRear.setPower(RR);
