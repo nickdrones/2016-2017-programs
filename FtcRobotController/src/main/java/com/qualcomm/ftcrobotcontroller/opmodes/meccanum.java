@@ -34,8 +34,8 @@ public class meccanum extends OpMode {
   @Override
   public void loop() {
 
-    float yL_val = -gamepad1.left_stick_y;            //reading raw values from the joysticks
-    float xL_val = gamepad1.left_stick_x;            //reading raw values from the joysticks
+    float yL_val = -gamepad1.left_stick_y*((float)0.7);            //reading raw values from the joysticks
+    float xL_val = gamepad1.left_stick_x*((float)0.7);            //reading raw values from the joysticks
     float xR_val = gamepad1.right_stick_x/2;
     //clip the right/left values so that the values never exceed +/- 1.
 //    yL_val = Range.clip(yL_val, -1, 1);
@@ -44,6 +44,7 @@ public class meccanum extends OpMode {
     yL_val = (float) scaleInput(yL_val);
     xL_val = (float) scaleInput(xL_val);
     xR_val = (float) scaleInput(xR_val);
+
     float RF =(yL_val-xR_val-xL_val);
     float LF =(yL_val+xR_val+xL_val);
     float RR= (yL_val-xR_val+xL_val);
@@ -53,8 +54,7 @@ public class meccanum extends OpMode {
     LF = Range.clip(LF, -1, 1);
     RR = Range.clip(RR, -1, 1);
     LR = Range.clip(LR, -1, 1);
-
-    float ballcollectorspeed = gamepad2.right_trigger-gamepad2.left_trigger;
+   float ballcollectorspeed = gamepad2.right_trigger-gamepad2.left_trigger;
 
     ballcollectorspeed = Range.clip(ballcollectorspeed, -1, 1);
     ballcollectorspeed = (float) scaleInput(ballcollectorspeed);
@@ -68,8 +68,12 @@ public class meccanum extends OpMode {
     leftRear.setPower(LR);
     telemetry.addData( "01", "Left Drive: " + leftFront.getPower ());
     telemetry.addData( "02", "Right Drive: " + rightFront.getPower ());
-    telemetry.addData ("05", "Gamepad1 Left: " + -gamepad1.left_stick_y);
-    telemetry.addData ("06", "Gamepad1 Right: " + -gamepad1.right_stick_y);
+    telemetry.addData ("05", "Gamepad1 Left Y: " + -gamepad1.left_stick_y);
+    telemetry.addData ("06", "Gamepad1 left X: " + -gamepad1.left_stick_x);
+    telemetry.addData ("07", "Gamepad1 Right X: " + -gamepad1.right_stick_x);
+    telemetry.addData ("08", "LF:  " +LF + "   RF:  "+RF+"   RR:  "+RR+"   LR:  "+LR);
+    telemetry.addData ("09", "LFa: " +leftFront.getPower() + "   RFa: "+rightFront.getPower()+"   RRa: "+rightRear.getPower()+"   LRa: "+leftRear.getPower());
+
   }
   @Override
   public void stop() {
