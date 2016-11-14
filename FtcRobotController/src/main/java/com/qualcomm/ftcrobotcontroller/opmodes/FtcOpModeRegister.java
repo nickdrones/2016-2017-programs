@@ -60,14 +60,15 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("PushBotTeleOp", PushBotTeleOp.class);
    // manager.register("Slide left with gyro", strafeSidewaysTestStateMachine.class);
     manager.register("Teleop", meccanum.class);
-    manager.register("Meccanum Ramp", meccanum_rampUp.class);
-    manager.register("Move Gyro", nickSensorTest.class);
-    manager.register("Sensor Distance", distanceSensor.class);
-    manager.register("Line Detect", lineDetection.class);
+   // manager.register("Meccanum Ramp", meccanum_rampUp.class);
+    //manager.register("Move Gyro", nickSensorTest.class);
+    //manager.register("Sensor Distance", distanceSensor.class);
+    //manager.register("Line Detect", lineDetection.class);
     manager.register("Autonomous to Beacon New",beaconAutonomous10_31.class );
     manager.register("Cap Ball Autonomous Blue", mecanumCapBallStateMachine10_31_16.class);
     manager.register("knock cap ball Blue", mecanumKnockCapBall10_31_16.class);
-    manager.register("two color sensors", multipleColorSesnsors.class);
+    //manager.register("two color sensors", multipleColorSesnsors.class);
+    manager.register("Auto to ramp",vortexRampAuto11_12_16.class);
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */
