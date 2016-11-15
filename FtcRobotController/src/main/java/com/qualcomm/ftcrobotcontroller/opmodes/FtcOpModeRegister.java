@@ -60,7 +60,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("PushBotTeleOp", PushBotTeleOp.class);
    // manager.register("Slide left with gyro", strafeSidewaysTestStateMachine.class);
     manager.register("Teleop", meccanum.class);
-   // manager.register("Meccanum Ramp", meccanum_rampUp.class);
+    manager.register("Launcher", launcher.class);
     //manager.register("Move Gyro", nickSensorTest.class);
     //manager.register("Sensor Distance", distanceSensor.class);
     //manager.register("Line Detect", lineDetection.class);
