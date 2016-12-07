@@ -10,12 +10,20 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
   public beaconAutonomous10_31()
   {
   }
+   @Override public void init(){
+    super.init();
+    telemetry.addData("Out Red: ", beacon.red());
+    telemetry.addData("Out Blue: ", beacon.blue());
+    gyroCalibrate();
+    telemetry.addData("Gyro: ", gyro.getHeading());
+   }
   @Override public void start(){
     driveStright("RWOE", 0.0, "F", 0);
     resetAllEncoders_withWait();
     gyroCalibrate();
     RGB.enableLed(false); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
     beacon.enableLed(false);
+
 
   }
   @Override public void loop ()
@@ -45,7 +53,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         break;
       case 3:
         pointTurn("RUE",0.1,"r",0); //turn towards line
-        if (gyro.getHeading()>24) {
+        if (gyro.getHeading()>24 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
         }
         break;
@@ -63,8 +71,8 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
 //          state++;
 //        break;
       case 5:
-        driveStright("RUE",0.2,"r",0); //drive to line's general area
-        if (is_encoder_reached((2500+encoder), leftFront)) {
+        driveStright("RUE",0.4,"r",0); //drive to line's general area
+        if (is_encoder_reached((2200+encoder), leftFront)) {
           state++;
         }
         break;
@@ -81,27 +89,32 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         break;
       case 8:
         driveStright("RUE",0.1,"r",0); //drive until line is seen
-        if(RGB.alpha()>15)
+        if(RGB.alpha()>5)
         {
         state++;
         }
         break;
-      case 9:
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
-        //resetAllEncoders_noWait();
-        state++;
-        break;
-      case 10:
-        driveStright("RUE",0,"f",0);
-        state++;
-        break;
 
-      case 11:
-        state++;
-        break;
+        case 9:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            //resetAllEncoders_noWait();
+            state++;
+            encoder=leftFront.getCurrentPosition();
+            driveStright("RUE",0.0,"r",0); //drive to line's general area
+            break;
+
+        case 10:
+            driveStright("RUE",0.1,"r",0); //drive to line's general area
+            if (is_encoder_reached((100+encoder), leftFront)) {
+                state++;
+            }
+            break;
+        case 11:
+            state++;
+            break;
 
       case 12:
         state++;
@@ -178,7 +191,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         break;
       case 24:
         slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-        if (is_encoder_reached(encoder+350, leftFront)) {
+        if (is_encoder_reached(encoder+210, leftFront)) {
           state++;
         }
         break;
@@ -193,41 +206,8 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         driveStright("RUE",0,"r",0);
         encoder=leftFront.getCurrentPosition();
 //        //resetAllEncoders_withWait();
-        state++;
+        state=31;
         break;
-      case 27:
-//        driveStright("RUE",0.05,"l",0); //drive to line's general area
-//        if (is_encoder_reached(encoder+100, leftFront)) {
-        state++;
-        break;
-      case 28:
-//        if(beacon.red()>beacon.blue())
-//        {
-
-          driveStright("RUE",0.05,"r",0); //drive to line's general area
-          if (is_encoder_reached(encoder+100, leftFront)||touch.isPressed()) {
-            state=29;
-//          }
-//        }
-//        else if(beacon.blue()>beacon.red())
-//        {
-//          driveStright("RUE",0.05,"r",0); //drive to line's general area
-//          if (is_encoder_reached(encoder+100, leftFront)||touch.isPressed()) {
-//            state=31;
-//          }
-        }
-        break;
-        case 29: //red case
-          state=31;
-        break;
-//      case 30: //blue case
-//        try {
-//          Thread.sleep(5000);                 //1000 milliseconds is one second.
-//        } catch(InterruptedException ex) {
-//          Thread.currentThread().interrupt();
-//        }
-//        state=34;
-//        break;
       case 31:
         set_power(0,rightFront);
         set_power(0,leftFront);
@@ -242,30 +222,8 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         state++;
         break;
       case 33:
-        driveStright("RUE",0.05,"f",0); //drive to line's general area
-        if (is_encoder_reached(encoder+200, leftFront)) {
           state = 37;
-        }
         break;
-      case 34:
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
-        //resetAllEncoders_noWait();
-        state++;
-        break;
-//      case 35:
-//        driveStright("RUE",0,"r",0);
-//        encoder=leftFront.getCurrentPosition();
-//        state++;
-//        break;
-//      case 36:
-//        driveStright("RUE",0.05,"r",0); //drive to line's general area
-//        if (is_encoder_reached(encoder+100, leftFront)) {
-//          state = 37;
-//        }
-//        break;
      case 37:
         set_power(0,rightFront);
         set_power(0,leftFront);
@@ -281,7 +239,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         }
             else
             {
-                state++;
+                state=39;
             }
             break;
         case 39:
@@ -292,35 +250,85 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             }
             break;
         case 40: // blue case
+            state=50;
             break;
-        case 41: // red case
-            try {
-          Thread.sleep(5000);                 //1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
-          Thread.currentThread().interrupt();
-        }
-            state=42;
-            break;
-        case 42:
+        case 50:
             driveStright("RUE",0,"r",0);
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
-        case 43:
+        case 51:
             driveStright("RUE",0.05,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+200, leftFront)) {
-                state = 44;
+            if (is_encoder_reached(encoder+250, leftFront)) {
+                state = 52;
             }
             break;
-        case 44:
+        case 52:
             set_power(0,rightFront);
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
+            state = 56;
+            break;
+        case 41: // red case
+            ///////////////////////////////////////////////
+            slide_sideways("RUE",0,"l",0);
+            encoder=leftFront.getCurrentPosition();
             state++;
             break;
-      default:
+        case 42:
+            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            if (is_encoder_reached(encoder+300, leftFront)) {
+                state++;
+            }
+            break;
+        case 43:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+        case 44:
+            driveStright("RUE",0,"r",0);
+            encoder=leftFront.getCurrentPosition();
+            state++;
+            break;
+        case 45:
+            driveStright("RUE",0.05,"r",0); //drive to line's general area
+            if (is_encoder_reached(encoder+250, leftFront)) {
+                state = 46;
+            }
+            break;
+        case 46:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state = 56;
+            break;
+        case 56:
+            //////////////////////////////
+            driveStright("RUE",0,"f",0);
+            encoder=leftFront.getCurrentPosition();
+            state = 58;
+            break;
+        case 58:
+            driveStright("RUE",0.05,"f",0); //drive to line's general area
+            if (is_encoder_reached(encoder+400, leftFront)) {
+                state = 60;
+            }
+            break;
+        case 60:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+            //////////////////////////////
+
+        default:
         break;
 
 
