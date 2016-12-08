@@ -11,12 +11,16 @@ public class meccanum extends OpMode {
   DcMotor rightRear;
   DcMotor leftRear;
   DcMotor ballcollector;
+  DcMotor balllauncher;
   public meccanum() {
   }
+
   @Override
   public void init() {
+    balllauncher = hardwareMap.dcMotor.get("balllauncher");
+    balllauncher.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     ballcollector = hardwareMap.dcMotor.get("ballcollector");
-    ballcollector.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    ballcollector.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     leftFront = hardwareMap.dcMotor.get("leftFront");
     rightFront = hardwareMap.dcMotor.get("rightFront");
     leftFront.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -37,6 +41,7 @@ public class meccanum extends OpMode {
     float yL_val = -gamepad1.left_stick_y*((float)0.7);            //reading raw values from the joysticks
     float xL_val = gamepad1.left_stick_x*((float)0.7);            //reading raw values from the joysticks
     float xR_val = gamepad1.right_stick_x/2;
+    float collector = gamepad2.right_trigger-gamepad2.left_trigger;
     //clip the right/left values so that the values never exceed +/- 1.
 //    yL_val = Range.clip(yL_val, -1, 1);
 //    xL_val = Range.clip(xL_val, -1, 1);
@@ -44,24 +49,37 @@ public class meccanum extends OpMode {
     yL_val = (float) scaleInput(yL_val);
     xL_val = (float) scaleInput(xL_val);
     xR_val = (float) scaleInput(xR_val);
+    collector = (float) scaleInput(collector);
 
     float RF =(yL_val-xR_val-xL_val);
     float LF =(yL_val+xR_val+xL_val);
     float RR= (yL_val-xR_val+xL_val);
     float LR =(yL_val+xR_val-xL_val);
 
+    collector = Range.clip(collector, -1, 1);
     RF = Range.clip(RF, -1, 1);
     LF = Range.clip(LF, -1, 1);
     RR = Range.clip(RR, -1, 1);
     LR = Range.clip(LR, -1, 1);
-   float ballcollectorspeed = gamepad2.right_trigger-gamepad2.left_trigger;
 
-    ballcollectorspeed = Range.clip(ballcollectorspeed, -1, 1);
-    ballcollectorspeed = (float) scaleInput(ballcollectorspeed);
+    float launcher = gamepad2.right_stick_y/2;
+    launcher = (float) scaleInput(launcher);
+    float launchspeed;
+    ballcollector.setPower(collector);
 
-    ballcollector.setPower(ballcollectorspeed);
 
-
+    if(gamepad2.a){
+      launchspeed=100;
+    }
+    else if(gamepad2.y){
+      launchspeed=-100;
+    }
+    else{
+      launchspeed=0;
+    }
+    launcher=launcher+launchspeed;
+    launcher=Range.clip(launcher, -1, 1);
+    balllauncher.setPower(launcher);
     rightFront.setPower(RF);
     leftFront.setPower(LF);
     rightRear.setPower(RR);

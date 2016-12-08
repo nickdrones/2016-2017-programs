@@ -1,13 +1,13 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
+public class beaconAutonomousRED extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
   private int encoder=0;
   private int test=0;
-  public beaconAutonomous10_31()
+  public beaconAutonomousRED()
   {
   }
    @Override public void init(){
@@ -52,8 +52,8 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
        state++;
         break;
       case 3:
-        pointTurn("RUE",0.1,"r",0); //turn towards line
-        if (gyro.getHeading()>24 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
+        pointTurn("RUE",0.1,"l",0); //turn towards line
+        if (gyro.getHeading()<336 && gyro.getHeading()>180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
         }
         break;
@@ -102,12 +102,12 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             set_power(0,leftRear);
             //resetAllEncoders_noWait();
             state++;
+            driveStright("RUE",0.0,"f",0); //drive to line's general area
             encoder=leftFront.getCurrentPosition();
-            driveStright("RUE",0.0,"r",0); //drive to line's general area
             break;
 
         case 10:
-            driveStright("RUE",0.1,"r",0); //drive to line's general area
+            driveStright("RUE",0.1,"f",0); //drive to line's general area
             if (is_encoder_reached((100+encoder), leftFront)) {
                 state++;
             }
@@ -131,8 +131,8 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         state++;
         break;
       case 15:
-        pointTurn("RUE",0.1,"r",0); //turn onto line
-        if (gyro.getHeading()>80) {
+        pointTurn("RUE",0.1,"l",0); //turn onto line
+        if (gyro.getHeading()<280 && gyro.getHeading()>180) {
           state++;
         }
         break;
@@ -171,7 +171,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
         break;
       case 21:
         driveStright("RUE",0.1,"f",0); //drive to line's general area
-        if (is_encoder_reached((encoder+200), leftFront)) {
+        if (is_encoder_reached((encoder+180), leftFront)) {
           state++;
         }
         break;
@@ -235,7 +235,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             if(beacon.blue()>beacon.red())
         {
             telemetry.addData("It's BLUE!!!","");
-            state = 40;
+            state = 41;
         }
             else
             {
@@ -246,7 +246,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             if(beacon.red()>beacon.blue())
             {
                 telemetry.addData("It's RED!!!","");
-                state=41;
+                state=40;
             }
             break;
         case 40: // blue case
@@ -327,11 +327,11 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             state++;
             break;
         case 61:
-            if (gyro.getHeading()>84){
+            if (gyro.getHeading()>276){
                 state=63;
                 break;
             }
-            else if(gyro.getHeading()<84)
+            else if(gyro.getHeading()<276)
             {
                 state=62;
                 break;
@@ -342,13 +342,13 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             }
         case 62:
             pointTurn("RUE",0.05,"r",0); //turn right
-            if (gyro.getHeading()>83){
+            if (gyro.getHeading()<277){
                 state=64;
             }
             break;
         case 63:
             pointTurn("RUE",0.05,"l",0); //turn left
-            if (gyro.getHeading()<85) {
+            if (gyro.getHeading()>275) {
                 state=64;
             }
             break;
@@ -357,12 +357,12 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0); //drive to line's general area
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 65:
-            slide_sideways("RUE",0.3,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.3,"l",0); //drive to line's general area
             if (is_encoder_reached(encoder+2000, leftFront)) {
                 state++;
             }
@@ -372,12 +372,12 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0); //drive to line's general area
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 67:
-            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
             if (RGB.alpha()>4) {
                 state++;
             }
@@ -402,7 +402,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0); //drive to line's general area
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
@@ -504,7 +504,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             if(beacon.blue()>beacon.red())
             {
                 telemetry.addData("It's BLUE!!!","");
-                state = 87;
+                state = 91;
             }
             else
             {
@@ -515,7 +515,7 @@ public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
             if(beacon.red()>beacon.blue())
             {
                 telemetry.addData("It's RED!!!","");
-                state=91;
+                state=87;
             }
             break;
         case 87: // blue case

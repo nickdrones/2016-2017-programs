@@ -1,13 +1,13 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-public class beaconAutonomous10_31 extends Error404_Hardware_Tier2
+public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
   private int encoder=0;
   private int test=0;
-  public beaconAutonomous10_31()
+  public beaconAutonomousBLUE()
   {
   }
    @Override public void init(){

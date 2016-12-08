@@ -64,7 +64,8 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("Move Gyro", nickSensorTest.class);
     //manager.register("Sensor Distance", distanceSensor.class);
     //manager.register("Line Detect", lineDetection.class);
-    manager.register("Autonomous to Beacon New",beaconAutonomous10_31.class );
+    manager.register("Autonomous to Beacon Blue",beaconAutonomousBLUE.class);
+    manager.register("Autonomous to Beacon RED",beaconAutonomousRED.class);
     manager.register("Cap Ball Autonomous Blue", mecanumCapBallStateMachine10_31_16.class);
     manager.register("knock cap ball Blue", mecanumKnockCapBall10_31_16.class);
     //manager.register("two color sensors", multipleColorSesnsors.class);
