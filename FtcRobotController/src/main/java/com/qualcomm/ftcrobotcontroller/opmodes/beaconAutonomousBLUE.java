@@ -16,6 +16,8 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
     telemetry.addData("Out Blue: ", beacon.blue());
     gyroCalibrate();
     telemetry.addData("Gyro: ", gyro.getHeading());
+    telemetry.addData("","V 3");
+
    }
   @Override public void start(){
     driveStright("RWOE", 0.0, "F", 0);
@@ -149,7 +151,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         state++;
         break;
       case 18:
-        driveStright("RUE",0.1,"r",0);
+        driveStright("RUE",0.2,"r",0);
 //        if ((ODS.getLightDetected()*100)>50) {
         if(touch.isPressed()){
           state++;
@@ -170,7 +172,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         encoder=leftFront.getCurrentPosition();
         break;
       case 21:
-        driveStright("RUE",0.1,"f",0); //drive to line's general area
+        driveStright("RUE",0.3,"f",0); //drive to line's general area
         if (is_encoder_reached((encoder+200), leftFront)) {
           state++;
         }
@@ -191,7 +193,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         break;
       case 24:
         slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-        if (is_encoder_reached(encoder+210, leftFront)) {
+        if (is_encoder_reached(encoder+220, leftFront)) {
           state++;
         }
         break;
@@ -229,6 +231,8 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
+         slide_sideways("RUE",0,"l",0);
+         encoder=leftFront.getCurrentPosition();
         state++;
         break;
         case 38:
@@ -237,19 +241,27 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             telemetry.addData("It's BLUE!!!","");
             state = 40;
         }
-            else
-            {
-                state=39;
-            }
-            break;
-        case 39:
-            if(beacon.red()>beacon.blue())
+            else if(beacon.red()>beacon.blue())
             {
                 telemetry.addData("It's RED!!!","");
                 state=41;
             }
+            else {
+                state=39;
+                encoder=leftFront.getCurrentPosition();
+            }
+            break;
+        case 39:
+                slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+                if (is_encoder_reached(encoder+100, leftFront)) {
+                    state=38;
+                }
             break;
         case 40: // blue case
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
             state=50;
             break;
         case 50:
@@ -258,7 +270,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 51:
-            driveStright("RUE",0.05,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+250, leftFront)) {
                 state = 52;
             }
@@ -272,6 +284,10 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 41: // red case
             ///////////////////////////////////////////////
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
             slide_sideways("RUE",0,"l",0);
             encoder=leftFront.getCurrentPosition();
             state++;
@@ -295,7 +311,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 45:
-            driveStright("RUE",0.05,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+250, leftFront)) {
                 state = 46;
             }
@@ -314,8 +330,8 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state = 58;
             break;
         case 58:
-            driveStright("RUE",0.05,"f",0); //drive to line's general area
-            if (is_encoder_reached(encoder+500, leftFront)) {
+            driveStright("RUE",0.25,"f",0); //drive to line's general area
+            if (is_encoder_reached(encoder+450, leftFront)) {
                 state = 60;
             }
             break;
@@ -328,12 +344,15 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 61:
             if (gyro.getHeading()>84){
-                state=63;
+                //state=63;
+                state=64;
+
                 break;
             }
             else if(gyro.getHeading()<84)
             {
-                state=62;
+                //state=62;
+                state=64;
                 break;
             }
             else
@@ -362,7 +381,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             encoder=leftFront.getCurrentPosition();
             break;
         case 65:
-            slide_sideways("RUE",0.3,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.5,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+2000, leftFront)) {
                 state++;
             }
@@ -393,7 +412,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 69:
             slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+150, leftFront)) {
+            if (is_encoder_reached(encoder+110, leftFront)) {
                 state++;
             }
             break;
@@ -406,8 +425,6 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
-        ///////////////////////////////////////////////
-        /***********************************************/
         case 71:
             set_power(0,rightFront);
             set_power(0,leftFront);
@@ -421,7 +438,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 73:
-            driveStright("RUE",0.1,"r",0);
+            driveStright("RUE",0.2,"r",0);
 //        if ((ODS.getLightDetected()*100)>50) {
             if(touch.isPressed()){
                 state++;
@@ -463,7 +480,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 79:
             slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-            if (is_encoder_reached(encoder+270, leftFront)) {
+            if (is_encoder_reached(encoder+275, leftFront)) {
                 state++;
             }
             break;
@@ -498,6 +515,8 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
+            slide_sideways("RUE",0,"l",0);
+            encoder=leftFront.getCurrentPosition();
             state++;
             break;
         case 85:
@@ -506,16 +525,20 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
                 telemetry.addData("It's BLUE!!!","");
                 state = 87;
             }
-            else
-            {
-                state=86;
-            }
-            break;
-        case 86:
-            if(beacon.red()>beacon.blue())
+            else if(beacon.red()>beacon.blue())
             {
                 telemetry.addData("It's RED!!!","");
                 state=91;
+            }
+            else {
+                state=86;
+                encoder=leftFront.getCurrentPosition();
+            }
+            break;
+        case 86:
+            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            if (is_encoder_reached(encoder+100, leftFront)) {
+                state=85;
             }
             break;
         case 87: // blue case
@@ -527,7 +550,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 89:
-            driveStright("RUE",0.05,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+250, leftFront)) {
                 state = 90;
             }
@@ -564,7 +587,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 95:
-            driveStright("RUE",0.05,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+250, leftFront)) {
                 state = 96;
             }
@@ -583,8 +606,8 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state = 98;
             break;
         case 98:
-            driveStright("RUE",0.05,"f",0); //drive to line's general area
-            if (is_encoder_reached(encoder+400, leftFront)) {
+            driveStright("RUE",0.3,"f",0); //drive to line's general area
+            if (is_encoder_reached(encoder+840, leftFront)) {
                 state = 99;
             }
             break;
@@ -593,11 +616,26 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
+            slide_sideways("RUE",0,"l",0);
             state++;
             break;
-
-        /***********************************************/
-        ///////////////////////////////////////////////
+        case 100:
+            slide_sideways("RUE",0,"l",0);
+            encoder=leftFront.getCurrentPosition();
+            state++;
+            break;
+        case 101:
+            slide_sideways("RUE",0.8,"l",0); //drive to line's general area
+            if (is_encoder_reached(encoder+4500, leftFront)) {
+                state++;
+            }
+            break;
+        case 102:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            break;
         default:
             break;
 

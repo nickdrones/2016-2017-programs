@@ -16,6 +16,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
     telemetry.addData("Out Blue: ", beacon.blue());
     gyroCalibrate();
     telemetry.addData("Gyro: ", gyro.getHeading());
+    telemetry.addData("","V 1");
    }
   @Override public void start(){
     driveStright("RWOE", 0.0, "F", 0);

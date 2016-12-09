@@ -33,6 +33,7 @@ public class meccanum extends OpMode {
     leftRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
+    telemetry.addData("","V 1");
 
   }
   @Override
@@ -69,10 +70,16 @@ public class meccanum extends OpMode {
 
 
     if(gamepad2.a){
-      launchspeed=100;
+      launchspeed=85;
     }
     else if(gamepad2.y){
       launchspeed=-100;
+    }
+    else if(gamepad2.x){
+      launchspeed=100;
+    }
+    else if(gamepad2.b){
+      launchspeed=70;
     }
     else{
       launchspeed=0;
@@ -90,7 +97,7 @@ public class meccanum extends OpMode {
     telemetry.addData ("06", "Gamepad1 left X: " + -gamepad1.left_stick_x);
     telemetry.addData ("07", "Gamepad1 Right X: " + -gamepad1.right_stick_x);
     telemetry.addData ("08", "LF:  " +LF + "   RF:  "+RF+"   RR:  "+RR+"   LR:  "+LR);
-    telemetry.addData ("09", "LFa: " +leftFront.getPower() + "   RFa: "+rightFront.getPower()+"   RRa: "+rightRear.getPower()+"   LRa: "+leftRear.getPower());
+    telemetry.addData ("09", "LFa: " +leftFront.getCurrentPosition() + "   RFa: "+rightFront.getCurrentPosition()+"   RRa: "+rightRear.getCurrentPosition()+"   LRa: "+leftRear.getCurrentPosition());
 
   }
   @Override
