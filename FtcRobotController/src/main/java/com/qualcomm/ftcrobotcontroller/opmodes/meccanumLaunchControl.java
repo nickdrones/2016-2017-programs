@@ -71,7 +71,6 @@ public class meccanumLaunchControl extends OpMode {
     float launchspeed1;
     ballcollector.setPower(collector);
 
-
     if(gamepad2.a){
       launchspeed1=85;
     }
@@ -108,14 +107,10 @@ public class meccanumLaunchControl extends OpMode {
       launchspeed2=0;
     }
 //////////////////////////////////////////////////////////////////
-
     float launchpower1=launcher+launchspeed1;
     float launchpower2=launcher+launchspeed1;
-
     launchpower1=launchpower1-gamepad2.left_stick_y/4;//motor 1 is the top motor
-
     launchpower2=launchpower2+gamepad2.left_stick_y/4;//motor two is the top motor
-
     launchpower1=Range.clip(launchpower1, -1, 1);
     launchpower2=Range.clip(launchpower2, -1, 1);
     balllauncher1.setPower(launchpower1);
@@ -131,7 +126,6 @@ public class meccanumLaunchControl extends OpMode {
     telemetry.addData ("07", "Gamepad1 Right X: " + -gamepad1.right_stick_x);
     telemetry.addData ("08", "LF:  " +LF + "   RF:  "+RF+"   RR:  "+RR+"   LR:  "+LR);
     telemetry.addData ("09", "LFa: " +leftFront.getCurrentPosition() + "   RFa: "+rightFront.getCurrentPosition()+"   RRa: "+rightRear.getCurrentPosition()+"   LRa: "+leftRear.getCurrentPosition());
-
   }
   @Override
   public void stop() {
