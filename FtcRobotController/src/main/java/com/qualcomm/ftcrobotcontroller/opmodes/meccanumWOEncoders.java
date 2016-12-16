@@ -5,14 +5,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
-public class meccanum extends OpMode {
+public class meccanumWOEncoders extends OpMode {
   DcMotor rightFront;
   DcMotor leftFront;
   DcMotor rightRear;
   DcMotor leftRear;
   DcMotor ballcollector;
   DcMotor balllauncher;
-  public meccanum() {
+  public meccanumWOEncoders() {
   }
 
   @Override
@@ -23,14 +23,14 @@ public class meccanum extends OpMode {
     ballcollector.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     leftFront = hardwareMap.dcMotor.get("leftFront");
     rightFront = hardwareMap.dcMotor.get("rightFront");
-    leftFront.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-    rightFront.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    leftFront.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
+    rightFront.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     leftFront.setDirection(DcMotor.Direction.FORWARD);
     rightFront.setDirection(DcMotor.Direction.REVERSE);
     leftRear = hardwareMap.dcMotor.get("leftRear");
     rightRear = hardwareMap.dcMotor.get("rightRear");
-    rightRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-    leftRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    rightRear.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
+    leftRear.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
     telemetry.addData("","V 1");
@@ -97,7 +97,7 @@ public class meccanum extends OpMode {
     telemetry.addData ("06", "Gamepad1 left X: " + -gamepad1.left_stick_x);
     telemetry.addData ("07", "Gamepad1 Right X: " + -gamepad1.right_stick_x);
     telemetry.addData ("08", "LF:  " +LF + "   RF:  "+RF+"   RR:  "+RR+"   LR:  "+LR);
-    telemetry.addData ("09", "LFa: " +leftFront.getCurrentPosition() + "   RFa: "+rightFront.getCurrentPosition()+"   RRa: "+rightRear.getCurrentPosition()+"   LRa: "+leftRear.getCurrentPosition());
+   // telemetry.addData ("09", "LFa: " +leftFront.getCurrentPosition() + "   RFa: "+rightFront.getCurrentPosition()+"   RRa: "+rightRear.getCurrentPosition()+"   LRa: "+leftRear.getCurrentPosition());
 
   }
   @Override

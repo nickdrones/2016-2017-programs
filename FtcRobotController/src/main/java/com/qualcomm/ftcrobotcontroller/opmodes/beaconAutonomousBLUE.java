@@ -16,7 +16,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
     telemetry.addData("Out Blue: ", beacon.blue());
     gyroCalibrate();
     telemetry.addData("Gyro: ", gyro.getHeading());
-    telemetry.addData("","V 3");
+    telemetry.addData("","V 4");
 
    }
   @Override public void start(){
@@ -480,7 +480,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 79:
             slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-            if (is_encoder_reached(encoder+275, leftFront)) {
+            if (is_encoder_reached(encoder+270, leftFront)) {
                 state++;
             }
             break;
