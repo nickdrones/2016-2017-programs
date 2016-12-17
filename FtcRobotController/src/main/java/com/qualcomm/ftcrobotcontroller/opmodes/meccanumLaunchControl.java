@@ -19,9 +19,9 @@ public class meccanumLaunchControl extends OpMode {
   @Override
   public void init() {
     balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
-    balllauncher1.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
+    balllauncher1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     balllauncher2 = hardwareMap.dcMotor.get("balllauncher2");
-    balllauncher2.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
+    balllauncher2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     ballcollector = hardwareMap.dcMotor.get("ballcollector");
     ballcollector.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     leftFront = hardwareMap.dcMotor.get("leftFront");
@@ -36,7 +36,7 @@ public class meccanumLaunchControl extends OpMode {
     leftRear.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
-    telemetry.addData("","V 1");
+    telemetry.addData("","V 2");
 
   }
   @Override
@@ -52,10 +52,10 @@ public class meccanumLaunchControl extends OpMode {
     xR_val = (float) scaleInput(xR_val);
     collector = (float) scaleInput(collector);
 
-    float RF =(yL_val-xR_val-xL_val);
-    float LF =(yL_val+xR_val+xL_val);
-    float RR= (yL_val-xR_val+xL_val);
-    float LR =(yL_val+xR_val-xL_val);
+    float RF =(yL_val-xR_val-xL_val);  //these are the calculations need to make a simple
+    float LF =(yL_val+xR_val+xL_val);  // meaccnum drive. The left joystick controls moving
+    float RR= (yL_val-xR_val+xL_val);  //straight forward/backward and straight sideways. The
+    float LR =(yL_val+xR_val-xL_val);  //right joystick controls turning.
 
     collector = Range.clip(collector, -1, 1);
     RF = Range.clip(RF, -1, 1);
@@ -71,7 +71,7 @@ public class meccanumLaunchControl extends OpMode {
     float launchspeed1;
     ballcollector.setPower(collector);
 
-    if(gamepad2.a){
+    if(gamepad2.a){                   //Preset values for motor speeds for ball launcher
       launchspeed1=85;
     }
     else if(gamepad2.y){
@@ -97,7 +97,7 @@ public class meccanumLaunchControl extends OpMode {
     else if(gamepad2.y){
       launchspeed2=-100;
     }
-    else if(gamepad2.x){
+    else if(gamepad2.x){          //preset values for ball laucnher motor power
       launchspeed2=100;
     }
     else if(gamepad2.b){
@@ -109,6 +109,7 @@ public class meccanumLaunchControl extends OpMode {
 //////////////////////////////////////////////////////////////////
     float launchpower1=launcher+launchspeed1;
     float launchpower2=launcher+launchspeed1;
+    //next two lines control difference between launcher motors
     launchpower1=launchpower1-gamepad2.left_stick_y/4;//motor 1 is the top motor
     launchpower2=launchpower2+gamepad2.left_stick_y/4;//motor two is the top motor
     launchpower1=Range.clip(launchpower1, -1, 1);
