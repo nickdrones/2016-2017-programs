@@ -68,6 +68,11 @@ public class meccanumLaunchControl extends OpMode {
 /////////////////////////////////////////////////////////////
     //////LAUNCHER MOTOR 1////////////////
     /////////////////////////////////////
+     /*
+    The below statements allow the driver to write a constant speed to the launcher motors.
+    In other statements below, the driver is able to use the left joystick to control the speed
+    difference between the
+     */
     float launchspeed1;
     ballcollector.setPower(collector);
 
@@ -89,6 +94,11 @@ public class meccanumLaunchControl extends OpMode {
     /////////////////////////////////////////////////////////////
     /////////////////LAUNCHER MOTOR 2////////////////////////////
     /////////////////////////////////////////////////////////////
+    /*
+    The below statements allow the driver to write a constant speed to the launcher motors.
+    In other statements below, the driver is able to use the left joystick to control the speed
+    difference between the
+     */
     float launchspeed2=0;
 
     if(gamepad2.a){
@@ -97,7 +107,7 @@ public class meccanumLaunchControl extends OpMode {
     else if(gamepad2.y){
       launchspeed2=-100;
     }
-    else if(gamepad2.x){          //preset values for ball laucnher motor power
+    else if(gamepad2.x){
       launchspeed2=100;
     }
     else if(gamepad2.b){
@@ -106,10 +116,13 @@ public class meccanumLaunchControl extends OpMode {
     else{
       launchspeed2=0;
     }
-//////////////////////////////////////////////////////////////////
     float launchpower1=launcher+launchspeed1;
-    float launchpower2=launcher+launchspeed1;
+    float launchpower2=launcher+launchspeed2;
     //next two lines control difference between launcher motors
+    /*
+    Taking the motor power and subtracting the value from the top and adding it to the bottom
+    will allow for more fine control of pitch and spin of ball.
+    */
     launchpower1=launchpower1-gamepad2.left_stick_y/4;//motor 1 is the top motor
     launchpower2=launchpower2+gamepad2.left_stick_y/4;//motor two is the top motor
     launchpower1=Range.clip(launchpower1, -1, 1);
