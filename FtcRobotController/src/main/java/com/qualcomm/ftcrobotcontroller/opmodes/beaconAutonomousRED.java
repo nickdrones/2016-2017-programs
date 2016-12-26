@@ -37,7 +37,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
       state++;
       break;
       case 1:
-          driveStright("RUE",0.2,"r",0); //drive away from line
+          driveStright("RUE",0.2,"r",0); //drive away from wall
 
         if (is_encoder_reached(200, leftFront)) {
 
@@ -63,14 +63,9 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         encoder=leftFront.getCurrentPosition();
         break;
-//    case 4:
-//      resetAllEncoders_noWait();
-//          state++;
-//        break;
       case 5:
         driveStright("RUE",0.4,"r",0); //drive to line's general area
         if (is_encoder_reached((2200+encoder), leftFront)) {
@@ -84,8 +79,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftRear);
         state++;
         break;
-      case 7:
-        //resetAllEncoders_noWait();
+        case 7:
         state++;
         break;
       case 8:

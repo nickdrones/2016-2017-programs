@@ -19,9 +19,9 @@ public class meccanumLaunchControl extends OpMode {
   @Override
   public void init() {
     balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
-    balllauncher1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    balllauncher1.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     balllauncher2 = hardwareMap.dcMotor.get("balllauncher2");
-    balllauncher2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+    balllauncher2.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     ballcollector = hardwareMap.dcMotor.get("ballcollector");
     ballcollector.setMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
     leftFront = hardwareMap.dcMotor.get("leftFront");

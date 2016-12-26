@@ -62,7 +62,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Teleop W/ encoder", meccanum.class);
     manager.register("Teleop NO encoder", meccanumWOEncoders.class);
     manager.register("Motor Test", twoMotorTest.class);
-    //manager.register("Move Gyro", nickSensorTest.class);
+    manager.register("Teleop Launch Control", meccanumLaunchControl.class);
     //manager.register("Sensor Distance", distanceSensor.class);
     //manager.register("Line Detect", lineDetection.class);
     manager.register("Autonomous to Beacon Blue",beaconAutonomousBLUE.class);
