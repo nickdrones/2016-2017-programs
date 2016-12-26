@@ -95,14 +95,13 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
-            driveStright("RUE",0.0,"f",0); //drive to line's general area
+            driveStright("RUE",0.0,"f",0);
             encoder=leftFront.getCurrentPosition();
             break;
 
         case 10:
-            driveStright("RUE",0.1,"f",0); //drive to line's general area
+            driveStright("RUE",0.1,"f",0); //drive slightly past line
             if (is_encoder_reached((100+encoder), leftFront)) {
                 state++;
             }
@@ -122,7 +121,6 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 15:
@@ -136,7 +134,6 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 17:
@@ -144,8 +141,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         state++;
         break;
       case 18:
-        driveStright("RUE",0.2,"r",0);
-//        if ((ODS.getLightDetected()*100)>50) {
+        driveStright("RUE",0.2,"r",0); //drive until robot presses against wall
         if(touch.isPressed()){
           state++;
         }
@@ -155,17 +151,15 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 20:
         driveStright("RUE",0,"f",0);
-        //resetAllEncoders_noWait();
         state++;
         encoder=leftFront.getCurrentPosition();
         break;
       case 21:
-        driveStright("RUE",0.3,"f",0); //drive to line's general area
+        driveStright("RUE",0.3,"f",0); //drive back from pressing wall
         if (is_encoder_reached((encoder+200), leftFront)) {
           state++;
         }
@@ -175,17 +169,15 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 23:
         slide_sideways("RUE",0,"l",0);
         encoder=leftFront.getCurrentPosition();
-        //resetAllEncoders_withWait();
        state++;
         break;
       case 24:
-        slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+        slide_sideways("RUE",0.1,"l",0); //slide sideways until pusher is in front of firest beacon button
         if (is_encoder_reached(encoder+220, leftFront)) {
           state++;
         }
@@ -195,12 +187,10 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
      case 26:
         driveStright("RUE",0,"r",0);
         encoder=leftFront.getCurrentPosition();
-//        //resetAllEncoders_withWait();
         state=31;
         break;
       case 31:
@@ -208,7 +198,6 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 32:
@@ -229,23 +218,23 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         state++;
         break;
         case 38:
-            if(beacon.blue()>beacon.red())
+            if(beacon.blue()>beacon.red()) //measure color of beacon
             {
-                telemetry.addData("It's BLUE!!!","");
+                telemetry.addData("It's BLUE!!!",""); //if it is blue, jump to state 41
                 state = 41;
             }
             else if(beacon.red()>beacon.blue())
             {
-                telemetry.addData("It's RED!!!","");
+                telemetry.addData("It's RED!!!",""); //if it is blue, jump to state 40
                 state=40;
             }
             else {
-                state=39;
+                state=39; // if both color values are the same (ie: Blue and Red are both zero), jump to state 39
                 encoder=leftFront.getCurrentPosition();
             }
             break;
         case 39:
-            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //continue moving sideways until it sees the beacon
             if (is_encoder_reached(encoder+100, leftFront)) {
                 state=38;
             }
@@ -263,7 +252,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             state++;
             break;
         case 51:
-            driveStright("RUE",0.05,"r",0); //drive to line's general area
+            driveStright("RUE",0.05,"r",0); //drive to push in beacon
             if (is_encoder_reached(encoder+250, leftFront)) {
                 state = 52;
             }
@@ -276,13 +265,12 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             state = 56;
             break;
         case 41: // red case
-            ///////////////////////////////////////////////
             slide_sideways("RUE",0,"l",0);
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
         case 42:
-            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //slide sideways to other beacon button
             if (is_encoder_reached(encoder+300, leftFront)) {
                 state++;
             }
@@ -300,7 +288,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             state++;
             break;
         case 45:
-            driveStright("RUE",0.2,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //push in button
             if (is_encoder_reached(encoder+250, leftFront)) {
                 state = 46;
             }
@@ -319,7 +307,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             state = 58;
             break;
         case 58:
-            driveStright("RUE",0.25,"f",0); //drive to line's general area
+            driveStright("RUE",0.25,"f",0); //back up from pushing
             if (is_encoder_reached(encoder+450, leftFront)) {
                 state = 60;
             }
@@ -362,12 +350,12 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"l",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0);
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 65:
-            slide_sideways("RUE",0.5,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.5,"l",0); //slide sideways to other beacon
             if (is_encoder_reached(encoder+2000, leftFront)) {
                 state++;
             }
@@ -377,12 +365,12 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"l",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0);
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 67:
-            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //slowly slide to other line
             if (RGB.alpha()>4) {
                 state++;
             }
@@ -397,7 +385,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             encoder=leftFront.getCurrentPosition();
             break;
         case 69:
-            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"r",0); //slide slightly past line
             if (is_encoder_reached(encoder+110, leftFront)) {
                 state++;
             }
@@ -407,18 +395,15 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"l",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0);
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
-        ///////////////////////////////////////////////
-        /***********************************************/
         case 71:
             set_power(0,rightFront);
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 72:
@@ -426,8 +411,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             state++;
             break;
         case 73:
-            driveStright("RUE",0.2,"r",0);
-//        if ((ODS.getLightDetected()*100)>50) {
+            driveStright("RUE",0.2,"r",0); //drive until robot touches wall
             if(touch.isPressed()){
                 state++;
             }
@@ -437,17 +421,15 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 75:
             driveStright("RUE",0,"f",0);
-            //resetAllEncoders_noWait();
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 76:
-            driveStright("RUE",0.1,"f",0); //drive to line's general area
+            driveStright("RUE",0.1,"f",0); //slightly back up from wall
             if (is_encoder_reached((encoder+200), leftFront)) {
                 state++;
             }
@@ -457,17 +439,15 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 78:
             slide_sideways("RUE",0,"l",0);
             encoder=leftFront.getCurrentPosition();
-            //resetAllEncoders_withWait();
             state++;
             break;
         case 79:
-            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //slide sideways to other line
             if (is_encoder_reached(encoder+270, leftFront)) {
                 state++;
             }
@@ -477,12 +457,10 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
         case 81:
             driveStright("RUE",0,"r",0);
             encoder=leftFront.getCurrentPosition();
-//        //resetAllEncoders_withWait();
             state++;
             break;
         case 82:
@@ -490,7 +468,6 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 83:
@@ -507,6 +484,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
+        //Logic of beacon pressing is same as earlier
         case 85:
             if(beacon.blue()>beacon.red())
             {
