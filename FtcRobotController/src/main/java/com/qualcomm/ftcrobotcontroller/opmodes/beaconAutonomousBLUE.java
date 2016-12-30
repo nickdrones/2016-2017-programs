@@ -7,7 +7,9 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
   private int state = 0;
   private int encoder=0;
   private int test=0;
-  public beaconAutonomousBLUE()
+  int zeroPoint=0;
+
+    public beaconAutonomousBLUE()
   {
   }
    @Override public void init(){
@@ -143,7 +145,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
+        zeroPoint = gyro.getHeading();
         state++;
         break;
       case 17:
@@ -343,16 +345,15 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 61:
-            if (gyro.getHeading()>84){
-                //state=63;
-                state=64;
-
+            if (gyro.getHeading()>zeroPoint){
+                state=63;
+                //state=64;
                 break;
             }
-            else if(gyro.getHeading()<84)
+            else if(gyro.getHeading()<zeroPoint)
             {
-                //state=62;
-                state=64;
+                state=62;
+                //state=64;
                 break;
             }
             else

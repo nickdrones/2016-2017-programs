@@ -134,6 +134,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
+        int zeroPoint = gyro.getHeading();
         state++;
         break;
       case 17:
@@ -177,7 +178,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
        state++;
         break;
       case 24:
-        slide_sideways("RUE",0.1,"l",0); //slide sideways until pusher is in front of firest beacon button
+        slide_sideways("RUE",0.1,"l",0); //slide sideways until pusher is in front of first beacon button
         if (is_encoder_reached(encoder+220, leftFront)) {
           state++;
         }
