@@ -7,7 +7,8 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
   private int state = 0;
   private int encoder=0;
   private int test=0;
-  public beaconAutonomousRED()
+  int zeroPoint = 0;
+    public beaconAutonomousRED()
   {
   }
    @Override public void init(){
@@ -21,10 +22,8 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
   @Override public void start(){
     driveStright("RWOE", 0.0, "F", 0);
     resetAllEncoders_withWait();
-    //gyroCalibrate();
     RGB.enableLed(false); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
     beacon.enableLed(false);
-
 
   }
   @Override public void loop ()
@@ -38,9 +37,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
       break;
       case 1:
           driveStright("RUE",0.2,"r",0); //drive away from wall
-
         if (is_encoder_reached(200, leftFront)) {
-
           state++;
           encoder=leftFront.getCurrentPosition();
         }
@@ -109,7 +106,6 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         case 11:
             state++;
             break;
-
       case 12:
         state++;
         break;
@@ -134,7 +130,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        int zeroPoint = gyro.getHeading();
+        zeroPoint = gyro.getHeading();
         state++;
         break;
       case 17:
@@ -321,13 +317,13 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             state++;
             break;
         case 61:
-            if (gyro.getHeading()>276){
-                state=64;
+            if (gyro.getHeading()>zeroPoint){
+                state=63;
                 break;
             }
-            else if(gyro.getHeading()<276)
+            else if(gyro.getHeading()<zeroPoint)
             {
-                state=64;
+                state=62;
                 break;
             }
             else
@@ -597,7 +593,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
             break;
         case 101:
             slide_sideways("RUE",0.8,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+4500, leftFront)) {
+            if (is_encoder_reached(encoder+4800, leftFront)) {
                 state++;
             }
             break;

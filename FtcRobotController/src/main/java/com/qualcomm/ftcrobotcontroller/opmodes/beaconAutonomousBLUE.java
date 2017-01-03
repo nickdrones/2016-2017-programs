@@ -643,6 +643,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
 
     }
     telemetry.addData("RightFront: ", get_position(rightFront));
+    telemetry.addData("Zero point: ", zeroPoint);
     telemetry.addData("LeftFront: ", get_position(leftFront));
     telemetry.addData("RightRear: ", get_position(rightRear));
     telemetry.addData("LeftRear: ", get_position(leftRear));
