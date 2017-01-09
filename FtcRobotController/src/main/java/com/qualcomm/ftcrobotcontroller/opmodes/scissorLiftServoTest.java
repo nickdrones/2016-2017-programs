@@ -7,12 +7,17 @@ public class scissorLiftServoTest extends OpMode {
   final static double SPIN_MIN_RANGE = 0;
   final static double SPIN_MAX_RANGE = 1;
   double spinPosition = 0;
-  Servo spin;
+  Servo one;
+  Servo two;
+  Servo three;
+
   public scissorLiftServoTest() {
   }
   @Override
   public void init() {
-    spin = hardwareMap.servo.get("spin");
+    one = hardwareMap.servo.get("one");
+    two = hardwareMap.servo.get("two");
+    three = hardwareMap.servo.get("three");
   }
   @Override
   public void loop() {
@@ -23,7 +28,10 @@ public class scissorLiftServoTest extends OpMode {
         spinPosition -= 0.002; // if the dpad right on gamepad 2 is pressed, subtract from the position of the base servo.
       }
        spinPosition = Range.clip(spinPosition, SPIN_MIN_RANGE, SPIN_MAX_RANGE);
-    spin.setPosition(spinPosition);
+    one.setPosition(spinPosition);
+    two.setPosition(spinPosition);
+    three.setPosition(spinPosition);
+
     telemetry.addData("Text", "*** Robot Data***");
     telemetry.addData("spin", "spin:  " + String.format("%.2f", spinPosition));
   }
