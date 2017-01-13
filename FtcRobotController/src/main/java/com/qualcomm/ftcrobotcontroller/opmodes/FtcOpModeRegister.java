@@ -69,7 +69,6 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
    // manager.register("knock cap ball Blue", mecanumKnockCapBall10_31_16.class);
     //manager.register("Servo controls", scissorLiftServoTest.class);
-    //manager.register("Auto to ramp",vortexRampAuto11_12_16.class);
     manager.register("shoot balls",ballShootAuto.class);
     /*
      * Uncomment any of the following lines if you want to register an op mode.
