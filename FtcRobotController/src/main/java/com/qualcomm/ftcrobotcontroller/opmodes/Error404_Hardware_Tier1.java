@@ -14,7 +14,8 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected DcMotor leftRear;
     protected DcMotor rightRear;
     protected DcMotor ballCollector;
-    protected DcMotor balllauncher;
+    protected DcMotor balllauncher1;
+    protected DcMotor balllauncher2;
     protected ColorSensor RGB;
     protected ColorSensor beacon;
     protected GyroSensor gyro;
@@ -27,10 +28,16 @@ public class Error404_Hardware_Tier1 extends OpMode {
         //    an error message shows on the driver station telemetry.  //
         *////////////////////////////////////////////////////////////////
         try {
-            balllauncher = hardwareMap.dcMotor.get("balllauncher");
+            balllauncher2 = hardwareMap.dcMotor.get("balllauncher2");
         } catch (Exception p_exeception) {
-            telemetry.addData("ball launcher not found in config file", 0);
-            balllauncher = null;
+            telemetry.addData("ball launcher 2 not found in config file", 0);
+            balllauncher2 = null;
+        }
+        try {
+            balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
+        } catch (Exception p_exeception) {
+            telemetry.addData("ball launcher 1 not found in config file", 0);
+            balllauncher1 = null;
         }
         try {
             touch = hardwareMap.touchSensor.get("touch");

@@ -15,13 +15,11 @@ public class meccanumLaunchControl extends OpMode {
   DcMotor balllauncher2;
   float launchspeed1;
   double powerval;
-  double test;
   public meccanumLaunchControl() {
   }
   @Override
   public void init() {
     powerval=1;
-    test=5;
     telemetry.addData ("0", "I AM HERE");
     balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
     balllauncher1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -79,7 +77,6 @@ public class meccanumLaunchControl extends OpMode {
     In other statements below, the driver is able to use the left joystick to control the speed
     difference between the
      */
-    powerval = scaleInput(powerval);
     ballcollector.setPower(collector);
 
     if(gamepad2.a){                   //Preset values for motor speeds for ball launcher
@@ -90,7 +87,6 @@ public class meccanumLaunchControl extends OpMode {
     }
     else if(gamepad2.x){
       powerval=powerval-0.01;
-      test=powerval;
     }
     else if(gamepad2.b){
       powerval=powerval+0.01;
@@ -116,7 +112,6 @@ public class meccanumLaunchControl extends OpMode {
     telemetry.addData ("04", powerval);
     telemetry.addData ("03", launchspeed1);
     telemetry.addData ("01", launchpower1);
-    telemetry.addData ("05", test);
 
 
   }

@@ -13,7 +13,8 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
   }
    @Override public void init(){
     super.init();
-    telemetry.addData("Out Red: ", beacon.red());
+    RGB.enableLed(true); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
+       telemetry.addData("Out Red: ", beacon.red());
     telemetry.addData("Out Blue: ", beacon.blue());
     telemetry.addData("Down White: ", RGB.alpha());
     gyroCalibrate();

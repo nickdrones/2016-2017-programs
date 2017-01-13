@@ -13,8 +13,9 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
   {
   }
    @Override public void init(){
-    super.init();
-    telemetry.addData("Out Red: ", beacon.red());
+       super.init();
+       RGB.enableLed(true); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
+       telemetry.addData("Out Red: ", beacon.red());
     telemetry.addData("Out Blue: ", beacon.blue());
     telemetry.addData("Down White: ", RGB.alpha());
     gyroCalibrate();
@@ -113,7 +114,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
 
         case 10:
             driveStright("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached((100+encoder), leftFront)) {
+            if (is_encoder_reached((120+encoder), leftFront)) {
                 state++;
             }
             break;
@@ -256,7 +257,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 39:
                 slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-                if (is_encoder_reached(encoder+100, leftFront)) {
+                if (is_encoder_reached(encoder+140, leftFront)) {
                     state=38;
                 }
             break;
@@ -539,7 +540,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 86:
             slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-            if (is_encoder_reached(encoder+100, leftFront)) {
+            if (is_encoder_reached(encoder+140, leftFront)) {
                 state=85;
             }
             break;
@@ -618,17 +619,17 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"l",0);
+            pointTurn("RUE",0,"l",0);
             state++;
             break;
         case 100:
-            slide_sideways("RUE",0,"l",0);
+            pointTurn("RUE",0,"l",0);
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
         case 101:
-            slide_sideways("RUE",0.8,"l",0); //drive to line's general area
-            if (is_encoder_reached(encoder+4500, leftFront)) {
+            pointTurn("RUE",0.2,"l",0); //drive to line's general area
+            if (gyro.getHeading()<60 && gyro.getHeading()>1) {
                 state++;
             }
             break;
@@ -637,7 +638,35 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
+            state++;
             break;
+
+        case 103:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+        case 104:
+            driveStright("RUE",0,"f",0);
+            encoder=leftFront.getCurrentPosition();
+            state++;
+            break;
+        case 105:
+            driveStright("RUE",0.3,"f",0); //drive to line's general area
+            if (is_encoder_reached(encoder+2400, leftFront)) {
+                state++;
+            }
+            break;
+        case 106:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+
         default:
             break;
 
