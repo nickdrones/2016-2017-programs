@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
-public class meccanumLaunchControl extends OpMode {
+public class meccanum2controllers extends OpMode {
   DcMotor rightFront;
   DcMotor leftFront;
   DcMotor rightRear;
@@ -14,14 +14,10 @@ public class meccanumLaunchControl extends OpMode {
   DcMotor balllauncher1;
   DcMotor balllauncher2;
   float launchspeed1;
-  double powerval;
-  double test;
-  public meccanumLaunchControl() {
+  public meccanum2controllers() {
   }
   @Override
   public void init() {
-    powerval=1;
-    test=5;
     telemetry.addData ("0", "I AM HERE");
     balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
     balllauncher1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -79,21 +75,19 @@ public class meccanumLaunchControl extends OpMode {
     In other statements below, the driver is able to use the left joystick to control the speed
     difference between the
      */
-    powerval = scaleInput(powerval);
     ballcollector.setPower(collector);
 
     if(gamepad2.a){                   //Preset values for motor speeds for ball launcher
-      launchspeed1=(float)powerval;
+      launchspeed1=1;
     }
     else if(gamepad2.y){
       launchspeed1=-1;
     }
     else if(gamepad2.x){
-      powerval=powerval-0.01;
-      test=powerval;
+      launchspeed1=(float)0.8;
     }
     else if(gamepad2.b){
-      powerval=powerval+0.01;
+      launchspeed1=(float)0.9;
     }
     else{
       launchspeed1=0;
@@ -113,10 +107,8 @@ public class meccanumLaunchControl extends OpMode {
     rightRear.setPower(RR);
     leftRear.setPower(LR);
     telemetry.addData ("02", launcher);
-    telemetry.addData ("04", powerval);
     telemetry.addData ("03", launchspeed1);
     telemetry.addData ("01", launchpower1);
-    telemetry.addData ("05", test);
 
 
   }

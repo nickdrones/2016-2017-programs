@@ -15,6 +15,7 @@ public class beaconAutonomousRED extends Error404_Hardware_Tier2
     super.init();
     telemetry.addData("Out Red: ", beacon.red());
     telemetry.addData("Out Blue: ", beacon.blue());
+    telemetry.addData("Down White: ", RGB.alpha());
     gyroCalibrate();
     telemetry.addData("Gyro: ", gyro.getHeading());
     telemetry.addData("","V 4");

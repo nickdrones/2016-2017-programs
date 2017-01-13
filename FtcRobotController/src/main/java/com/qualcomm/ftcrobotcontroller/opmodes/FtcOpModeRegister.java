@@ -59,17 +59,16 @@ public class FtcOpModeRegister implements OpModeRegister {
    // manager.register("Runner program", Error404_Hardware_Testing.class);
     //manager.register("PushBotTeleOp", PushBotTeleOp.class);
    // manager.register("Slide left with gyro", strafeSidewaysTestStateMachine.class);
-    manager.register("Teleop W/ encoder", meccanum.class);
-    manager.register("Teleop NO encoder", meccanumWOEncoders.class);
+    manager.register("Teleop", meccanum2controllers.class);
     manager.register("Motor Test", twoMotorTest.class);
-    manager.register("Teleop Launch Control", meccanumLaunchControl.class);
+    //manager.register("Teleop Launch Control", meccanumLaunchControl.class);
     //manager.register("Sensor Distance", distanceSensor.class);
     //manager.register("Line Detect", lineDetection.class);
     manager.register("Autonomous to Beacon Blue",beaconAutonomousBLUE.class);
     manager.register("Autonomous to Beacon RED",beaconAutonomousRED.class);
     manager.register("Cap Ball Autonomous Blue", mecanumCapBallStateMachine10_31_16.class);
    // manager.register("knock cap ball Blue", mecanumKnockCapBall10_31_16.class);
-    manager.register("Servo controls", scissorLiftServoTest.class);
+    //manager.register("Servo controls", scissorLiftServoTest.class);
     //manager.register("Auto to ramp",vortexRampAuto11_12_16.class);
     manager.register("Auto Shoot balls up ramp",rampStrafeShootAuto.class);
     /*
