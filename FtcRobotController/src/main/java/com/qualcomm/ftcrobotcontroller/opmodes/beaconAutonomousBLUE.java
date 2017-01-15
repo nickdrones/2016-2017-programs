@@ -197,7 +197,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         break;
       case 24:
         slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-        if (is_encoder_reached(encoder+220, leftFront)) {
+        if (is_encoder_reached(encoder+300, leftFront)) {
           state++;
         }
         break;
@@ -257,7 +257,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 39:
                 slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-                if (is_encoder_reached(encoder+140, leftFront)) {
+                if (is_encoder_reached(encoder+160, leftFront)) {
                     state=38;
                 }
             break;
@@ -275,7 +275,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 51:
             driveStright("RUE",0.2,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+250, leftFront)) {
+            if (is_encoder_reached(encoder+280, leftFront)) {
                 state = 52;
             }
             break;
@@ -298,7 +298,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 42:
             slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-            if (is_encoder_reached(encoder+300, leftFront)) {
+            if (is_encoder_reached(encoder+380, leftFront)) {
                 state++;
             }
             break;
@@ -316,7 +316,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 45:
             driveStright("RUE",0.2,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+250, leftFront)) {
+            if (is_encoder_reached(encoder+280, leftFront)) {
                 state = 46;
             }
             break;
@@ -415,7 +415,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 69:
             slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+110, leftFront)) {
+            if (is_encoder_reached(encoder+90, leftFront)) {
                 state++;
             }
             break;
@@ -573,7 +573,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 92:
             slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-            if (is_encoder_reached(encoder+400, leftFront)) {
+            if (is_encoder_reached(encoder+430, leftFront)) {
                 state++;
             }
             break;
@@ -591,7 +591,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 95:
             driveStright("RUE",0.2,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+250, leftFront)) {
+            if (is_encoder_reached(encoder+260, leftFront)) {
                 state = 96;
             }
             break;
