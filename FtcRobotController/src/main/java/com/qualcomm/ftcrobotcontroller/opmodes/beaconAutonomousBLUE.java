@@ -6,7 +6,10 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
   private int encoder=0;
-  private int test=0;
+  private int tempval=0;
+  private double powervalue;
+  private int gyrovalatslow=0;
+    private int gyroafterstraight;
   int zeroPoint=0;
 
     public beaconAutonomousBLUE()
@@ -58,8 +61,22 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
        state++;
         break;
       case 3:
-        pointTurn("RUE",0.1,"r",0); //turn towards line
-        if (gyro.getHeading()>24 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
+          if(gyro.getHeading()<20){
+              powervalue=0.1;
+          }
+          if(gyro.getHeading()>20 && gyro.getHeading()<30){
+              powervalue=(30-gyro.getHeading())/200;
+              if(gyrovalatslow==0){
+                  gyrovalatslow=gyro.getHeading();
+              }
+          }
+          if(powervalue<0.03){
+              powervalue=0.03;
+          }
+
+        pointTurn("RUE",powervalue,"r",0); //turn towards line
+
+        if (gyro.getHeading()>28 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
         }
         break;
@@ -70,19 +87,21 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         set_power(0,leftRear);
         //resetAllEncoders_noWait();
         state++;
+          tempval=gyro.getHeading();
         encoder=leftFront.getCurrentPosition();
-        break;
+          break;
 //    case 4:
 //      resetAllEncoders_noWait();
 //          state++;
 //        break;
       case 5:
-        driveStright("RUE",0.4,"r",0); //drive to line's general area
+          driveStright("RUE",0.4,"r",0); //drive to line's general area
         if (is_encoder_reached((2200+encoder), leftFront)) {
           state++;
         }
         break;
-      case 6:
+        case 6:
+        gyroafterstraight=gyro.getHeading();
         set_power(0,rightFront);
         set_power(0,leftFront);
         set_power(0,rightRear);
@@ -133,7 +152,6 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 15:
@@ -148,7 +166,8 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         set_power(0,rightRear);
         set_power(0,leftRear);
         zeroPoint = gyro.getHeading();
-        state++;
+          state=150;
+          state++;
         break;
       case 17:
         driveStright("RUE",0,"f",0);
@@ -665,6 +684,11 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             set_power(0,rightRear);
             set_power(0,leftRear);
             state++;
+            break;
+        case 150:
+            telemetry.addData("Gyro after fast turn: ", gyrovalatslow);
+            telemetry.addData("Gyro after initial turn completed: ", tempval);
+            telemetry.addData("Gyro after initial straight move: ", gyroafterstraight);
             break;
 
         default:

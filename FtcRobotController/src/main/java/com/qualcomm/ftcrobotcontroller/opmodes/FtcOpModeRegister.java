@@ -63,12 +63,11 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("Motor Test", twoMotorTest.class);
     manager.register("Teleop", meccanumLaunchControl.class);
     manager.register("Cross field to block", crossFieldTroll.class);
-    //manager.register("Line Detect", lineDetection.class);
+    manager.register("Gyro Troubleshooting", gyroTest.class);
     manager.register("Beacon Blue cntr",beaconAutonomousBLUE.class);
     manager.register("Beacon Red cntr",beaconAutonomousRED.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
-   // manager.register("knock cap ball Blue", mecanumKnockCapBall10_31_16.class);
-    //manager.register("Servo controls", scissorLiftServoTest.class);
+    manager.register("Drive gyro", meccanumwithGYRO.class);
     manager.register("shoot balls",ballShootAuto.class);
     /*
      * Uncomment any of the following lines if you want to register an op mode.
