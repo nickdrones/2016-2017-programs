@@ -81,7 +81,7 @@ public class ballShootAuto extends Error404_Hardware_Tier2
             state++;
             break;
         case 7:
-            driveStright("RUE",0.2,"r",0); //drive away from line
+            driveStright("RUE",0.2,"r",0);
 
             if (is_encoder_reached(1400, leftFront)) {
 
@@ -108,11 +108,11 @@ public class ballShootAuto extends Error404_Hardware_Tier2
             set_power(0,rightRear);
             set_power(0,leftRear);
             state++;
-            driveStright("RUE",0,"f",0); //drive to line's general area
+            driveStright("RUE",0,"f",0);
             encoder=leftFront.getCurrentPosition();
             break;
         case 11:
-            driveStright("RUE",0.4,"f",0); //drive to line's general area
+            driveStright("RUE",0.4,"f",0);
             ballCollector.setPower(1);
             if (is_encoder_reached((2200+encoder), leftFront)) {
                 state++;
@@ -139,11 +139,11 @@ public class ballShootAuto extends Error404_Hardware_Tier2
             set_power(0,rightRear);
             set_power(0,leftRear);
             state++;
-            driveStright("RUE",0,"f",0); //drive to line's general area
+            driveStright("RUE",0,"f",0);
             encoder=leftFront.getCurrentPosition();
             break;
         case 15:
-            driveStright("RUE",0.4,"f",0); //drive to line's general area
+            driveStright("RUE",0.4,"f",0);
             ballCollector.setPower(1);
             if (is_encoder_reached((2200+encoder), leftFront)) {
                 state++;
@@ -164,14 +164,8 @@ public class ballShootAuto extends Error404_Hardware_Tier2
 
 
     }
-    //telemetry.addData("RightFront: ", get_position(rightFront));
-    //telemetry.addData("LeftFront: ", get_position(leftFront));
-    //telemetry.addData("RightRear: ", get_position(rightRear));
-    //telemetry.addData("LeftRear: ", get_position(leftRear));
     telemetry.addData("1. State: ", state);
     telemetry.addData("2. loops: ", test);
     telemetry.addData("3. Gyro: ", gyro.getHeading());
-    //telemetry.addData("3. Blue out: ", beacon.blue());
-    //telemetry.addData("Gyro: ", gyro.getHeading());
   } // loop
 } //

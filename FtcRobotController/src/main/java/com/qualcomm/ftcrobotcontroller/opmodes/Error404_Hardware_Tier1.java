@@ -20,6 +20,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected ColorSensor beacon;
     protected GyroSensor gyro;
     protected TouchSensor touch;
+    protected TouchSensor touch2;
 
     @Override public void init() {
         /////////////////////////////////////////////////////////////////
@@ -27,6 +28,12 @@ public class Error404_Hardware_Tier1 extends OpMode {
         //      If the device cannot be found in the config file,      //
         //    an error message shows on the driver station telemetry.  //
         *////////////////////////////////////////////////////////////////
+        try {
+            touch2 = hardwareMap.touchSensor.get("touch2");
+        } catch (Exception p_exeception) {
+            telemetry.addData("Touch 2 not found in config file", 0);
+            touch2 = null;
+        }
         try {
             balllauncher2 = hardwareMap.dcMotor.get("balllauncher2");
         } catch (Exception p_exeception) {
