@@ -61,21 +61,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
        state++;
         break;
       case 3:
-          if(gyro.getHeading()<20){
-              powervalue=0.1;
-          }
-          if(gyro.getHeading()>20 && gyro.getHeading()<30){
-              powervalue=(30-gyro.getHeading())/200;
-              if(gyrovalatslow==0){
-                  gyrovalatslow=gyro.getHeading();
-              }
-          }
-          if(powervalue<0.03){
-              powervalue=0.03;
-          }
-
-        pointTurn("RUE",powervalue,"r",0); //turn towards line
-
+          turn_gyro_power(23, 0.1, 0.6, "r");
         if (gyro.getHeading()>28 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
         }
@@ -90,10 +76,6 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
           tempval=gyro.getHeading();
         encoder=leftFront.getCurrentPosition();
           break;
-//    case 4:
-//      resetAllEncoders_noWait();
-//          state++;
-//        break;
       case 5:
           driveStright("RUE",0.4,"r",0); //drive to line's general area
         if (is_encoder_reached((2200+encoder), leftFront)) {
