@@ -129,6 +129,16 @@ public class Error404_Hardware_Tier1 extends OpMode {
     //  and String versions for printing to   //
     //        Driver's Station phone          //
     *///////////////////////////////////////////
+    public boolean is_stalled(DcMotor motor){
+        int encoder1;
+        int encoder2;
+        if(motor.getPower()>0||motor.getPower()<0){
+            
+        }
+
+
+     return true;
+    }
 
     public double get_power(DcMotor motor)
     {

@@ -1,6 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
+public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
@@ -13,7 +13,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
     private int gyroafterstraight;
   int zeroPoint=0;
 
-    public beaconAutonomousBLUE()
+    public beaconAutonomousBLUEStrafenotStraight()
   {
   }
    @Override public void init(){
@@ -99,65 +99,76 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
         driveStright("RUE",0.1,"r",0); //drive until line is seen
         if(RGB.alpha()>5)
         {
-        state++;
+        state=11;
         }
         break;
 
-        case 9:
+//        case 9:
+//            set_power(0,rightFront);
+//            set_power(0,leftFront);
+//            set_power(0,rightRear);
+//            set_power(0,leftRear);
+//            //resetAllEncoders_noWait();
+//            state++;
+//            encoder=leftFront.getCurrentPosition();
+//            driveStright("RUE",0.0,"r",0); //drive to line's general area
+//            break;
+//
+//        case 10:
+//            driveStright("RUE",0.1,"r",0); //drive to line's general area
+//            if (is_encoder_reached((120+encoder), leftFront)) {
+//                state++;
+//            }
+//            break;
+        case 11:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+
+      case 12:
+          pointTurn("RUE",0.1,"r",0); //turn onto line
+          if (gyro.getHeading()>80) {
+              state++;
+          }
+        break;
+      case 13:
+          set_power(0,rightFront);
+          set_power(0,leftFront);
+          set_power(0,rightRear);
+          set_power(0,leftRear);
+          zeroPoint = gyro.getHeading();
+          state++;
+        break;
+        case 14:
             set_power(0,rightFront);
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
             //resetAllEncoders_noWait();
             state++;
-            encoder=leftFront.getCurrentPosition();
-            driveStright("RUE",0.0,"r",0); //drive to line's general area
             break;
-
-        case 10:
-            driveStright("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached((120+encoder), leftFront)) {
+        case 15:
+            slide_sideways("RUE",0,"r",0);
+            encoder=leftFront.getCurrentPosition();
+            //resetAllEncoders_withWait();
+            state++;
+            break;
+        case 16:
+            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+            if (is_encoder_reached(encoder+200, leftFront)) {
                 state++;
             }
             break;
-        case 11:
-            state++;
-            break;
 
-      case 12:
-        state++;
-        break;
-      case 13:
-          state++;
-        break;
-      case 14:
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
-        state++;
-        break;
-      case 15:
-        pointTurn("RUE",0.1,"r",0); //turn onto line
-        if (gyro.getHeading()>80) {
-          state++;
-        }
-        break;
-      case 16:
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
-        zeroPoint = gyro.getHeading();
-          state++;
-        break;
-      case 17:
+        case 17:
         driveStright("RUE",0,"f",0);
         state++;
         break;
       case 18:
         driveStright("RUE",0.2,"r",0);
-//        if ((ODS.getLightDetected()*100)>50) {
         if(touch.isPressed()||touch2.isPressed()){
           state++;
         }
@@ -277,7 +288,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 51:
-            driveStright("RUE",0.2,"r",0); //drive to line's general area
+            driveStright("RUE",0.1,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 52;
             }
@@ -319,7 +330,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 45:
-            driveStright("RUE",0.2,"r",0); //drive to line's general area
+            driveStright("RUE",0.1,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 46;
             }
@@ -419,7 +430,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             break;
         case 69:
             slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+90, leftFront)) {
+            if (is_encoder_reached(encoder+80, leftFront)) {
                 state++;
             }
             break;
@@ -558,7 +569,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 89:
-            driveStright("RUE",0.2,"r",0); //drive to line's general area
+            driveStright("RUE",0.1,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 90;
             }
@@ -596,7 +607,7 @@ public class beaconAutonomousBLUE extends Error404_Hardware_Tier2
             state++;
             break;
         case 95:
-            driveStright("RUE",0.2,"r",0); //drive to line's general area
+            driveStright("RUE",0.1,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 96;
             }
