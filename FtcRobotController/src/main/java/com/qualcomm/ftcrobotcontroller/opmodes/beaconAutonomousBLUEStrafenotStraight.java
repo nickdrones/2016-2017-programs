@@ -158,7 +158,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             break;
         case 16:
             slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+200, leftFront)) {
+            if (is_encoder_reached(encoder+100, leftFront)) {
                 state++;
             }
             break;
