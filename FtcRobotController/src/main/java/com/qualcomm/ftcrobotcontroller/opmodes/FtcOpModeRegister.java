@@ -64,10 +64,10 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Teleop", meccanumLaunchControl.class);
     manager.register("Cross field to block", crossFieldTroll.class);
     manager.register("Gyro Troubleshooting", gyroTest.class);
-    manager.register("Beacon Blue cntr",beaconAutonomousBLUE.class);
-    manager.register("Beacon Blue strafe",beaconAutonomousBLUEStrafenotStraight.class);
-    manager.register("Beacon Blue sideways",beaconAutonomousBLUEsideways.class);
-    manager.register("Beacon Red cntr",beaconAutonomousRED.class);
+    //manager.register("Beacon Blue cntr",beaconAutonomousBLUE.class);
+    manager.register("Beacon Blue cntr",beaconAutonomousBLUEStrafenotStraight.class);
+    //manager.register("Beacon Blue sideways",beaconAutonomousBLUEsideways.class);
+    manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
     manager.register("Drive gyro", meccanumwithGYRO.class);
     manager.register("shoot balls",ballShootAuto.class);

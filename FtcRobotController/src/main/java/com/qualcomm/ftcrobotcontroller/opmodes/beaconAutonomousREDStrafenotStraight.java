@@ -1,45 +1,33 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tier2
+public class beaconAutonomousREDStrafenotStraight extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
   private int encoder=0;
-  private int tempval=0;
-  private int backupEncoder=0;
-  private double powervalue;
-  private int gyrovalatslow=0;
-    private int gyroafterstraight;
-  int zeroPoint=0;
+  private int test=0;
+  int zeroPoint = 0;
+    private int backupEncoder=0;
 
-    public beaconAutonomousBLUEStrafenotStraight()
+    public beaconAutonomousREDStrafenotStraight()
   {
   }
    @Override public void init(){
-       super.init();
-       RGB.enableLed(true); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
+    super.init();
+    RGB.enableLed(true); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
        telemetry.addData("Out Red: ", beacon.red());
     telemetry.addData("Out Blue: ", beacon.blue());
     telemetry.addData("Down White: ", RGB.alpha());
     gyroCalibrate();
     telemetry.addData("Gyro: ", gyro.getHeading());
     telemetry.addData("","V 4");
-       if(touch.isPressed()){
-           telemetry.addData("Touch 1 is pressed","");
-       }
-       if(touch2.isPressed()){
-           telemetry.addData("Touch 2 is pressed","");
-       }
-
    }
   @Override public void start(){
     driveStright("RWOE", 0.0, "F", 0);
     resetAllEncoders_withWait();
-    //gyroCalibrate();
     RGB.enableLed(false); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
     beacon.enableLed(false);
-
 
   }
   @Override public void loop ()
@@ -52,10 +40,8 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
       state++;
       break;
       case 1:
-          driveStright("RUE",0.2,"r",0); //drive away from line
-
+          driveStright("RUE",0.2,"r",0); //drive away from wall
         if (is_encoder_reached(200, leftFront)) {
-
           state++;
           encoder=leftFront.getCurrentPosition();
         }
@@ -68,8 +54,8 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
        state++;
         break;
       case 3:
-          turn_gyro_power(23, 0.1, 0.6, "r");
-        if (gyro.getHeading()>28 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
+          turn_gyro_power(23, 0.1, 0.6, "l");
+          if (gyro.getHeading()<340 && gyro.getHeading()>180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
         }
         break;
@@ -78,65 +64,52 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
-          tempval=gyro.getHeading();
         encoder=leftFront.getCurrentPosition();
-          break;
+        break;
       case 5:
-          driveStright("RUE",0.4,"r",0); //drive to line's general area
+        driveStright("RUE",0.4,"r",0); //drive to line's general area
         if (is_encoder_reached((2200+encoder), leftFront)) {
           state++;
         }
         break;
-        case 6:
-        gyroafterstraight=gyro.getHeading();
+      case 6:
         set_power(0,rightFront);
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
         state++;
         break;
-      case 7:
-        //resetAllEncoders_noWait();
+        case 7:
         state++;
         break;
       case 8:
         driveStright("RUE",0.1,"r",0); //drive until line is seen
         if(RGB.alpha()>5)
         {
-        state=11;
+        state++;
         }
         break;
 
-//        case 9:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            //resetAllEncoders_noWait();
-//            state++;
-//            encoder=leftFront.getCurrentPosition();
-//            driveStright("RUE",0.0,"r",0); //drive to line's general area
-//            break;
-//
-//        case 10:
-//            driveStright("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached((120+encoder), leftFront)) {
-//                state++;
-//            }
-//            break;
-        case 11:
+        case 9:
             set_power(0,rightFront);
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
             state++;
+            driveStright("RUE",0.0,"f",0);
+            encoder=leftFront.getCurrentPosition();
             break;
 
+        case 10:
+            state++;
+            break;
+        case 11:
+            state++;
+            break;
       case 12:
-          pointTurn("RUE",0.1,"r",0); //turn onto line
-          if (gyro.getHeading()>80) {
+          pointTurn("RUE",0.1,"l",0); //turn onto line
+          if (gyro.getHeading()<280 && gyro.getHeading()>180) {
               state++;
           }
         break;
@@ -148,37 +121,34 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
           zeroPoint = gyro.getHeading();
           state++;
         break;
-        case 14:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            //resetAllEncoders_noWait();
-            state++;
-            break;
-        case 15:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0);
-            encoder=leftFront.getCurrentPosition();
-            //resetAllEncoders_withWait();
-            state++;
-            break;
-        case 16:
-            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-            if (is_encoder_reached(encoder+100, leftFront)) {
-                state++;
-            }
-            break;
-
-        case 17:
+      case 14:
+        set_power(0,rightFront);
+        set_power(0,leftFront);
+        set_power(0,rightRear);
+        set_power(0,leftRear);
+        state++;
+        break;
+      case 15:
+          set_power(0,rightFront);
+          set_power(0,leftFront);
+          set_power(0,rightRear);
+          set_power(0,leftRear);
+          slide_sideways("RUE",0,"r",0);
+          encoder=leftFront.getCurrentPosition();
+          state++;
+        break;
+      case 16:
+          slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+          if (is_encoder_reached(encoder+100, leftFront)) {
+              state++;
+          }
+          break;
+      case 17:
         driveStright("RUE",0,"f",0);
         state++;
         break;
       case 18:
-        driveStright("RUE",0.2,"r",0);
+        driveStright("RUE",0.2,"r",0); //drive until robot presses against wall
         if(touch.isPressed()||touch2.isPressed()){
           state++;
         }
@@ -188,17 +158,15 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 20:
         driveStright("RUE",0,"f",0);
-        //resetAllEncoders_noWait();
         state++;
         encoder=leftFront.getCurrentPosition();
         break;
       case 21:
-        driveStright("RUE",0.3,"f",0); //drive to line's general area
+        driveStright("RUE",0.3,"f",0); //drive back from pressing wall
         if (is_encoder_reached((encoder+200), leftFront)) {
           state++;
         }
@@ -208,17 +176,15 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 23:
         slide_sideways("RUE",0,"l",0);
         encoder=leftFront.getCurrentPosition();
-        //resetAllEncoders_withWait();
        state++;
         break;
       case 24:
-        slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+        slide_sideways("RUE",0.1,"l",0); //slide sideways until pusher is in front of first beacon button
         if (is_encoder_reached(encoder+330, leftFront)) {
           state++;
         }
@@ -228,12 +194,10 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
      case 26:
         driveStright("RUE",0,"r",0);
         encoder=leftFront.getCurrentPosition();
-//        //resetAllEncoders_withWait();
         state=31;
         break;
       case 31:
@@ -241,13 +205,11 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
         set_power(0,leftFront);
         set_power(0,rightRear);
         set_power(0,leftRear);
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 32:
         driveStright("RUE",0,"f",0);
         encoder=leftFront.getCurrentPosition();
-        backupEncoder=leftRear.getCurrentPosition();
         state++;
         break;
       case 33:
@@ -263,26 +225,26 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
         state++;
         break;
         case 38:
-            if(beacon.blue()>beacon.red())
-        {
-            telemetry.addData("It's BLUE!!!","");
-            state = 40;
-        }
+            if(beacon.blue()>beacon.red()) //measure color of beacon
+            {
+                telemetry.addData("It's BLUE!!!",""); //if it is blue, jump to state 41
+                state = 41;
+            }
             else if(beacon.red()>beacon.blue())
             {
-                telemetry.addData("It's RED!!!","");
-                state=41;
+                telemetry.addData("It's RED!!!",""); //if it is blue, jump to state 40
+                state=40;
             }
             else {
-                state=39;
+                state=39; // if both color values are the same (ie: Blue and Red are both zero), jump to state 39
                 encoder=leftFront.getCurrentPosition();
             }
             break;
         case 39:
-                slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-                if (is_encoder_reached(encoder+160, leftFront)) {
-                    state=38;
-                }
+            slide_sideways("RUE",0.1,"l",0); //continue moving sideways until it sees the beacon
+            if (is_encoder_reached(encoder+160, leftFront)) {
+                state=38;
+            }
             break;
         case 40: // blue case
             set_power(0,rightFront);
@@ -298,7 +260,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             state++;
             break;
         case 51:
-            driveStright("RUE",0.1,"r",0); //drive to line's general area
+            driveStright("RUE",0.05,"r",0); //drive to push in beacon
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 52;
             }
@@ -311,17 +273,12 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             state = 56;
             break;
         case 41: // red case
-            ///////////////////////////////////////////////
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
             slide_sideways("RUE",0,"l",0);
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
         case 42:
-            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //slide sideways to other beacon button
             if (is_encoder_reached(encoder+410, leftFront)) {
                 state++;
             }
@@ -335,12 +292,12 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             break;
         case 44:
             driveStright("RUE",0,"r",0);
-            encoder=leftFront.getCurrentPosition();
             backupEncoder=leftRear.getCurrentPosition();
+            encoder=leftFront.getCurrentPosition();
             state++;
             break;
         case 45:
-            driveStright("RUE",0.1,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //push in button
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 46;
             }
@@ -359,7 +316,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             state = 58;
             break;
         case 58:
-            driveStright("RUE",0.25,"f",0); //drive to line's general area
+            driveStright("RUE",0.25,"f",0); //back up from pushing
             if (is_encoder_reached(encoder+450, leftFront)) {
                 state = 60;
             }
@@ -388,14 +345,14 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
                 state = 64;
             }
         case 62:
-            pointTurn("RUE",0.03,"r",0); //turn right
-            if (gyro.getHeading()>83){
+            pointTurn("RUE",0.05,"r",0); //turn right
+            if (gyro.getHeading()<277){
                 state=64;
             }
             break;
         case 63:
-            pointTurn("RUE",0.03,"l",0); //turn left
-            if (gyro.getHeading()<85) {
+            pointTurn("RUE",0.05,"l",0); //turn left
+            if (gyro.getHeading()>275) {
                 state=64;
             }
             break;
@@ -404,12 +361,12 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0);
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 65:
-            slide_sideways("RUE",0.5,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.5,"l",0); //slide sideways to other beacon
             if (is_encoder_reached(encoder+2000, leftFront)) {
                 state++;
             }
@@ -419,12 +376,12 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0);
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 67:
-            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //slowly slide to other line
             if (RGB.alpha()>4) {
                 state++;
             }
@@ -439,7 +396,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             encoder=leftFront.getCurrentPosition();
             break;
         case 69:
-            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"r",0); //slide slightly past line
             if (is_encoder_reached(encoder+90, leftFront)) {
                 state++;
             }
@@ -449,7 +406,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
+            slide_sideways("RUE",0,"l",0);
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
@@ -458,7 +415,6 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 72:
@@ -466,9 +422,8 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             state++;
             break;
         case 73:
-            driveStright("RUE",0.2,"r",0);
-//        if ((ODS.getLightDetected()*100)>50) {
-            if(touch.isPressed() && touch2.isPressed()){
+            driveStright("RUE",0.2,"r",0); //drive until robot touches wall
+            if(touch.isPressed()){
                 state++;
             }
             break;
@@ -477,17 +432,15 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 75:
             driveStright("RUE",0,"f",0);
-            //resetAllEncoders_noWait();
             state++;
             encoder=leftFront.getCurrentPosition();
             break;
         case 76:
-            driveStright("RUE",0.1,"f",0); //drive to line's general area
+            driveStright("RUE",0.1,"f",0); //slightly back up from wall
             if (is_encoder_reached((encoder+200), leftFront)) {
                 state++;
             }
@@ -497,17 +450,15 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 78:
             slide_sideways("RUE",0,"l",0);
             encoder=leftFront.getCurrentPosition();
-            //resetAllEncoders_withWait();
             state++;
             break;
         case 79:
-            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"l",0); //slide sideways to other line
             if (is_encoder_reached(encoder+300, leftFront)) {
                 state++;
             }
@@ -517,12 +468,10 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
         case 81:
             driveStright("RUE",0,"r",0);
             encoder=leftFront.getCurrentPosition();
-//        //resetAllEncoders_withWait();
             state++;
             break;
         case 82:
@@ -530,7 +479,6 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            //resetAllEncoders_noWait();
             state++;
             break;
         case 83:
@@ -547,16 +495,17 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
+        //Logic of beacon pressing is same as earlier
         case 85:
             if(beacon.blue()>beacon.red())
             {
                 telemetry.addData("It's BLUE!!!","");
-                state = 87;
+                state = 91;
             }
             else if(beacon.red()>beacon.blue())
             {
                 telemetry.addData("It's RED!!!","");
-                state=91;
+                state=87;
             }
             else {
                 state=86;
@@ -583,7 +532,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             state++;
             break;
         case 89:
-            driveStright("RUE",0.1,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 90;
             }
@@ -621,7 +570,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             state++;
             break;
         case 95:
-            driveStright("RUE",0.1,"r",0); //drive to line's general area
+            driveStright("RUE",0.2,"r",0); //drive to line's general area
             if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
                 state = 96;
             }
@@ -650,17 +599,17 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             set_power(0,leftFront);
             set_power(0,rightRear);
             set_power(0,leftRear);
-            pointTurn("RUE",0,"l",0);
+            pointTurn("RUE",0,"r",0);
             state++;
             break;
         case 100:
-            pointTurn("RUE",0,"l",0);
+            pointTurn("RUE",0,"r",0);
             encoder=leftFront.getCurrentPosition();
             state++;
             break;
         case 101:
-            pointTurn("RUE",0.2,"l",0); //drive to line's general area
-            if (gyro.getHeading()<60 && gyro.getHeading()>1) {
+            pointTurn("RUE",0.2,"r",0); //drive to line's general area
+            if (gyro.getHeading()>300 && gyro.getHeading()<360) {
                 state++;
             }
             break;
@@ -686,7 +635,7 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             break;
         case 105:
             driveStright("RUE",0.3,"f",0); //drive to line's general area
-            if (is_encoder_reached(encoder+2500, leftFront)) {
+            if (is_encoder_reached(encoder+2600, leftFront)) {
                 state++;
             }
             break;
@@ -702,9 +651,9 @@ public class beaconAutonomousBLUEStrafenotStraight extends Error404_Hardware_Tie
             break;
 
 
+
     }
     telemetry.addData("RightFront: ", get_position(rightFront));
-    telemetry.addData("Zero point: ", zeroPoint);
     telemetry.addData("LeftFront: ", get_position(leftFront));
     telemetry.addData("RightRear: ", get_position(rightRear));
     telemetry.addData("LeftRear: ", get_position(leftRear));
