@@ -5,11 +5,12 @@ import com.qualcomm.robotcore.util.Range;
 
 public class scissorLiftServoTest extends OpMode {
   final static double SPIN_MIN_RANGE = 0;
-  final static double SPIN_MAX_RANGE = 1;
-  double spinPosition = 0;
+  final static double SPIN_MAX_RANGE = 0.65;
+  double spinPosition = 0.65;
   Servo one;
   Servo two;
   Servo three;
+  Servo four;
 
   public scissorLiftServoTest() {
   }
@@ -18,6 +19,12 @@ public class scissorLiftServoTest extends OpMode {
     one = hardwareMap.servo.get("one");
     two = hardwareMap.servo.get("two");
     three = hardwareMap.servo.get("three");
+    four = hardwareMap.servo.get("four");
+
+    one.setPosition(0.65);
+    two.setPosition(0.65);
+    three.setPosition(0.65);
+    four.setPosition(0.65);
   }
   @Override
   public void loop() {
@@ -31,6 +38,7 @@ public class scissorLiftServoTest extends OpMode {
     one.setPosition(spinPosition);
     two.setPosition(spinPosition);
     three.setPosition(spinPosition);
+    four.setPosition(spinPosition);
 
     telemetry.addData("Text", "*** Robot Data***");
     telemetry.addData("spin", "spin:  " + String.format("%.2f", spinPosition));
