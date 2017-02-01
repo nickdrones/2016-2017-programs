@@ -1,10 +1,14 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
 
+    public void setServoPos(Servo servomotor, Double position){
+        servomotor.setPosition(position);
+    }
     public void gyroCalibrate()
     {
         double before = gyro.getHeading();

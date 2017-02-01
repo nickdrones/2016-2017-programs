@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.GyroSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.Range;
 
@@ -21,6 +22,8 @@ public class Error404_Hardware_Tier1 extends OpMode {
     protected GyroSensor gyro;
     protected TouchSensor touch;
     protected TouchSensor touch2;
+    protected Servo leftPush;
+    protected Servo rightPush;
 
     @Override public void init() {
         /////////////////////////////////////////////////////////////////
@@ -33,6 +36,18 @@ public class Error404_Hardware_Tier1 extends OpMode {
         } catch (Exception p_exeception) {
             telemetry.addData("Touch 2 not found in config file", 0);
             touch2 = null;
+        }
+        try {
+            leftPush = hardwareMap.servo.get("leftPush");
+        } catch (Exception p_exeception) {
+            telemetry.addData("leftPush not found in config file", 0);
+            leftPush = null;
+        }
+        try {
+            rightPush = hardwareMap.servo.get("rightPush");
+        } catch (Exception p_exeception) {
+            telemetry.addData("rightPush not found in config file", 0);
+            rightPush = null;
         }
         try {
             balllauncher2 = hardwareMap.dcMotor.get("balllauncher2");

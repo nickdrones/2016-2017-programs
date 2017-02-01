@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 public class meccanumLaunchControl extends OpMode {
@@ -13,14 +14,20 @@ public class meccanumLaunchControl extends OpMode {
   DcMotor ballcollector;
   DcMotor balllauncher1;
   DcMotor balllauncher2;
+  Servo leftPush;
+  Servo rightPush;
   float launchspeed1;
   double powerval;
+  double rightval=0;
+  double leftval=0;
   public meccanumLaunchControl() {
   }
   @Override
   public void init() {
     powerval=1;
     telemetry.addData ("0", "I AM HERE");
+    leftPush = hardwareMap.servo.get("leftPush");
+    rightPush = hardwareMap.servo.get("rightPush");
     balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
     balllauncher1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     balllauncher1.setDirection(DcMotor.Direction.FORWARD);
@@ -45,7 +52,10 @@ public class meccanumLaunchControl extends OpMode {
   }
   @Override
   public void loop() {
-
+    rightval=gamepad1.right_trigger;
+    leftval=gamepad1.left_trigger;
+    rightPush.setPosition(rightval);
+    leftPush.setPosition(leftval);
     float yL_val = -gamepad1.left_stick_y*((float)0.7);            //reading raw values from the joysticks
     float xL_val = gamepad1.left_stick_x*((float)0.7);            //reading raw values from the joysticks
     float xR_val = gamepad1.right_stick_x/2;

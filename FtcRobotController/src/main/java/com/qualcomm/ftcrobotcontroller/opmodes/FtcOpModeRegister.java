@@ -66,7 +66,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Gyro Troubleshooting", gyroTest.class);
     manager.register("lift",scissorLiftServoTest.class);
     manager.register("Beacon Blue cntr",beaconAutonomousBLUEStrafenotStraight.class);
-    //manager.register("Beacon Blue sideways",beaconAutonomousBLUEsideways.class);
+    manager.register("beacon blue square",beaconAutonomousBLUELinearSlide.class);
     manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
     manager.register("Drive gyro", meccanumwithGYRO.class);
