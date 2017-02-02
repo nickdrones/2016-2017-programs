@@ -38,7 +38,7 @@ public class Error404_Hardware_Tier1 extends OpMode {
             touch2 = null;
         }
         try {
-            leftPush = hardwareMap.servo.get("leftPush");
+            leftPush = hardwareMap.servo.get("leftPush");   ///beacon pusher
         } catch (Exception p_exeception) {
             telemetry.addData("leftPush not found in config file", 0);
             leftPush = null;

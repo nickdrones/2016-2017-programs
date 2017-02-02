@@ -1,6 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-public class beaconAutonomousBLUELinearSlide extends Error404_Hardware_Tier2
+public class beaconAutonomousBLUELinearSlideShorter extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@ public class beaconAutonomousBLUELinearSlide extends Error404_Hardware_Tier2
     double rightVal=0.15;
     double leftVal=0.15;
 
-    public beaconAutonomousBLUELinearSlide()
+    public beaconAutonomousBLUELinearSlideShorter()
   {
   }
    @Override public void init(){
@@ -51,58 +51,48 @@ public class beaconAutonomousBLUELinearSlide extends Error404_Hardware_Tier2
     RGB.enableLed(true);
     beacon.enableLed(false);
     switch (state)
-    {   case 0:
-            resetAllEncoders_withWait();
-      state++;
-      break;
-      case 1:
-          driveStright("RUE",0.2,"r",0); //drive away from line
-
+    {
+     case 0:
+        state++;
+        break;
+      case 1:  // Drive straight away from wall
+         driveStright("RUE",0.2,"r",0);
         if (is_encoder_reached(200, leftFront)) {
-
           state++;
           encoder=leftFront.getCurrentPosition();
         }
         break;
-     case 2:
-       set_power(0,rightFront);
-       set_power(0,leftFront);
-       set_power(0,rightRear);
-       set_power(0,leftRear);
-       state++;
-        break;
+     case 2:  // stop motors
+         left_set_power(0.0);
+         right_set_power(0.0);
+         state++;
+         break;
       case 3:
           turn_gyro_power(23, 0.1, 0.6, "r");
-        if (gyro.getHeading()>28 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
+         if (gyro.getHeading()>28 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
-        }
-        break;
-      case 4:
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
-        //resetAllEncoders_noWait();
-        state++;
-          tempval=gyro.getHeading();
-        encoder=leftFront.getCurrentPosition();
+         }
+         break;
+      case 4: // stop motors
+          left_set_power(0.0);
+          right_set_power(0.0);
+          state++;
+          tempval=gyro.getHeading();  //why collect this data?  You're not using it.
+          encoder=leftFront.getCurrentPosition(); // Not using this?
           break;
       case 5:
           driveStright("RUE",0.4,"r",0); //drive to line's general area
-        if (is_encoder_reached((2200+encoder), leftFront)) {
+         if (is_encoder_reached((2200+encoder), leftFront)) {
           state++;
-        }
-        break;
-        case 6:
+         }
+         break;
+      case 6:
         gyroafterstraight=gyro.getHeading();
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
+          left_set_power(0.0);
+          right_set_power(0.0);
         state++;
         break;
       case 7:
-        //resetAllEncoders_noWait();
         state++;
         break;
       case 8:
@@ -112,11 +102,9 @@ public class beaconAutonomousBLUELinearSlide extends Error404_Hardware_Tier2
         state=11;
         }
         break;
-        case 11:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
+      case 11:
+          left_set_power(0.0);
+          right_set_power(0.0);
             state++;
             break;
 
@@ -125,7 +113,7 @@ public class beaconAutonomousBLUELinearSlide extends Error404_Hardware_Tier2
           if (gyro.getHeading()>80) {
               state++;
           }
-        break;
+         break;
       case 13:
           set_power(0,rightFront);
           set_power(0,leftFront);

@@ -18,8 +18,8 @@ public class meccanumLaunchControl extends OpMode {
   Servo rightPush;
   float launchspeed1;
   double powerval;
-  double rightval=0;
-  double leftval=0;
+  double rightVal=0;
+  double leftVal=0;
   public meccanumLaunchControl() {
   }
   @Override
@@ -52,14 +52,12 @@ public class meccanumLaunchControl extends OpMode {
   }
   @Override
   public void loop() {
-    rightval=gamepad1.right_trigger;
-    leftval=gamepad1.left_trigger;
-    rightPush.setPosition(rightval);
-    leftPush.setPosition(leftval);
+
     float yL_val = -gamepad1.left_stick_y*((float)0.7);            //reading raw values from the joysticks
     float xL_val = gamepad1.left_stick_x*((float)0.7);            //reading raw values from the joysticks
     float xR_val = gamepad1.right_stick_x/2;
     float collector = gamepad2.right_trigger-gamepad2.left_trigger;
+
     //clip the right/left values so that the values never exceed +/- 1.
     yL_val = (float) scaleInput(yL_val);
     xL_val = (float) scaleInput(xL_val);
@@ -79,6 +77,35 @@ public class meccanumLaunchControl extends OpMode {
 
     float launcher = gamepad2.right_stick_y;
     launcher = (float) scaleInput(launcher);
+
+//////////////////////////////////////////////////////////
+    //////BEACON PRESSER////////////////
+    /////////////////////////////////////
+
+   if(gamepad1.y){                   //Preset values for motor speeds for ball launcher
+      leftVal=0.15;
+      rightVal=0.15;
+    }
+    else if(gamepad1.a){
+      leftVal =1.0;
+      rightVal=1.0;
+    }
+    else if(gamepad1.x){
+      leftVal=0.5;
+      rightVal=0.5;
+    }
+    else if(gamepad1.b){
+      leftVal=0.75;
+       rightVal=0.75;
+    }
+    else{
+     // leftVal = 0.0;
+     // rightVal=0.0;
+    }
+    rightPush.setPosition(rightVal);
+    leftPush.setPosition(leftVal);
+
+
 /////////////////////////////////////////////////////////////
     //////LAUNCHER MOTOR 1////////////////
     /////////////////////////////////////

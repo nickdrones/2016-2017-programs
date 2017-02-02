@@ -71,6 +71,9 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
     manager.register("Drive gyro", meccanumwithGYRO.class);
     manager.register("shoot balls",ballShootAuto.class);
+    manager.register("Linear Slide Test",beaconAutonomousLinearSlideTest.class );
+    manager.register("beacon blue square shorter",beaconAutonomousBLUELinearSlideShorter.class);
+
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */

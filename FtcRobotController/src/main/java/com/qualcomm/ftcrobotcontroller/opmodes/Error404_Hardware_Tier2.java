@@ -5,10 +5,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
 
-
+   /// Beacon pusher method  //
     public void setServoPos(Servo servomotor, Double position){
         servomotor.setPosition(position);
     }
+
     public void gyroCalibrate()
     {
         double before = gyro.getHeading();
@@ -247,7 +248,8 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_power(rearPower, leftRear);
         }
     }
-public void turn_gyro_power(int desired_gyro, double starting_power, double fraction_to_change_power, String direction){
+
+    public void turn_gyro_power(int desired_gyro, double starting_power, double fraction_to_change_power, String direction){
     double powervalue=0;
     double last_part=(desired_gyro*fraction_to_change_power);
     if(direction.toLowerCase()=="r") {
@@ -285,7 +287,7 @@ public void turn_gyro_power(int desired_gyro, double starting_power, double frac
         pointTurn("RUE", powervalue, "l", 0); //turn towards line
     }
 
-}
+   }
 
     public double ramp_up(double powerBegin, double powerEnd, double powerToWrite){
         if (powerBegin<powerEnd)
