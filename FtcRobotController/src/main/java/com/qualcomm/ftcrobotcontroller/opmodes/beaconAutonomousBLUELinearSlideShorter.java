@@ -12,7 +12,7 @@ public class beaconAutonomousBLUELinearSlideShorter extends Error404_Hardware_Ti
   private int gyrovalatslow=0;
     private int gyroafterstraight;
   int zeroPoint=0;
-    double rightVal=0.15;
+    double rightVal=0.2;
     double leftVal=0.15;
 
     public beaconAutonomousBLUELinearSlideShorter()
@@ -22,19 +22,20 @@ public class beaconAutonomousBLUELinearSlideShorter extends Error404_Hardware_Ti
        super.init();
        RGB.enableLed(true); //not sure why these are needed here.  Seems to help reset the LEDS so the next enable commands are obeyed.
        telemetry.addData("Out Red: ", beacon.red());
-    telemetry.addData("Out Blue: ", beacon.blue());
-    telemetry.addData("Down White: ", RGB.alpha());
-    gyroCalibrate();
-    telemetry.addData("Gyro: ", gyro.getHeading());
-    telemetry.addData("","V 5");
+       telemetry.addData("Out Blue: ", beacon.blue());
+       telemetry.addData("Down White: ", RGB.alpha());
+
+       gyroCalibrate();
+       telemetry.addData("Gyro: ", gyro.getHeading());
+       telemetry.addData("","V 5");
        if(touch.isPressed()){
            telemetry.addData("Touch 1 is pressed","");
        }
        if(touch2.isPressed()){
            telemetry.addData("Touch 2 is pressed","");
        }
-    setServoPos(rightPush, rightVal);
-    setServoPos(leftPush, leftVal);
+       setServoPos(rightPush, rightVal);  // nitialize servos to initial positions
+       setServoPos(leftPush, leftVal);
 
    }
   @Override public void start(){
@@ -59,55 +60,44 @@ public class beaconAutonomousBLUELinearSlideShorter extends Error404_Hardware_Ti
          driveStright("RUE",0.2,"r",0);
         if (is_encoder_reached(200, leftFront)) {
           state++;
-          encoder=leftFront.getCurrentPosition();
-        }
+         }
         break;
      case 2:  // stop motors
          left_set_power(0.0);
          right_set_power(0.0);
          state++;
          break;
-      case 3:
-          turn_gyro_power(23, 0.1, 0.6, "r");
-         if (gyro.getHeading()>28 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
+      case 3:  //turn about 28 degrees to head to line
+          turn_gyro_power(28, 0.1, 0.6, "r");
+         if (gyro.getHeading()>27 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
          }
          break;
       case 4: // stop motors
           left_set_power(0.0);
           right_set_power(0.0);
+          driveStright("RUE",0,"r",0);
+          encoder=leftFront.getCurrentPosition();
           state++;
-          tempval=gyro.getHeading();  //why collect this data?  You're not using it.
-          encoder=leftFront.getCurrentPosition(); // Not using this?
           break;
       case 5:
           driveStright("RUE",0.4,"r",0); //drive to line's general area
          if (is_encoder_reached((2200+encoder), leftFront)) {
-          state++;
+          state=8;
          }
          break;
-      case 6:
-        gyroafterstraight=gyro.getHeading();
-          left_set_power(0.0);
-          right_set_power(0.0);
-        state++;
-        break;
-      case 7:
-        state++;
-        break;
-      case 8:
-        driveStright("RUE",0.1,"r",0); //drive until line is seen
+      case 8://drive slowly until line is seen
+        driveStright("RUE",0.1,"r",0);
         if(RGB.alpha()>5)
         {
         state=11;
         }
         break;
-      case 11:
+      case 11:     // stop on line
           left_set_power(0.0);
           right_set_power(0.0);
-            state++;
-            break;
-
+           state++;
+           break;
       case 12:
           pointTurn("RUE",0.1,"r",0); //turn onto line
           if (gyro.getHeading()>80) {
@@ -115,564 +105,144 @@ public class beaconAutonomousBLUELinearSlideShorter extends Error404_Hardware_Ti
           }
          break;
       case 13:
-          set_power(0,rightFront);
-          set_power(0,leftFront);
-          set_power(0,rightRear);
-          set_power(0,leftRear);
-          zeroPoint = gyro.getHeading();
-          state++;
-        break;
-        case 14:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            //resetAllEncoders_noWait();
-            state=18;
-//            break;
-//        case 15:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            slide_sideways("RUE",0,"r",0);
-//            encoder=leftFront.getCurrentPosition();
-//            //resetAllEncoders_withWait();
-//            state++;
-//            break;
-//        case 16:
-//            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+100, leftFront)) {
-//                state++;
-//            }
-//            break;
-//
-//        case 17:
-//        driveStright("RUE",0,"f",0);
-//        state++;
-//        break;
-      case 18:
+          left_set_power(0.0);
+          right_set_power(0.0);
+          state=18;
+          break;
+      case 18:  //drive till both touch sensors pressed on wall
         driveStright("RUE",0.2,"r",0);
         if(touch.isPressed()&&touch2.isPressed()){
           state++;
         }
         break;
       case 19:
-        set_power(0,rightFront);
-        set_power(0,leftFront);
-        set_power(0,rightRear);
-        set_power(0,leftRear);
-        //state=38;
-        setServoPos(rightPush, 0.2);
-          state=55;
-       break;
-//      case 20:
-//        driveStright("RUE",0,"f",0);
-//        //resetAllEncoders_noWait();
-//        state++;
-//        encoder=leftFront.getCurrentPosition();
-//        break;
-//      case 21:
-//        driveStright("RUE",0.3,"f",0); //drive to line's general area
-//        if (is_encoder_reached((encoder+200), leftFront)) {
-//          state++;
-//        }
-//        break;
-//      case 22:
-//        set_power(0,rightFront);
-//        set_power(0,leftFront);
-//        set_power(0,rightRear);
-//        set_power(0,leftRear);
-//        //resetAllEncoders_noWait();
-//        state++;
-//        break;
-//      case 23:
-//        slide_sideways("RUE",0,"l",0);
-//        encoder=leftFront.getCurrentPosition();
-//        //resetAllEncoders_withWait();
-//       state++;
-//        break;
-//      case 24:
-//        slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-//        if (is_encoder_reached(encoder+330, leftFront)) {
-//          state++;
-//        }
-//        break;
-//      case 25:
-//        set_power(0,rightFront);
-//        set_power(0,leftFront);
-//        set_power(0,rightRear);
-//        set_power(0,leftRear);
-//        //resetAllEncoders_noWait();
-//        state++;
-//     case 26:
-//        driveStright("RUE",0,"r",0);
-//        encoder=leftFront.getCurrentPosition();
-////        //resetAllEncoders_withWait();
-//        state=31;
-//        break;
-//      case 31:
-//        set_power(0,rightFront);
-//        set_power(0,leftFront);
-//        set_power(0,rightRear);
-//        set_power(0,leftRear);
-//        //resetAllEncoders_noWait();
-//        state++;
-//        break;
-//      case 32:
-//        driveStright("RUE",0,"f",0);
-//        encoder=leftFront.getCurrentPosition();
-//        backupEncoder=leftRear.getCurrentPosition();
-//        state++;
-//        break;
-//      case 33:
-//          state = 37;
-//        break;
-//     case 37:
-//        set_power(0,rightFront);
-//        set_power(0,leftFront);
-//        set_power(0,rightRear);
-//        set_power(0,leftRear);
-//         slide_sideways("RUE",0,"l",0);
-//         encoder=leftFront.getCurrentPosition();
-//        state++;
-//        break;
-        case 38:
+          left_set_power(0.0);
+          right_set_power(0.0);
+          zeroPoint = gyro.getHeading();  //capture gyro reading for gyro correction after backing away from beacon
+          driveStright("RUE",0,"f",0); // this needs to be here because if we change direction of the motors, the encoder readings also change to correspond with the new direction.
+          encoder=leftFront.getCurrentPosition();
+          state=38;
+          break;
+       case 38:  //assumes color sensor is on right pusher
             if(beacon.blue()>beacon.red())
-        {
-            telemetry.addData("It's BLUE!!!","");
-            state = 40;
-        }
+            {
+              telemetry.addData("It's BLUE!!!","");
+              leftPush.setPosition(.5);
+                state=55;
+            }
             else if(beacon.red()>beacon.blue())
             {
-                telemetry.addData("It's RED!!!","");
-                state=41;
+              telemetry.addData("It's RED!!!","");
+              rightPush.setPosition(.45);
+                state=55;
             }
-            else
+             else
             {
-               state=41;
-            }
-            break;
-        case 40: // blue case
-            leftPush.setPosition(.3);
-            state=55;
-            break;
-//        case 50:
-//            driveStright("RUE",0,"r",0);
-//            encoder=leftFront.getCurrentPosition();
-//            backupEncoder=leftRear.getCurrentPosition();
-//            state++;
-//            break;
-//        case 51:
-//            driveStright("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
-//                state = 52;
-//            }
-//            break;
-//        case 52:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            state = 56;
-//            break;
-        case 41: // red case
-            ///////////////////////////////////////////////
-            rightPush.setPosition(.3);
-            state=55;
-            break;
-//        case 42:
-//            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+410, leftFront)) {
-//                state++;
-//            }
-//            break;
-//        case 43:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            state++;
-//            break;
-//        case 44:
-//            driveStright("RUE",0,"r",0);
-//            encoder=leftFront.getCurrentPosition();
-//            backupEncoder=leftRear.getCurrentPosition();
-//            state++;
-//            break;
-//        case 45:
-//            driveStright("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
-//                state = 46;
-//            }
-//            break;
-//        case 46:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            state = 56;
-//            break;
-        case 55:
+                state= 55;
+            };  //if see no beacon color, then just stop program
+             break;
+        case 55: //wait one sec for pushers to finish moving and pressing button
             try {
-                Thread.sleep(1500);                 //1000 milliseconds is one second.
+                Thread.sleep(900);                 // one second.
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
             state++;
             break;
-        case 56:
-            //////////////////////////////
-            driveStright("RUE",0,"f",0);
-            encoder=leftFront.getCurrentPosition();
-            state = 58;
-            break;
-        case 58:
-            driveStright("RUE",0.25,"f",0); //drive to line's general area
-            if (is_encoder_reached(encoder+450, leftFront)) {
-                state = 60;
+         case 56: // back away from beacon slightly and retract beacon pushers
+             driveStright("RUE",0.25,"f",0);
+            rightPush.setPosition(0.2);
+             leftPush.setPosition(0.15);
+             if (is_encoder_reached(encoder+450, leftFront)) {
+              state = 60;
             }
             break;
         case 60:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            state++;
-            break;
-        case 61:
-            if (gyro.getHeading()>zeroPoint){
-                //state=63;
-                state=64;
-                break;
-            }
-            else if(gyro.getHeading()<zeroPoint)
-            {
-                //state=62;
-                state=64;
-                break;
-            }
-            else
-            {
-                state = 64;
-            }
-        case 62:
-            pointTurn("RUE",0.03,"r",0); //turn right
-            if (gyro.getHeading()>83){
-                state=64;
-            }
-            break;
-        case 63:
-            pointTurn("RUE",0.03,"l",0); //turn left
-            if (gyro.getHeading()<85) {
-                state=64;
-            }
-            break;
-        case 64:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
-            state++;
+            left_set_power(0.0);
+            right_set_power(0.0);
+            slide_sideways("RUE",0,"r",0);
             encoder=leftFront.getCurrentPosition();
+            state=65;
             break;
         case 65:
-            slide_sideways("RUE",0.5,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.5,"r",0); //drive to general area of second beacon line
             if (is_encoder_reached(encoder+2000, leftFront)) {
-                state++;
+                state=67;
             }
             break;
-        case 66:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
-            state++;
-            encoder=leftFront.getCurrentPosition();
-            break;
         case 67:
-            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
+            slide_sideways("RUE",0.1,"r",0); //drive slowly till see line
             if (RGB.alpha()>4) {
                 state++;
             }
             break;
-        case 68:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            slide_sideways("RUE",0,"r",0); //drive to line's general area
-            state=71;
-            encoder=leftFront.getCurrentPosition();
+        case 68:        //stop on line
+            left_set_power(0.0);
+            right_set_power(0.0);
+            state=73;
             break;
-//        case 69:
-//            slide_sideways("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+90, leftFront)) {
-//                state++;
-//            }
-//            break;
-//        case 70:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            slide_sideways("RUE",0,"r",0); //drive to line's general area
-//            state++;
-//            encoder=leftFront.getCurrentPosition();
-//            break;
-        case 71:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            //resetAllEncoders_noWait();
-            state++;
-            break;
-        case 72:
-            driveStright("RUE",0,"f",0);
-            state++;
-            break;
-        case 73:
+        case 73:            // drive straight till both touch sensors see the wall
             driveStright("RUE",0.2,"r",0);
-//        if ((ODS.getLightDetected()*100)>50) {
             if(touch.isPressed() && touch2.isPressed()){
                 state++;
             }
             break;
         case 74:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            //resetAllEncoders_noWait();
+            left_set_power(0.0);
+            right_set_power(0.0);
+            driveStright("RUE",0,"f",0);
+            encoder=leftFront.getCurrentPosition();
             state++;
             break;
-        case 75:
-            driveStright("RUE",0,"f",0);
-            //resetAllEncoders_noWait();
-            state=96;
-            encoder=leftFront.getCurrentPosition();
-            break;
-//        case 76:
-//            driveStright("RUE",0.1,"f",0); //drive to line's general area
-//            if (is_encoder_reached((encoder+200), leftFront)) {
-//                state++;
-//            }
-//            break;
-//        case 77:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            //resetAllEncoders_noWait();
-//            state++;
-//            break;
-//        case 78:
-//            slide_sideways("RUE",0,"l",0);
-//            encoder=leftFront.getCurrentPosition();
-//            //resetAllEncoders_withWait();
-//            state++;
-//            break;
-//        case 79:
-//            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+300, leftFront)) {
-//                state++;
-//            }
-//            break;
-//        case 80:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            //resetAllEncoders_noWait();
-//            state++;
-//        case 81:
-//            driveStright("RUE",0,"r",0);
-//            encoder=leftFront.getCurrentPosition();
-////        //resetAllEncoders_withWait();
-//            state++;
-//            break;
-//        case 82:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            //resetAllEncoders_noWait();
-//            state++;
-//            break;
-//        case 83:
-//            driveStright("RUE",0,"f",0);
-//            encoder=leftFront.getCurrentPosition();
-//            state++;
-//            break;
-//        case 84:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            slide_sideways("RUE",0,"l",0);
-//            encoder=leftFront.getCurrentPosition();
-//            state++;
-//            break;
-//        case 85:
-//            if(beacon.blue()>beacon.red())
-//            {
-//                telemetry.addData("It's BLUE!!!","");
-//                state = 87;
-//            }
-//            else if(beacon.red()>beacon.blue())
-//            {
-//                telemetry.addData("It's RED!!!","");
-//                state=91;
-//            }
-//            else {
-//                state=86;
-//                encoder=leftFront.getCurrentPosition();
-//            }
-//            break;
-//        case 86:
-//            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+140, leftFront)) {
-//                state=85;
-//            }
-//            break;
-//        case 87: // blue case
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            state++;
-//            break;
-//        case 88:
-//            driveStright("RUE",0,"r",0);
-//            encoder=leftFront.getCurrentPosition();
-//            backupEncoder=leftRear.getCurrentPosition();
-//            state++;
-//            break;
-//        case 89:
-//            driveStright("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
-//                state = 90;
-//            }
-//            break;
-//        case 90:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            state = 97;
-//            break;
-//        case 91: // red case
-//            ///////////////////////////////////////////////
-//            slide_sideways("RUE",0,"l",0);
-//            encoder=leftFront.getCurrentPosition();
-//            state++;
-//            break;
-//        case 92:
-//            slide_sideways("RUE",0.1,"l",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+430, leftFront)) {
-//                state++;
-//            }
-//            break;
-//        case 93:
-//            set_power(0,rightFront);
-//            set_power(0,leftFront);
-//            set_power(0,rightRear);
-//            set_power(0,leftRear);
-//            state++;
-//            break;
-//        case 94:
-//            driveStright("RUE",0,"r",0);
-//            encoder=leftFront.getCurrentPosition();
-//            backupEncoder=leftRear.getCurrentPosition();
-//            state++;
-//            break;
-//        case 95:
-//            driveStright("RUE",0.1,"r",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+280, leftFront)||is_encoder_reached(backupEncoder+300, leftRear)||touch.isPressed()||touch2.isPressed()) {
-//                state = 96;
-//            }
-//            break;
-        case 96:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            state = 97;
-            break;
-        case 97:
-            /////////////////////////
-           try
-           {
-               Thread.sleep(1500);                 //1000 milliseconds is one second.
+        case 75://assumes color sensor is on right pusher
+            if(beacon.blue()>beacon.red())
+            {
+                telemetry.addData("It's BLUE!!!","");
+                leftPush.setPosition(.5);
+                state=76;
             }
-           catch(InterruptedException ex)
-           {
+            else if(beacon.red()>beacon.blue())
+            {
+                telemetry.addData("It's RED!!!","");
+                rightPush.setPosition(.45);
+                state=76;
+            }
+            else
+            {
+                state=76;
+            };  //if see no beacon color, then just stop program
+            break;
+        case 76: //wait one sec for pushers to finish moving and pressing button
+            try {
+                Thread.sleep(900);                 // one second.
+            } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-            ////////////////
-      driveStright("RUE",0,"f",0);
-            encoder=leftFront.getCurrentPosition();
-            state = 98;
+            state++;
             break;
-        case 98:
-            driveStright("RUE",0.3,"f",0); //drive to line's general area
-            if (is_encoder_reached(encoder+840, leftFront)) {
-                state = 99;
+        case 77: // back away from beacon slightly and retract beacon pushers
+            driveStright("RUE",0.25,"f",0);
+            rightPush.setPosition(0.15);
+            leftPush.setPosition(0.15);
+            if (is_encoder_reached(encoder+450, leftFront)) {
+              state = 100;
             }
             break;
-        case 99:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            pointTurn("RUE",0,"l",0);
-            state++;
-            break;
-        case 100:
-            pointTurn("RUE",0,"l",0);
-            encoder=leftFront.getCurrentPosition();
-            state++;
-            break;
-        case 101:
-            pointTurn("RUE",0.2,"l",0); //drive to line's general area
+       case 100:              // turn slightly to face center vortex
+            pointTurn("RUE",0.2,"l",0);
             if (gyro.getHeading()<60 && gyro.getHeading()>1) {
-                state++;
+                state=105;
             }
             break;
-        case 102:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            state++;
-            break;
-
-        case 103:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
-            state++;
-            break;
-        case 104:
-            driveStright("RUE",0,"f",0);
-            encoder=leftFront.getCurrentPosition();
-            state++;
-            break;
-        case 105:
+       case 105:
             driveStright("RUE",0.3,"f",0); //drive to line's general area
             if (is_encoder_reached(encoder+2500, leftFront)) {
                 state++;
             }
             break;
         case 106:
-            set_power(0,rightFront);
-            set_power(0,leftFront);
-            set_power(0,rightRear);
-            set_power(0,leftRear);
+            left_set_power(0.0);
+            right_set_power(0.0);
             state++;
             break;
 

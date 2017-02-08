@@ -249,45 +249,83 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         }
     }
 
-    public void turn_gyro_power(int desired_gyro, double starting_power, double fraction_to_change_power, String direction){
+    public void turn_gyro_power_new(int desired_gyro, double starting_power, double fraction_to_change_power, String direction){
     double powervalue=0;
     double last_part=(desired_gyro*fraction_to_change_power);
-    if(direction.toLowerCase()=="r") {
-        if (gyro.getHeading() < last_part) {
+    if(direction.toLowerCase().equals("r")) {
+        if (gyro.getHeading() <= last_part) {
             powervalue = starting_power;
         }
-        if (gyro.getHeading() > last_part && gyro.getHeading() < desired_gyro) {
-            powervalue = (desired_gyro - gyro.getHeading()) / 200;
-
+        else if (gyro.getHeading() > last_part) {
+            powervalue = (desired_gyro - gyro.getHeading()) / 50;
         }
-        if (powervalue < 0.03) {
+
+        if(powervalue < 0.03) {
             powervalue = 0.03;
         }
 
         pointTurn("RUE", powervalue, "r", 0); //turn towards line
-    }
-    if(direction.toLowerCase()=="l") {
+    } // end if direction = r
+    else if(direction.toLowerCase().equals("l")) {
         int heading = gyro.getHeading();
         if (heading>180)
         {
-            heading=360-heading;
-            heading=-heading;
+            heading=-360+heading;
         }
-        if (heading > last_part) {
+
+        if (heading >= last_part) {
             powervalue = starting_power;
         }
-        if (heading < last_part && heading > desired_gyro) {
-            powervalue = (desired_gyro - gyro.getHeading()) / 200;
-
+        else if (heading < last_part) {
+            powervalue = (desired_gyro - gyro.getHeading()) / 50;
         }
+
         if (powervalue < 0.03) {
             powervalue = 0.03;
         }
 
         pointTurn("RUE", powervalue, "l", 0); //turn towards line
-    }
+    } // end if direction = l
 
    }
+
+    public void turn_gyro_power(int desired_gyro, double starting_power, double fraction_to_change_power, String direction){
+        double powervalue=0;
+        double last_part=(desired_gyro*fraction_to_change_power);
+        if(direction.toLowerCase()=="r") {
+            if (gyro.getHeading() <= last_part) {
+                powervalue = starting_power;
+            }
+            if (gyro.getHeading() > last_part && gyro.getHeading() < desired_gyro) {
+                powervalue = (desired_gyro - gyro.getHeading()) / 200;
+
+            }
+            if(powervalue <0.03) {
+                powervalue = 0.03;
+            }
+
+            pointTurn("RUE", powervalue, "r", 0); //turn towards line
+        } // end if direction = r
+        if(direction.toLowerCase()=="l") {
+            int heading = gyro.getHeading();
+            if (heading>180)
+            {
+                heading=-360+heading;
+            }
+            if (heading > last_part) {
+                powervalue = starting_power;
+            }
+            if (heading < last_part && heading > desired_gyro) {
+                powervalue = (desired_gyro - gyro.getHeading()) / 200;
+            }
+            if (powervalue < 0.03) {
+                powervalue = 0.03;
+            }
+
+            pointTurn("RUE", powervalue, "l", 0); //turn towards line
+        } // end if direction = l
+
+    }
 
     public double ramp_up(double powerBegin, double powerEnd, double powerToWrite){
         if (powerBegin<powerEnd)

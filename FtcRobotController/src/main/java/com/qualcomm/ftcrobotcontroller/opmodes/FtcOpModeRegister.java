@@ -62,17 +62,20 @@ public class FtcOpModeRegister implements OpModeRegister {
    // manager.register("Teleop", meccanum2controllers.class);
     //manager.register("Motor Test", twoMotorTest.class);
     manager.register("Teleop", meccanumLaunchControl.class);
-    manager.register("Cross field to block", crossFieldTroll.class);
-    manager.register("Gyro Troubleshooting", gyroTest.class);
-    manager.register("lift",scissorLiftServoTest.class);
-    manager.register("Beacon Blue cntr",beaconAutonomousBLUEStrafenotStraight.class);
+    //manager.register("Cross field to block", crossFieldTroll.class);
+    //manager.register("Gyro Troubleshooting", gyroTest.class);
+    //manager.register("lift",scissorLiftServoTest.class);
+  //  manager.register("Beacon Blue cntr",beaconAutonomousBLUEStrafenotStraight.class);
     manager.register("beacon blue square",beaconAutonomousBLUELinearSlide.class);
     manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
-    manager.register("Drive gyro", meccanumwithGYRO.class);
+    manager.register("gyro gyro gyro gyro gyro gyro gyro", gyroStateTest.class);
     manager.register("shoot balls",ballShootAuto.class);
     manager.register("Linear Slide Test",beaconAutonomousLinearSlideTest.class );
     manager.register("beacon blue square shorter",beaconAutonomousBLUELinearSlideShorter.class);
+    manager.register("beacon blue enum v1",beaconAutonomousBLUELinearSlideShorterRevA.class);
+    manager.register("beacon blue enum v2",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
+    manager.register("beacon red enum v1",beaconAutonomousREDLinearSlideShorterRevA.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.
