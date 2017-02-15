@@ -2,45 +2,41 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import android.graphics.Color;
 
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.BACK_UP_FROM_BEACON1;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.BACK_UP_FROM_BEACON2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.CHECK_COLOR_LOGIC1;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.CHECK_COLOR_LOGIC2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.DRIVE_QUICKLY_STRAIGHT_TO_LINE;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.DRIVE_SLOWLY_TILL_FIND_LINE;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.DRIVE_STRAIGHT_FROM_WALL;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.DRIVE_TILL_TOUCH;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.DRIVE_TILL_TOUCH2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.DRIVE_TO_VORTEX;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.SLIDE_SLOWLY_TILL_LINE;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.SLIDE_TO_OTHER_BEACON;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP1;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP3;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP4;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP_AFTER_BACKING_UP;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP_FINAL;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP_ON_LINE;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP_ON_WALL;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STOP_RESET_CAPTURE_POSITION;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.TURN_TOWARD_LINE;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.TURN_TOWARD_VORTEX;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.TURN_TOWARD_WALL;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.WAIT_FOR_PUSH1;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.WAIT_FOR_PUSH2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.STRAFE_BACK_SLIGHTLY;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.RECOVERY;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.TBD_CODE;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.MOVE_LEFT;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.MOVE_RIGHT;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.CHECK_COLOR_AMOUNTS;
-
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.MOVE_LEFT2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.MOVE_RIGHT2;
-import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousBLUELinearSlideShorterRevA2_7.State.CHECK_COLOR_AMOUNTS2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.BACK_UP_FROM_BEACON1;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.BACK_UP_FROM_BEACON2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.CHECK_COLOR_AMOUNTS;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.CHECK_COLOR_AMOUNTS2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.CHECK_COLOR_LOGIC1;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.CHECK_COLOR_LOGIC2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.DRIVE_QUICKLY_STRAIGHT_TO_LINE;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.DRIVE_SLOWLY_TILL_FIND_LINE;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.DRIVE_STRAIGHT_FROM_WALL;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.DRIVE_TILL_TOUCH;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.DRIVE_TILL_TOUCH2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.DRIVE_TO_VORTEX;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.MOVE_LEFT;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.MOVE_LEFT2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.MOVE_RIGHT;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.MOVE_RIGHT2;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.RECOVERY;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.SLIDE_SLOWLY_TILL_LINE;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.SLIDE_TO_OTHER_BEACON;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP3;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP4;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP_AFTER_BACKING_UP;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP_FINAL;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP_ON_LINE;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP_ON_WALL;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.STOP_RESET_CAPTURE_POSITION;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.TBD_CODE;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.TURN_TOWARD_LINE;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.TURN_TOWARD_VORTEX;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.TURN_TOWARD_WALL;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.WAIT_FOR_PUSH1;
+import static com.qualcomm.ftcrobotcontroller.opmodes.beaconAutonomousREDLinearSlideShorterRevA2_7.State.WAIT_FOR_PUSH2;
 
 
-public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hardware_Tier2
+public class beaconAutonomousREDLinearSlideShorterRevA2_7 extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
@@ -93,7 +89,7 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
     double rightVal=0.15;
     double leftVal=0.15;
 
-    public beaconAutonomousBLUELinearSlideShorterRevA2_7()
+    public beaconAutonomousREDLinearSlideShorterRevA2_7()
   {
   }
    @Override public void init(){
@@ -157,8 +153,8 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             }
             break;
         case TURN_TOWARD_LINE:
-            turn_gyro_power_new(30, 0.1, 0.6, "r");
-            if (gyro.getHeading() > 30 && gyro.getHeading() < 180) {   //the <180 is to compensate if the robot turns slightly to the left
+            pointTurn("RUE",0.075,"l",0); //turn towards line
+            if (gyro.getHeading()<340 && gyro.getHeading()>180) {   //the <180 is to compensate if the robot turns slightly to the left
                 state = DRIVE_QUICKLY_STRAIGHT_TO_LINE;
                 left_set_power(0.0);
                 right_set_power(0.0);
@@ -184,8 +180,8 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             state = TURN_TOWARD_WALL;
             break;
         case TURN_TOWARD_WALL:
-            pointTurn("RUE", 0.1, "r", 0);
-            if (gyro.getHeading() > 80) {
+            pointTurn("RUE",0.1,"l",0); //turn onto line
+            if (gyro.getHeading()<280 && gyro.getHeading()>180) {
                 state = STOP4;
             }
             break;
@@ -253,11 +249,11 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
           case CHECK_COLOR_LOGIC1:  //assumes color sensor is on right pusher
               if (hsvValues[0]<260 && hsvValues[0]>180 && beacon.blue()>0) {
                   telemetry.addData("It's BLUE!!!", "");
-                  rightPush.setPosition(.5);
+                  leftPush.setPosition(.5);
                   state = WAIT_FOR_PUSH1;
               } else if ((hsvValues[0]<41 && hsvValues[0]>=0 && beacon.red()>0)||(hsvValues[0]<361 && hsvValues[0]>299 && beacon.red()>0)){
                   telemetry.addData("It's RED!!!", "");
-                  leftPush.setPosition(.5);
+                  rightPush.setPosition(.5);
                   state = WAIT_FOR_PUSH1;
               } else {
                   state = WAIT_FOR_PUSH1;
@@ -282,18 +278,18 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
         case STOP_AFTER_BACKING_UP:
             left_set_power(0.0);
             right_set_power(0.0);
-            slide_sideways("RUE", 0, "r", 0);
+            slide_sideways("RUE", 0, "l", 0);
             encoder = leftFront.getCurrentPosition();
             state = SLIDE_TO_OTHER_BEACON;
             break;
         case SLIDE_TO_OTHER_BEACON:
-            slide_sideways("RUE", 0.5, "r", 0);
+            slide_sideways("RUE", 0.5, "l", 0);
             if (is_encoder_reached(encoder + 2000, leftFront)) {
                 state = SLIDE_SLOWLY_TILL_LINE;
             }
             break;
         case SLIDE_SLOWLY_TILL_LINE:
-            slide_sideways("RUE", 0.06, "r", 0);
+            slide_sideways("RUE", 0.06, "l", 0);
             if (RGB.alpha() > 4) {
                 left_set_power(0.0);
                 right_set_power(0.0);
@@ -374,11 +370,11 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
           case CHECK_COLOR_LOGIC2:  //assumes color sensor is on right pusher
               if (hsvValues[0]<260 && hsvValues[0]>180 && beacon.blue()>0) {
                   telemetry.addData("It's BLUE!!!", "");
-                  rightPush.setPosition(.45);
+                  leftPush.setPosition(.45);
                   state = WAIT_FOR_PUSH2;
               } else if ((hsvValues[0]<41 && hsvValues[0]>=0 && beacon.red()>0)||(hsvValues[0]<=360 && hsvValues[0]>=300 && beacon.red()>0)){
                   telemetry.addData("It's RED!!!", "");
-                  leftPush.setPosition(.45);
+                  rightPush.setPosition(.45);
                   state = WAIT_FOR_PUSH2;
               } else {
                   state = WAIT_FOR_PUSH2;
@@ -401,8 +397,8 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             }
             break;
         case TURN_TOWARD_VORTEX:              // turn slightly to face center vortex
-            pointTurn("RUE", 0.2, "l", 0);
-            if (gyro.getHeading() < 60 && gyro.getHeading() > 1) {
+            pointTurn("RUE",0.2,"r",0);
+            if (gyro.getHeading()>300 && gyro.getHeading()<360) {
                 state = DRIVE_TO_VORTEX;
                 driveStright("RUE", 0, "f", 0);
                 encoder = leftFront.getCurrentPosition();
