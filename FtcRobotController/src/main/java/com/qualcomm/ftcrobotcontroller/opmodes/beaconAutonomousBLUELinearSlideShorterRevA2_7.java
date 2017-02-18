@@ -138,15 +138,15 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
 
       switch (state) {
           case RECOVERY:
-              if(beacon.red()==255 && beacon.blue()==255){
-                  state=TBD_CODE;
+              if(beacon.red()==255 && beacon.blue()==255){  //check to see if color sensor reads 255 (this means color sensor is disconnected)
+                  state=TBD_CODE; // If color sensor has error, go to failsafe and stop so we dont accidentally push oppoents side of the beacon
               }
               else {
-                  state = DRIVE_STRAIGHT_FROM_WALL;
+                  state = DRIVE_STRAIGHT_FROM_WALL; // If color sensor is OK, proceed on with code
               }
               break;
           case TBD_CODE:
-              telemetry.addData("Oops, color sensor didn't work!","  ;-)");
+              telemetry.addData("Oops, color sensor didn't work!","  ;-)"); //This will soon implement another full backup program in case the color sensor fails
               break;
         case DRIVE_STRAIGHT_FROM_WALL:
             driveStright("RUE", 0.2, "r", 0);
@@ -209,14 +209,14 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             encoder = leftFront.getCurrentPosition();
             break;
 
-          case CHECK_COLOR_AMOUNTS:
-              if(beacon.blue()==0 && beacon.red()==0 && hsvValues[0]==0){
-                  slide_sideways("RUE", 0, "r", 0);
+          case CHECK_COLOR_AMOUNTS: //Check what each of the two color sensors see
+              if(beacon.blue()==0 && beacon.red()==0 && hsvValues[0]==0){ //If the right color sensor sees all zero...
+                  slide_sideways("RUE", 0, "r", 0);      //it's of the beacon. So, the robot slides left so it is centered
                   encoder = leftFront.getCurrentPosition();
                   state=MOVE_LEFT;
               }
 
-              else if(beacon2.blue()==0 && beacon2.red()==0 && hsvValues2[0]==0){
+              else if(beacon2.blue()==0 && beacon2.red()==0 && hsvValues2[0]==0){ //same code with the other color sensor, just reversed
                   slide_sideways("RUE", 0, "l", 0);
                   encoder = leftFront.getCurrentPosition();
                   state=MOVE_RIGHT;
@@ -230,7 +230,7 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
 
           case MOVE_LEFT:
               slide_sideways("RUE", 0.1, "r", 0);
-              if (is_encoder_reached((150 + encoder), leftFront)) {
+              if (is_encoder_reached((150 + encoder), leftFront)) { //move left slightly
                   left_set_power(0.0);
                   right_set_power(0.0);
                   driveStright("RUE", 0, "f", 0);
@@ -241,7 +241,7 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
 
           case MOVE_RIGHT:
               slide_sideways("RUE", 0.1, "l", 0);
-              if (is_encoder_reached((150 + encoder), leftFront)) {
+              if (is_encoder_reached((150 + encoder), leftFront)) { //move right slightly
                   left_set_power(0.0);
                   right_set_power(0.0);
                   driveStright("RUE", 0, "f", 0);
