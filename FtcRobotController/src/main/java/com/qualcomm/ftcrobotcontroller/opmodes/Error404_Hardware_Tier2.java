@@ -186,8 +186,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_power(power, leftFront);
             set_power(power, leftRear);
 
-        }
-        if (direction.toLowerCase().equals("l")) {
+        } else if (direction.toLowerCase().equals("l")) {  // added else tim
             set_direction(leftFront, "r");
             set_direction(rightRear, "f");
             set_direction(rightFront, "r");
@@ -230,8 +229,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_power(frontPower, leftFront);
             set_power(rearPower, leftRear);
 
-        }
-        if (direction.toLowerCase().equals("l")) {
+        } else if (direction.toLowerCase().equals("l")) {       // added else tim
             frontPower=power-rawgyro;
             rearPower=power+rawgyro;
             set_direction(leftFront, "r");
