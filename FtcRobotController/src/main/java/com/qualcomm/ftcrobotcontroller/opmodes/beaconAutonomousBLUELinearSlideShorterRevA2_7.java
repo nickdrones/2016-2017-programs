@@ -112,7 +112,7 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
 //       if(touch2.isPressed()){
 //           telemetry.addData("Touch 2 is pressed","");
 //       }
-       setServoPos(rightPush, rightVal);  // nitialize servos to initial positions
+       setServoPos(rightPush, rightVal);  // initialize servos to initial positions
        setServoPos(leftPush, leftVal);
 
    }
