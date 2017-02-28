@@ -76,6 +76,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("beacon blue enum v1",beaconAutonomousBLUELinearSlideShorterRevA.class);
     manager.register("beacon blue",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
     manager.register("beacon red",beaconAutonomousREDLinearSlideShorterRevA2_7.class);
+    manager.register("slide with gyro test",slideSidewayGyroTesting.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.

@@ -175,34 +175,27 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
         case DRIVE_SLOWLY_TILL_FIND_LINE:
             driveStright("RUE", 0.1, "r", 0);
             if (RGB.alpha() > 5) {
-                state = STOP3;
-            }
-            break;
-        case STOP3:
-            left_set_power(0.0);
-            right_set_power(0.0);
-            state = TURN_TOWARD_WALL;
+                left_set_power(0.0);
+                right_set_power(0.0);
+                state = TURN_TOWARD_WALL;            }
             break;
         case TURN_TOWARD_WALL:
             pointTurn("RUE", 0.1, "r", 0);
             if (gyro.getHeading() > 80) {
-                state = STOP4;
+                left_set_power(0.0);
+                right_set_power(0.0);
+                state = DRIVE_TILL_TOUCH;
             }
-            break;
-        case STOP4:
-            left_set_power(0.0);
-            right_set_power(0.0);
-            state = DRIVE_TILL_TOUCH;
             break;
         case DRIVE_TILL_TOUCH:  //drive till both touch sensors pressed on wall
             driveStright("RUE", 0.2, "r", 0);
             if (touch.isPressed() && touch2.isPressed()) {
+                left_set_power(0.0);
+                right_set_power(0.0);
                 state = STOP_RESET_CAPTURE_POSITION;
             }
             break;
         case STOP_RESET_CAPTURE_POSITION:
-            left_set_power(0.0);
-            right_set_power(0.0);
             zeroPoint = gyro.getHeading();  //capture gyro reading for gyro correction after backing away from beacon
             driveStright("RUE", 0, "f", 0);
             state = CHECK_COLOR_AMOUNTS;
@@ -211,7 +204,7 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
 
           case CHECK_COLOR_AMOUNTS: //Check what each of the two color sensors see
               if(beacon.blue()==0 && beacon.red()==0 && hsvValues[0]==0){ //If the right color sensor sees all zero...
-                  slide_sideways("RUE", 0, "r", 0);      //it's of the beacon. So, the robot slides left so it is centered
+                  slide_sideways("RUE", 0, "r", 0);      //it's off the beacon. So, the robot slides left so it is centered
                   encoder = leftFront.getCurrentPosition();
                   state=MOVE_LEFT;
               }
@@ -276,12 +269,12 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             rightPush.setPosition(0.15);
             leftPush.setPosition(0.15);
             if (is_encoder_reached(encoder + 450, leftFront)) {
+                left_set_power(0.0);
+                right_set_power(0.0);
                 state = STOP_AFTER_BACKING_UP;
             }
             break;
         case STOP_AFTER_BACKING_UP:
-            left_set_power(0.0);
-            right_set_power(0.0);
             slide_sideways("RUE", 0, "r", 0);
             encoder = leftFront.getCurrentPosition();
             state = SLIDE_TO_OTHER_BEACON;
@@ -301,8 +294,6 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             }
             break;
         case STOP_ON_LINE:
-            left_set_power(0.0);
-            right_set_power(0.0);
             slide_sideways("RUE", 0, "l", 0);
             encoder = leftFront.getCurrentPosition();
             state = DRIVE_TILL_TOUCH2;

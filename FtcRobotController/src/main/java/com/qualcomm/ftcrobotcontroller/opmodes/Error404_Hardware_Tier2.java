@@ -3,7 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
+public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION 2.1.2
 
    /// Beacon pusher method  //
     public void setServoPos(Servo servomotor, Double position){
@@ -29,8 +29,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_direction(leftRear, "f");
             set_direction(rightFront, "r");
             set_direction(rightRear, "r");
-        }
-        if (direction.toLowerCase().equals("r")) {
+        } else {
             set_direction(leftFront, "r");
             set_direction(leftRear, "r");
             set_direction(rightFront, "f");
@@ -86,8 +85,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_direction(leftRear, "f");
             set_direction(rightFront, "f");
             set_direction(rightRear, "f");
-        }
-        if (direction.toLowerCase().equals("l")) {
+        } else {
             set_direction(leftFront, "r");
             set_direction(leftRear, "r");
             set_direction(rightFront, "r");
@@ -108,7 +106,8 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         right_set_power(power);
     }
     
-
+//Unused at current time
+    /*
     public void swing_turn(String mode, double powerLeft, double powerRight, String direction, int position)
         {
             position = distance2encoder(position, 6, 1);
@@ -129,9 +128,7 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
                     position *= temp;
                     set_position(leftFront, position);
                     set_position(leftRear, position);
-                }
-            if(direction.toLowerCase().equals("l"))
-                {
+                } else {
                     set_position(leftFront, position);
                     set_position(leftRear, position);
                     double temp = powerRight - powerLeft;
@@ -143,7 +140,9 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             left_set_power(powerLeft);
             right_set_power(powerRight);
     }
-
+*/
+    //Unused at current time
+    /*
     public void pivot_turn(String mode, double power, String direction, int position){
         position = distance2encoder(position, 6, 1);
         set_direction(leftFront, "f");
@@ -158,13 +157,14 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_position(rightFront, position);
             set_position(rightRear, position);
             right_set_power(power);
-        }
-        if (direction.toLowerCase().equals("r")) {
+        } else {
             set_position(leftFront, position);
             set_position(leftRear, position);
             left_set_power(power);
         }
     }
+    */
+
     public void slide_sideways(String mode, double power, String direction, int position){
         position = distance2encoder(position, 4, 1);
         position=position*2; //because the wheels on the meccanum wheels are at 45', multiply the encoder counts by 2
@@ -202,17 +202,15 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
         }
     }
 
-    public void slide_sideways_gyro(String mode, double power, String direction, int position){
-        position = distance2encoder(position, 4, 1);
-        position=position*2; //because the wheels on the meccanum wheels are at 45', multiply the encoder counts by 2
-        double before=gyro.getHeading();
+    public void slide_sideways_gyro(String mode, double power, String direction, int zeropoint){
+        int maxDrift=5;
         set_mode(leftFront, mode);
         set_mode(leftRear, mode);
         set_mode(rightFront, mode);
         set_mode(rightRear, mode);
         double frontPower=power;
         double rearPower=power;
-        double rawgyro=(gyro.getHeading()-before)/36000;
+        double rawgyro=(gyro.getHeading()-zeropoint)/100;
         if (direction.toLowerCase().equals("r")) {
             frontPower=power+rawgyro;
             rearPower=power-rawgyro;
@@ -220,26 +218,18 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 {
             set_direction(rightRear, "r");
             set_direction(rightFront, "f");
             set_direction(leftRear, "r");
-            set_position(rightFront, position);
-            set_position(rightRear, position);
-            set_position(leftFront, position);
-            set_position(leftRear, position);
             set_power(rearPower, rightRear);
             set_power(frontPower, rightFront);
             set_power(frontPower, leftFront);
             set_power(rearPower, leftRear);
 
-        } else if (direction.toLowerCase().equals("l")) {       // added else tim
+        } else {       // added else tim
             frontPower=power-rawgyro;
             rearPower=power+rawgyro;
             set_direction(leftFront, "r");
             set_direction(rightRear, "f");
             set_direction(rightFront, "r");
             set_direction(leftRear, "f");
-            set_position(rightFront, position);
-            set_position(rightRear, position);
-            set_position(leftFront, position);
-            set_position(leftRear, position);
             set_power(rearPower, rightRear);
             set_power(frontPower, rightFront);
             set_power(frontPower, leftFront);
