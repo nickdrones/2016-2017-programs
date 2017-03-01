@@ -204,36 +204,67 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
 
     public void slide_sideways_gyro(String mode, double power, String direction, int zeropoint){
         int maxDrift=5;
+        int drift=0;
+        int current=gyro.getHeading();
         set_mode(leftFront, mode);
         set_mode(leftRear, mode);
         set_mode(rightFront, mode);
         set_mode(rightRear, mode);
-        double frontPower=power;
-        double rearPower=power;
-        double rawgyro=(gyro.getHeading()-zeropoint)/100;
+        double rawgyro=(current-zeropoint)/100;
+        int heading = current;
+        if (heading>180)
+        {   heading=360-heading;
+          //  heading=-heading;
+            }
+
         if (direction.toLowerCase().equals("r")) {
-            frontPower=power+rawgyro;
-            rearPower=power-rawgyro;
-            set_direction(leftFront, "f");
-            set_direction(rightRear, "r");
-            set_direction(rightFront, "f");
-            set_direction(leftRear, "r");
-            set_power(rearPower, rightRear);
-            set_power(frontPower, rightFront);
-            set_power(frontPower, leftFront);
-            set_power(rearPower, leftRear);
+            drift=(zeropoint-heading);
+            telemetry.addData("Drift: ",drift);
+            if(Math.abs(drift)>=maxDrift){
+                telemetry.addData("Max Drift Achieved","");
+                left_set_power(0);
+                right_set_power(0);
+                if(drift>0){
+                    turn_gyro_power_new(zeropoint,0.2, 0.6, "r");
+                    telemetry.addData("turn right","");
+                }else {
+                    turn_gyro_power_new(zeropoint,0.2, 0.6, "l");
+                    telemetry.addData("turn left","");
+
+                }
+            }
+            else {
+                set_direction(leftFront, "f");
+                set_direction(rightRear, "r");
+                set_direction(rightFront, "f");
+                set_direction(leftRear, "r");
+                set_power(power, rightRear);
+                set_power(power, rightFront);
+                set_power(power, leftFront);
+                set_power(power, leftRear);
+            }
 
         } else {       // added else tim
-            frontPower=power-rawgyro;
-            rearPower=power+rawgyro;
-            set_direction(leftFront, "r");
-            set_direction(rightRear, "f");
-            set_direction(rightFront, "r");
-            set_direction(leftRear, "f");
-            set_power(rearPower, rightRear);
-            set_power(frontPower, rightFront);
-            set_power(frontPower, leftFront);
-            set_power(rearPower, leftRear);
+            drift=(zeropoint-heading);
+            if(Math.abs(drift)>=maxDrift){
+                left_set_power(0);
+                right_set_power(0);
+                if(drift>0){
+                    turn_gyro_power_new(zeropoint,0.2, 0.6, "l");
+                }else {
+                    turn_gyro_power_new(zeropoint,0.2, 0.6, "r");
+                }
+            }
+            else {
+                set_direction(leftFront, "r");
+                set_direction(rightRear, "f");
+                set_direction(rightFront, "r");
+                set_direction(leftRear, "f");
+                set_power(power, rightRear);
+                set_power(power, rightFront);
+                set_power(power, leftFront);
+                set_power(power, leftRear);
+            }
         }
     }
 
@@ -254,17 +285,18 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
 
         pointTurn("RUE", powervalue, "r", 0); //turn towards line
     } // end if direction = r
-    else if(direction.toLowerCase().equals("l")) {
+    else {
         int heading = gyro.getHeading();
         if (heading>180)
         {
             heading=-360+heading;
         }
-
-        if (heading >= last_part) {
+            telemetry.addData("Heading: ",heading);
+        if (heading >= -last_part) {
             powervalue = starting_power;
         }
-        else if (heading < last_part) {
+        else// if (heading < -last_part)
+             {
             powervalue = (desired_gyro - gyro.getHeading()) / 50;
         }
 

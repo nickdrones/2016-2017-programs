@@ -69,7 +69,7 @@ public class slideSidewayGyroTesting extends Error404_Hardware_Tier2
       switch (state) {
           case SLIDE_SLOWLY_TILL_LINE:
             slide_sideways_gyro("RUE", 0.2, "r", zeroPoint);
-            if (leftFront.getCurrentPosition()>3000) {
+            if (leftFront.getCurrentPosition()>30000) {
                 left_set_power(0.0);
                 right_set_power(0.0);
             }
@@ -77,27 +77,8 @@ public class slideSidewayGyroTesting extends Error404_Hardware_Tier2
         default:
             break;
     }
-    //telemetry.addData("RightFront: ", get_position(rightFront));
-   // telemetry.addData("2. HUE Right: ", hsvValues[0]);
-    //telemetry.addData("3. HUE Left: ", hsvValues2[0]);
-      //telemetry.addData("4. Red Left: ", beacon2.red());
-      //telemetry.addData("6. Blue Left: ", beacon2.blue());
-   // telemetry.addData("Zero point: ", zeroPoint);
-    //telemetry.addData("LeftFront: ", get_position(leftFront));
-    //telemetry.addData("RightRear: ", get_position(rightRear));
-    //telemetry.addData("LeftRear: ", get_position(leftRear));
-    telemetry.addData("2.          Hue   Red   Blue", "");
-    telemetry.addData("3. right  "+ hsvValues[0] +"   "+ beacon.red() +"   "+ beacon.blue(), "");
-    telemetry.addData("4. left   "+ hsvValues2[0] +"   "+ beacon2.red() +"   "+ beacon2.blue(), "");
 
-    telemetry.addData("7. State: ", state);
-    //telemetry.addData("7. White down: ", RGB.alpha());
-    //telemetry.addData("5. Red Right: ", beacon.red());
-    //telemetry.addData("7. Blue Right: ", beacon.blue());
     telemetry.addData("1. Gyro: ", gyro.getHeading());
-   // telemetry.addData("left: ", leftPush.getPosition());
-    //telemetry.addData("right: ", rightPush.getPosition());
-    //telemetry.addData("right power: ", rightFront.getPower());
-    //telemetry.addData("left power: ", leftFront.getPower());
+
   }
 }
