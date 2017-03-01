@@ -212,10 +212,10 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
         set_mode(rightRear, mode);
         double rawgyro=(current-zeropoint)/100;
         int heading = current;
-        if (heading>180)
-        {   heading=360-heading;
+        //if (heading>180)
+       // {   heading=360-heading;
           //  heading=-heading;
-            }
+         //   }
 
         if (direction.toLowerCase().equals("r")) {
             drift=(zeropoint-heading);
@@ -224,13 +224,12 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
                 telemetry.addData("Max Drift Achieved","");
                 left_set_power(0);
                 right_set_power(0);
-                if(drift>0){
+                if(drift>0 && heading<180){
                     turn_gyro_power_new(zeropoint,0.2, 0.6, "r");
                     telemetry.addData("turn right","");
                 }else {
                     turn_gyro_power_new(zeropoint,0.2, 0.6, "l");
                     telemetry.addData("turn left","");
-
                 }
             }
             else {
