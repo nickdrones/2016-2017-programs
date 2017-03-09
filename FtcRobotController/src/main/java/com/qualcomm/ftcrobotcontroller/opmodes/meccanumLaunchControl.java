@@ -20,11 +20,12 @@ public class meccanumLaunchControl extends OpMode {
   double powerval;
   double rightVal=0;
   double leftVal=0;
+  double incrementDir=0;
   public meccanumLaunchControl() {
   }
   @Override
   public void init() {
-    powerval=1;
+    powerval=0.55;
     telemetry.addData ("0", "I AM HERE");
     leftPush = hardwareMap.servo.get("leftPush");
     rightPush = hardwareMap.servo.get("rightPush");
@@ -49,6 +50,8 @@ public class meccanumLaunchControl extends OpMode {
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
     telemetry.addData("","V 2");
+      leftVal=0.5;
+      rightVal=0.5;
   }
   @Override
   public void loop() {
@@ -114,20 +117,29 @@ public class meccanumLaunchControl extends OpMode {
     In other statements below, the driver is able to use the left joystick to control the speed
     difference between the
      */
+      if(gamepad2.x){
+          incrementDir=1;
+      }
+      if(gamepad2.b){
+          incrementDir=2;
+      }
+      if(incrementDir==1&&!gamepad2.x){
+          powerval=powerval-0.05;
+          incrementDir=0;
+      }
+      if(incrementDir==2&&!gamepad2.b){
+          powerval=powerval+0.05;
+          incrementDir=0;
+      }
     ballcollector.setPower(collector);
-
+      powerval=Range.clip(powerval, 0.05, 1);
     if(gamepad2.a){                   //Preset values for motor speeds for ball launcher
       launchspeed1=(float)powerval;
     }
     else if(gamepad2.y){
       launchspeed1=-1;
     }
-    else if(gamepad2.x){
-      powerval=powerval-0.01;
-    }
-    else if(gamepad2.b){
-      powerval=powerval+0.01;
-    }
+
     else{
       launchspeed1=0;
     }
@@ -145,11 +157,8 @@ public class meccanumLaunchControl extends OpMode {
     leftFront.setPower(LF);
     rightRear.setPower(RR);
     leftRear.setPower(LR);
-    telemetry.addData ("02", launcher);
-    telemetry.addData ("04", powerval);
-    telemetry.addData ("03", launchspeed1);
-    telemetry.addData ("01", launchpower1);
-
+    telemetry.addData ("01: Ball Launcher Power: ", powerval);
+    telemetry.addData ("right pusher:  "+rightPush.getPosition()+ "||||   left pusher: "+leftPush.getPosition()+"","");
 
   }
   @Override
