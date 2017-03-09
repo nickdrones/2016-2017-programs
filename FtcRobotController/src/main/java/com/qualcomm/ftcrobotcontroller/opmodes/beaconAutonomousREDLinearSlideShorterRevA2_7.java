@@ -398,7 +398,7 @@ public class beaconAutonomousREDLinearSlideShorterRevA2_7 extends Error404_Hardw
             break;
         case TURN_TOWARD_VORTEX:              // turn slightly to face center vortex
             pointTurn("RUE",0.2,"r",0);
-            if (gyro.getHeading()>300 && gyro.getHeading()<360) {
+            if (gyro.getHeading()>285 && gyro.getHeading()<360) {
                 state = DRIVE_TO_VORTEX;
                 driveStright("RUE", 0, "f", 0);
                 encoder = leftFront.getCurrentPosition();
