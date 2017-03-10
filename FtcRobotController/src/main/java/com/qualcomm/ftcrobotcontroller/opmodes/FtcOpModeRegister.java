@@ -20,10 +20,9 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("Color Display Ambient",ColorDisplaytest.class);
     //manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
-    manager.register("shoot balls",ballShootAuto.class);
-    manager.register("beacon blue",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
-    manager.register("beacon red",beaconAutonomousREDLinearSlideShorterRevA2_7.class);
+    manager.register("shoot balls at 100%",ballShootAuto.class);
+    manager.register("beacon blue center",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
+    manager.register("beacon red center",beaconAutonomousREDLinearSlideShorterRevA2_7.class);
     //manager.register("slide with gyro test",slideSidewayGyroTesting.class);
-    //IF YOU ARE READING THIS TYPE "HEY NICK" IN THE COMMENTS
   }
 }

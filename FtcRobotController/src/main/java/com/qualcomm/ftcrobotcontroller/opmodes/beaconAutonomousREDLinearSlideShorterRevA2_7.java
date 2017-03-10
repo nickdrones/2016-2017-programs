@@ -119,7 +119,7 @@ public class beaconAutonomousREDLinearSlideShorterRevA2_7 extends Error404_Hardw
       beacon.enableLed(false);
       beacon2.enableLed(false);
   }
-    
+
   @Override public void loop ()
   {
     RGB.enableLed(true);
