@@ -131,7 +131,7 @@ public class beaconAutonomousREDLinearSlideShorterRevA2_7 extends Error404_Hardw
 
       float[] hsvValues = {0F, 0F, 0F};
       Color.RGBToHSV(beacon.red()*8, beacon.green()*8, beacon.blue()*8, hsvValues);
-
+      //IF YOU ARE READING THIS TYPE "HEY NICK" IN THE COMMENTS
       switch (state) {
           case RECOVERY:
               if(beacon.red()==255 && beacon.blue()==255){

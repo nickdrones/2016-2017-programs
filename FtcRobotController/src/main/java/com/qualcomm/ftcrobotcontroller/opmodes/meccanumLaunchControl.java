@@ -117,6 +117,7 @@ public class meccanumLaunchControl extends OpMode {
     In other statements below, the driver is able to use the left joystick to control the speed
     difference between the
      */
+      //IF YOU ARE READING THIS TYPE "HEY NICK" IN THE COMMENTS
       if(gamepad2.x){
           incrementDir=1;
       }
@@ -157,8 +158,10 @@ public class meccanumLaunchControl extends OpMode {
     leftFront.setPower(LF);
     rightRear.setPower(RR);
     leftRear.setPower(LR);
+
     telemetry.addData ("01: Ball Launcher Power: ", powerval);
-    telemetry.addData ("right pusher:  "+rightPush.getPosition()+ "||||   left pusher: "+leftPush.getPosition()+"","");
+    telemetry.addData ("02: right pusher:  "+rightPush.getPosition()+ "||||   left pusher: "+leftPush.getPosition()+"","");
+    telemetry.addData ("03: Ball Collector Power: ", collector);
 
   }
   @Override

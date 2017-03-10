@@ -1,34 +1,3 @@
-/* Copyright (c) 2014, 2015 Qualcomm Technologies Inc
-
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted (subject to the limitations in the disclaimer below) provided that
-the following conditions are met:
-
-Redistributions of source code must retain the above copyright notice, this list
-of conditions and the following disclaimer.
-
-Redistributions in binary form must reproduce the above copyright notice, this
-list of conditions and the following disclaimer in the documentation and/or
-other materials provided with the distribution.
-
-Neither the name of Qualcomm Technologies Inc nor the names of its contributors
-may be used to endorse or promote products derived from this software without
-specific prior written permission.
-
-NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
-LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
@@ -47,68 +16,14 @@ public class FtcOpModeRegister implements OpModeRegister {
    */
   public void register(OpModeManager manager) {
 
-    /*
-     * register your op modes here.
-     * The first parameter is the name of the op mode
-     * The second parameter is the op mode class property
-     *
-     * If two or more op modes are registered with the same name, the app will display an error.
-     */
-
-   // manager.register("Nick test", NickStateMachine.class);
-   // manager.register("Runner program", Error404_Hardware_Testing.class);
-    //manager.register("PushBotTeleOp", PushBotTeleOp.class);
-   // manager.register("Slide left with gyro", strafeSidewaysTestStateMachine.class);
-   // manager.register("Teleop", meccanum2controllers.class);
-    //manager.register("Motor Test", twoMotorTest.class);
     manager.register("Teleop", meccanumLaunchControl.class);
-    //manager.register("Cross field to block", crossFieldTroll.class);
-    //manager.register("Gyro Troubleshooting", gyroTest.class);
-    //manager.register("lift",scissorLiftServoTest.class);
-    manager.register("Color Display Ambient",ColorDisplaytest.class);
-    //manager.register("beacon blue square",beaconAutonomousBLUELinearSlide.class);
-    manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
+    //manager.register("Color Display Ambient",ColorDisplaytest.class);
+    //manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
-    //manager.register("gyro gyro gyro gyro gyro gyro gyro", gyroStateTest.class);
     manager.register("shoot balls",ballShootAuto.class);
-    //manager.register("Linear Slide Test",beaconAutonomousLinearSlideTest.class );
-    //manager.register("beacon blue square shorter",beaconAutonomousBLUELinearSlideShorter.class);
-    //manager.register("beacon blue enum v1",beaconAutonomousBLUELinearSlideShorterRevA.class);
     manager.register("beacon blue",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
     manager.register("beacon red",beaconAutonomousREDLinearSlideShorterRevA2_7.class);
-    manager.register("slide with gyro test",slideSidewayGyroTesting.class);
-
-    /*
-     * Uncomment any of the following lines if you want to register an op mode.
-     */
-
-//    manager.register("MR Gyro Test", MRGyroTest.class);
-
-    //manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
-    //manager.register("ColorSensorDriver", ColorSensorDriver.class);
-
-    //manager.register("IrSeekerOp", IrSeekerOp.class);
-    //manager.register("CompassCalibration", CompassCalibration.class);
-    //manager.register("I2cAddressChangeExample", LinearI2cAddressChange.class);
-
-
-    //manager.register("NxtTeleOp", NxtTeleOp.class);
-
-    //manager.register("LinearK9TeleOp", LinearK9TeleOp.class);
-    //manager.register("LinearIrExample", LinearIrExample.class);
-
-
-    //manager.register ("PushBotManual1", PushBotManual1.class);
-    //manager.register ("PushBotAutoSensors", PushBotAutoSensors.class);
-    //manager.register ("PushBotIrEvent", PushBotIrEvent.class);
-
-    //manager.register ("PushBotManualSensors", PushBotManualSensors.class);
-    //manager.register ("PushBotOdsDetectEvent", PushBotOdsDetectEvent.class);
-    //manager.register ("PushBotOdsFollowEvent", PushBotOdsFollowEvent.class);
-    //manager.register ("PushBotTouchEvent", PushBotTouchEvent.class);
-
-    //manager.register("PushBotDriveTouch", PushBotDriveTouch.java);
-    //manager.register("PushBotIrSeek", PushBotIrSeek.java);
-    //manager.register("PushBotSquare", PushBotSquare.java);
+    //manager.register("slide with gyro test",slideSidewayGyroTesting.class);
+    //IF YOU ARE READING THIS TYPE "HEY NICK" IN THE COMMENTS
   }
 }

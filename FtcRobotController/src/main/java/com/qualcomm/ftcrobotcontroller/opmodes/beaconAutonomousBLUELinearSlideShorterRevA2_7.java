@@ -166,7 +166,8 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
                 encoder = leftFront.getCurrentPosition();
             }
             break;
-        case DRIVE_QUICKLY_STRAIGHT_TO_LINE:
+          //IF YOU ARE READING THIS TYPE "HEY NICK" IN THE COMMENTS
+          case DRIVE_QUICKLY_STRAIGHT_TO_LINE:
             driveStright("RUE", 0.4, "r", 0);
             if (is_encoder_reached((2200 + encoder), leftFront)) {
                 state = DRIVE_SLOWLY_TILL_FIND_LINE;
@@ -177,7 +178,8 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             if (RGB.alpha() > 5) {
                 left_set_power(0.0);
                 right_set_power(0.0);
-                state = TURN_TOWARD_WALL;            }
+                state = TURN_TOWARD_WALL;
+            }
             break;
         case TURN_TOWARD_WALL:
             pointTurn("RUE", 0.1, "r", 0);
