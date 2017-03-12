@@ -18,7 +18,7 @@ public class FtcOpModeRegister implements OpModeRegister {
 
     manager.register("Teleop", meccanumLaunchControl.class);
     //manager.register("Color Display Ambient",ColorDisplaytest.class);
-    //manager.register("Beacon Red cntr",beaconAutonomousREDStrafenotStraight.class);
+    manager.register("Ball hoot 55%",ballShootAuto3D_Print_Tube.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
     manager.register("shoot balls at 100%",ballShootAuto.class);
     manager.register("beacon blue center",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
