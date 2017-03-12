@@ -2,14 +2,14 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class ballShootAuto3D_Print_Tube extends Error404_Hardware_Tier2
+public class ballShootAuto3D_Print_Tube_Block_Blue extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
   private int state = 0;
   private int encoder=0;
   private int test=0;
-  public ballShootAuto3D_Print_Tube()
+  public ballShootAuto3D_Print_Tube_Block_Blue()
   {
   }
    @Override public void init(){
@@ -92,13 +92,42 @@ public class ballShootAuto3D_Print_Tube extends Error404_Hardware_Tier2
         case 8:
             driveStright("RUE",0.2,"r",0);
 
-            if (is_encoder_reached(3000, leftFront)) {
+            if (is_encoder_reached(5000, leftFront)) {
 
                 state++;
                 encoder=leftFront.getCurrentPosition();
             }
             break;
         case 9:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+        case 10:
+        pointTurn("RUE",0.1,"l",0); //turn towards line
+        if (gyro.getHeading()>180 && gyro.getHeading()<330) {   //the <180 is to compensate if the robot turns slightly to the left
+            state++;
+        }
+        break;
+        case 11:
+            set_power(0,rightFront);
+            set_power(0,leftFront);
+            set_power(0,rightRear);
+            set_power(0,leftRear);
+            state++;
+            break;
+        case 12:
+            driveStright("RUE",0.2,"r",0);
+
+            if (is_encoder_reached(5000, leftFront)) {
+
+                state++;
+                encoder=leftFront.getCurrentPosition();
+            }
+            break;
+        case 13:
             set_power(0,rightFront);
             set_power(0,leftFront);
             set_power(0,rightRear);
