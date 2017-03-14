@@ -210,26 +210,19 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
         set_mode(leftRear, mode);
         set_mode(rightFront, mode);
         set_mode(rightRear, mode);
-        double rawgyro=(current-zeropoint)/100;
-        int heading = current;
-        //if (heading>180)
-       // {   heading=360-heading;
-          //  heading=-heading;
-         //   }
-
         if (direction.toLowerCase().equals("r")) {
-            drift=(zeropoint-heading);
-            telemetry.addData("Drift: ",drift);
+            drift=(zeropoint-current);
+            telemetry.addData("Drift in direction R: ",drift);
             if(Math.abs(drift)>=maxDrift){
                 telemetry.addData("Max Drift Achieved","");
                 left_set_power(0);
                 right_set_power(0);
-                if(drift>0 && heading<180){
+                if(drift>0 && current<180){
                     turn_gyro_power_new(zeropoint,0.2, 0.6, "r");
-                    telemetry.addData("turn right","");
+                    telemetry.addData("adjusting right","");
                 }else {
                     turn_gyro_power_new(zeropoint,0.2, 0.6, "l");
-                    telemetry.addData("turn left","");
+                    telemetry.addData("adjusting left","");
                 }
             }
             else {
@@ -244,14 +237,18 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
             }
 
         } else {       // added else tim
-            drift=(zeropoint-heading);
+            drift=(zeropoint-current);
+            telemetry.addData("Drift in direction L: ",drift);
             if(Math.abs(drift)>=maxDrift){
+                telemetry.addData("Max Drift Achieved","");
                 left_set_power(0);
                 right_set_power(0);
-                if(drift>0){
+                if(drift>0 && current>180){
                     turn_gyro_power_new(zeropoint,0.2, 0.6, "l");
+                    telemetry.addData("adjusting left","");
                 }else {
                     turn_gyro_power_new(zeropoint,0.2, 0.6, "r");
+                    telemetry.addData("adjusting right","");
                 }
             }
             else {
@@ -269,13 +266,14 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
 
     public void turn_gyro_power_new(int desired_gyro, double starting_power, double fraction_to_change_power, String direction){
     double powervalue=0;
-    double last_part=(desired_gyro*fraction_to_change_power);
+        int heading = gyro.getHeading();
+        double last_part=(desired_gyro*fraction_to_change_power);
     if(direction.toLowerCase().equals("r")) {
-        if (gyro.getHeading() <= last_part) {
+        if (heading <= last_part) {
             powervalue = starting_power;
         }
-        else if (gyro.getHeading() > last_part) {
-            powervalue = (desired_gyro - gyro.getHeading()) / 50;
+        else if (heading> last_part) {
+            powervalue = (desired_gyro - heading) / 50;
         }
 
         if(powervalue < 0.03) {
@@ -285,18 +283,18 @@ public class Error404_Hardware_Tier2 extends Error404_Hardware_Tier1 { //VERSION
         pointTurn("RUE", powervalue, "r", 0); //turn towards line
     } // end if direction = r
     else {
-        int heading = gyro.getHeading();
         if (heading>180)
         {
             heading=-360+heading;
         }
-            telemetry.addData("Heading: ",heading);
+            telemetry.addData("Left Turn Heading: ",heading);
+
         if (heading >= -last_part) {
             powervalue = starting_power;
         }
         else// if (heading < -last_part)
              {
-            powervalue = (desired_gyro - gyro.getHeading()) / 50;
+            powervalue = (desired_gyro - Math.abs(heading)) / 50;
         }
 
         if (powervalue < 0.03) {

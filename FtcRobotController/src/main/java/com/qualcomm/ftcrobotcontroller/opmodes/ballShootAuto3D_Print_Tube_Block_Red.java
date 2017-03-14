@@ -2,7 +2,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class ballShootAuto3D_Print_Tube_Block_Blue extends Error404_Hardware_Tier2
+public class ballShootAuto3D_Print_Tube_Block_Red extends Error404_Hardware_Tier2
 
 {
   ///////////////////////////////////////////////////////////////////
@@ -10,7 +10,7 @@ public class ballShootAuto3D_Print_Tube_Block_Blue extends Error404_Hardware_Tie
   private int encoder=0;
   private int test=0;
 
-  public ballShootAuto3D_Print_Tube_Block_Blue()
+  public ballShootAuto3D_Print_Tube_Block_Red()
   {
   }
    @Override public void init(){

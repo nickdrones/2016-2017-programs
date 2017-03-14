@@ -45,11 +45,15 @@ public class gyroStateTest extends Error404_Hardware_Tier2
         state++;
         break;
       case 1:
-          turn_gyro_power(28, 0.1, 0.6, "r");
-         if (gyro.getHeading()>27 && gyro.getHeading()<180) {   //the <180 is to compensate if the robot turns slightly to the left
+          turn_gyro_power_new(90, 0.1, 0.6, "l");
+         if (gyro.getHeading()>180 && gyro.getHeading()<270) {   //the <180 is to compensate if the robot turns slightly to the left
           state++;
          }
          break;
+        case 2:
+            right_set_power(0);
+            left_set_power(0);
+            break;
 
         default:
             break;
