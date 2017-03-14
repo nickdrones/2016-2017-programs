@@ -391,18 +391,18 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7_BLOCKS_AFTER extends 
             break;
         case TURN_TO_BLOCK:              // turn slightly to face center vortex
             pointTurn("RUE", 0.2, "r", 0);
-            if (gyro.getHeading() > 70 && gyro.getHeading() < 85) {
-                state = STOP_FINAL;
+            if (gyro.getHeading() > 85 && gyro.getHeading() < 180) {
+                state = DRIVE_TO_VORTEX;
                 driveStright("RUE", 0, "f", 0);
                 encoder = leftFront.getCurrentPosition();
            }
             break;
-//       case DRIVE_TO_VORTEX:
-//            driveStright("RUE",0.4,"f",0); //drive to line's general area
-//            if (is_encoder_reached(encoder+2600, leftFront)) {
-//                state=STOP_FINAL;
-//            }
-//            break;
+       case DRIVE_TO_VORTEX:
+            driveStright("RUE",0.4,"f",0); //drive to line's general area
+            if (is_encoder_reached(encoder+2500, leftFront)) {
+                state=STOP_FINAL;
+            }
+            break;
         case STOP_FINAL:
             left_set_power(0.0);
             right_set_power(0.0);
