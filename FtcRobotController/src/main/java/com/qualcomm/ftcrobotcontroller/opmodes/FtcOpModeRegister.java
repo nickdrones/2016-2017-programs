@@ -24,5 +24,6 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("beacon red center",beaconAutonomousREDLinearSlideShorterRevA2_7.class);
     manager.register("beacon blue auto shoot",beaconAutonomousBLUELinearSlideShorterRevA2_7_shootFirst.class);
     manager.register("beacon blue auto block",beaconAutonomousBLUELinearSlideShorterRevA2_7_BLOCKS_AFTER.class);
+    manager.register("beacon red auto block",beaconAutonomousREDLinearSlideShorterRevA2_7_BLOCKS_AFTER.class);
   }
 }
