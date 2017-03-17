@@ -17,6 +17,7 @@ public class FtcOpModeRegister implements OpModeRegister {
   public void register(OpModeManager manager) {
 
     manager.register("Teleop", meccanumLaunchControl.class);
+    manager.register("Test of motors", motorTest.class);
     manager.register("Turn Test",gyroStateTest.class);
     manager.register("Ball shoot center",ballShootAuto3D_Print_Tube_Block_Blue.class);
     manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
