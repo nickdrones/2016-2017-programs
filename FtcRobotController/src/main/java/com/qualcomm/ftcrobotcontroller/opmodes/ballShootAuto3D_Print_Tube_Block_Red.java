@@ -133,8 +133,8 @@ public class ballShootAuto3D_Print_Tube_Block_Red extends Error404_Hardware_Tier
             state++;
             break;
         case 13:
-        pointTurn("RUE",0.1,"l",0); //turn towards line
-        if (gyro.getHeading()>180 && gyro.getHeading()<320) {   //the <180 is to compensate if the robot turns slightly to the left
+        pointTurn("RUE",0.1,"r",0); //turn towards line
+        if (gyro.getHeading()<180 && gyro.getHeading()>40) {   //the <180 is to compensate if the robot turns slightly to the left
             state++;
         }
         break;

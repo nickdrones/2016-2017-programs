@@ -101,7 +101,7 @@ public class beaconAutonomousREDLinearSlideShorterRevA2_7_BLOCKS_AFTER extends E
 
        gyroCalibrate();
        telemetry.addData("Gyro: ", gyro.getHeading());
-       telemetry.addData("","V 6");
+       telemetry.addData("","V1");
 //       if(touch.isPressed()){
 //           telemetry.addData("Touch 1 is pressed","");
 //       }
@@ -396,8 +396,8 @@ public class beaconAutonomousREDLinearSlideShorterRevA2_7_BLOCKS_AFTER extends E
             }
             break;
         case TURN_TO_BLOCK:              // turn slightly to face center vortex
-            pointTurn("RUE",0.2,"r",0);
-            if (gyro.getHeading()<10) {
+            pointTurn("RUE",0.2,"l",0);
+            if (gyro.getHeading()<255 && gyro.getHeading()>180) {
                 state = DRIVE_TO_BLOCK;
                 driveStright("RUE", 0, "f", 0);
                 encoder = leftFront.getCurrentPosition();

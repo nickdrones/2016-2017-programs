@@ -16,16 +16,15 @@ public class FtcOpModeRegister implements OpModeRegister {
    */
   public void register(OpModeManager manager) {
 
-    manager.register("Teleop", meccanumLaunchControl.class);
-    manager.register("Test of motors", motorTest.class);
-    manager.register("Turn Test",gyroStateTest.class);
-    manager.register("Ball shoot center",ballShootAuto3D_Print_Tube_Block_Blue.class);
-    manager.register("Cap Ball", mecanumCapBallStateMachine10_31_16.class);
-    manager.register("beacon blue center",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);
-    manager.register("beacon red center",beaconAutonomousREDLinearSlideShorterRevA2_7.class);
-    manager.register("beacon blue auto shoot",beaconAutonomousBLUELinearSlideShorterRevA2_7_shootFirst.class);
-    manager.register("beacon blue auto block",beaconAutonomousBLUELinearSlideShorterRevA2_7_BLOCKS_AFTER.class);
-    manager.register("beacon red auto block",beaconAutonomousREDLinearSlideShorterRevA2_7_BLOCKS_AFTER.class);
-    manager.register("beacon red auto shoot",beaconAutonomousREDLinearSlideShorterRevA2_7_shootFirst.class);
+    manager.register("Teleop", meccanumLaunchControl.class);//
+    manager.register("Shoot Straight",ballShootAuto3D_Print_Tube.class);//
+    manager.register("Shoot from side BLUE",ballShootAuto3D_Print_Tube_Block_Blue.class);//
+    manager.register("Shoot from side RED",ballShootAuto3D_Print_Tube_Block_Red.class);
+    manager.register("beacon blue center",beaconAutonomousBLUELinearSlideShorterRevA2_7.class);//
+    manager.register("beacon red center",beaconAutonomousREDLinearSlideShorterRevA2_7.class);//
+    manager.register("beacon blue auto shoot",beaconAutonomousBLUELinearSlideShorterRevA2_7_shootFirst.class);//
+    manager.register("beacon blue auto block",beaconAutonomousBLUELinearSlideShorterRevA2_7_BLOCKS_AFTER.class);//
+    manager.register("beacon red auto block",beaconAutonomousREDLinearSlideShorterRevA2_7_BLOCKS_AFTER.class);//
+    manager.register("beacon red auto shoot",beaconAutonomousREDLinearSlideShorterRevA2_7_shootFirst.class);//
   }
 }

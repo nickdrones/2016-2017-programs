@@ -106,12 +106,6 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7_shootFirst extends Er
        telemetry.addData("","V 6");
        balllauncher1.setDirection(DcMotor.Direction.FORWARD);
        balllauncher2.setDirection(DcMotor.Direction.REVERSE);
-//       if(touch.isPressed()){
-//           telemetry.addData("Touch 1 is pressed","");
-//       }
-//       if(touch2.isPressed()){
-//           telemetry.addData("Touch 2 is pressed","");
-//       }
        setServoPos(rightPush, rightVal);  // initialize servos to initial positions
        setServoPos(leftPush, leftVal);
 
