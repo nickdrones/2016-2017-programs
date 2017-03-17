@@ -162,6 +162,8 @@ public class meccanumLaunchControl extends OpMode {
     telemetry.addData ("01: Ball Launcher Power: ", powerval);
     telemetry.addData ("02: right pusher:  "+rightPush.getPosition()+ "||||   left pusher: "+leftPush.getPosition()+"","");
     telemetry.addData ("03: Ball Collector Power: ", collector);
+    telemetry.addData ("04: back right position: ", rightRear.getCurrentPosition());
+    telemetry.addData ("04: back left position: ", leftRear.getCurrentPosition());
 
   }
   @Override
