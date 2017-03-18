@@ -125,7 +125,7 @@ public class meccanumLaunchControl extends OpMode {
           incrementDir=2;
       }
       if(incrementDir==1&&!gamepad2.x){
-          powerval=powerval-0.05;
+          powerval=powerval-0.05;              //increment launcher motor power by 5% wth each push of the buttons
           incrementDir=0;
       }
       if(incrementDir==2&&!gamepad2.b){
