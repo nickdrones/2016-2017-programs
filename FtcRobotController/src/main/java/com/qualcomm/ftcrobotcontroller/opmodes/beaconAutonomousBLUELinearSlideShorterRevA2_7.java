@@ -282,8 +282,8 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             state = SLIDE_TO_OTHER_BEACON;
             break;
         case SLIDE_TO_OTHER_BEACON:
-            slide_sideways("RUE", 0.5, "r", 0);
-            if (is_encoder_reached(encoder + 2000, leftFront)) {
+            slide_sideways_gyro("RUE", 0.5, "r", 0);                             ///////////
+            if (is_encoder_reached(encoder + 2000, leftFront)) {  //slide to other beacon
                 state = SLIDE_SLOWLY_TILL_LINE;
             }
             break;
@@ -297,7 +297,7 @@ public class beaconAutonomousBLUELinearSlideShorterRevA2_7 extends Error404_Hard
             break;
         case STOP_ON_LINE:
             slide_sideways("RUE", 0, "l", 0);
-            encoder = leftFront.getCurrentPosition();
+            encoder = leftFront.getCurrentPosition(); //stop on line in front of beacon
             state = DRIVE_TILL_TOUCH2;
             break;
         case STRAFE_BACK_SLIGHTLY:

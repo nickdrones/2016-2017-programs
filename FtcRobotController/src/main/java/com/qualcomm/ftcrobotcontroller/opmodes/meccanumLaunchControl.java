@@ -68,7 +68,7 @@ public class meccanumLaunchControl extends OpMode {
     collector = (float) scaleInput(collector);
 
     float RF =(yL_val-xR_val-xL_val);  //these are the calculations need to make a simple
-    float LF =(yL_val+xR_val+xL_val);  // meaccnum drive. The left joystick controls moving
+    float LF =(yL_val+xR_val+xL_val);  // mecaccnum drive. The left joystick controls moving
     float RR= (yL_val-xR_val+xL_val);  //straight forward/backward and straight sideways. The
     float LR =(yL_val+xR_val-xL_val);  //right joystick controls turning.
 
@@ -85,12 +85,12 @@ public class meccanumLaunchControl extends OpMode {
     //////BEACON PRESSER////////////////
     /////////////////////////////////////
 
-   if(gamepad1.y){                   //Preset values for motor speeds for ball launcher
+   if(gamepad1.y){
       leftVal=0.15;
       rightVal=0.15;
     }
     else if(gamepad1.a){
-      leftVal =1.0;
+      leftVal =1.0;                      //controls for the beacon pusher servos
       rightVal=1.0;
     }
     else if(gamepad1.x){
@@ -117,7 +117,6 @@ public class meccanumLaunchControl extends OpMode {
     In other statements below, the driver is able to use the left joystick to control the speed
     difference between the
      */
-      //IF YOU ARE READING THIS TYPE "HEY NICK" IN THE COMMENTS
       if(gamepad2.x){
           incrementDir=1;
       }
