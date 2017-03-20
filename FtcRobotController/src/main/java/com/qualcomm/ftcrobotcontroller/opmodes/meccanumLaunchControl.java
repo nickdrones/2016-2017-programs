@@ -7,6 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 public class meccanumLaunchControl extends OpMode {
+    ////////////////////////////////////////////
+    // This is the Teleop program for driver control.
+    ////////////////////////////////////////////////
   DcMotor rightFront;
   DcMotor leftFront;
   DcMotor rightRear;
@@ -55,42 +58,46 @@ public class meccanumLaunchControl extends OpMode {
   }
   @Override
   public void loop() {
+  //////////////////////////////////////////
+  /////Drive Train//////////////////////////
+  /////////////////////////////////////////
 
     float yL_val = -gamepad1.left_stick_y*((float)0.7);            //reading raw values from the joysticks
     float xL_val = gamepad1.left_stick_x*((float)0.7);            //reading raw values from the joysticks
     float xR_val = gamepad1.right_stick_x/2;
-    float collector = gamepad2.right_trigger-gamepad2.left_trigger;
 
     //clip the right/left values so that the values never exceed +/- 1.
     yL_val = (float) scaleInput(yL_val);
     xL_val = (float) scaleInput(xL_val);
     xR_val = (float) scaleInput(xR_val);
-    collector = (float) scaleInput(collector);
 
     float RF =(yL_val-xR_val-xL_val);  //these are the calculations need to make a simple
     float LF =(yL_val+xR_val+xL_val);  // mecaccnum drive. The left joystick controls moving
     float RR= (yL_val-xR_val+xL_val);  //straight forward/backward and straight sideways. The
     float LR =(yL_val+xR_val-xL_val);  //right joystick controls turning.
 
-    collector = Range.clip(collector, -1, 1);
     RF = Range.clip(RF, -1, 1);
     LF = Range.clip(LF, -1, 1);
     RR = Range.clip(RR, -1, 1);
     LR = Range.clip(LR, -1, 1);
 
-    float launcher = gamepad2.right_stick_y;
-    launcher = (float) scaleInput(launcher);
+  //////////////////////////////////////////
+  /////Ball Collector//////////////////////
+  /////////////////////////////////////////
+      float collector = gamepad2.right_trigger-gamepad2.left_trigger;
+      collector = (float) scaleInput(collector);
+      collector = Range.clip(collector, -1, 1); //To keep power value within the acceptable range.
 
-//////////////////////////////////////////////////////////
-    //////BEACON PRESSER////////////////
-    /////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////BEACON PRESSER////////////////
+  /////////////////////////////////////
 
    if(gamepad1.y){
       leftVal=0.15;
       rightVal=0.15;
     }
     else if(gamepad1.a){
-      leftVal =1.0;                      //controls for the beacon pusher servos
+      leftVal =1.0;
       rightVal=1.0;
     }
     else if(gamepad1.x){
@@ -109,14 +116,14 @@ public class meccanumLaunchControl extends OpMode {
     leftPush.setPosition(leftVal);
 
 
-/////////////////////////////////////////////////////////////
-    //////LAUNCHER MOTOR 1////////////////
-    /////////////////////////////////////
-     /*
-    The below statements allow the driver to write a constant speed to the launcher motors.
-    In other statements below, the driver is able to use the left joystick to control the speed
-    difference between the
-     */
+   /////////////////////////////////////////////////////////////
+    //     LAUNCHER MOTORS                ////////////////
+    //The below statements allow the driver to write a constant speed to the launcher motors.
+    // The driver can also increase or decrease the launcher power in increments of 5%.
+     /////////////////////////////////////
+      float launcher = gamepad2.right_stick_y;
+      launcher = (float) scaleInput(launcher);
+
       if(gamepad2.x){
           incrementDir=1;
       }
@@ -124,7 +131,7 @@ public class meccanumLaunchControl extends OpMode {
           incrementDir=2;
       }
       if(incrementDir==1&&!gamepad2.x){
-          powerval=powerval-0.05;              //increment launcher motor power by 5% wth each push of the buttons
+          powerval=powerval-0.05;
           incrementDir=0;
       }
       if(incrementDir==2&&!gamepad2.b){
@@ -145,12 +152,7 @@ public class meccanumLaunchControl extends OpMode {
     }
 
     float launchpower1=launcher+launchspeed1;
-    //next two lines control difference between launcher motors
-    /*
-    Taking the motor power and subtracting the value from the top and adding it to the bottom
-    will allow for more fine control of pitch and spin of ball.
-    */
-    launchpower1=Range.clip(launchpower1, -1, 1);
+    launchpower1=Range.clip(launchpower1, -1, 1); //clip the launcher power to keep in within aceptable range
     balllauncher1.setPower(launchpower1);
     balllauncher2.setPower(launchpower1);
     rightFront.setPower(RF);
