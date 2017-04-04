@@ -26,9 +26,9 @@ public class ServoBallLifterTest extends OpMode {
       liftLeft3 = hardwareMap.servo.get("liftLeft3");
       liftLeft4 = hardwareMap.servo.get("liftLeft4");
       liftRight1 = hardwareMap.servo.get("liftRight1");
-      liftRight2 = hardwareMap.servo.get("leftRight2");
-      liftRight3 = hardwareMap.servo.get("leftRight3");
-      liftRight4 = hardwareMap.servo.get("leftRight4");
+      liftRight2 = hardwareMap.servo.get("liftRight2");
+      liftRight3 = hardwareMap.servo.get("liftRight3");
+      liftRight4 = hardwareMap.servo.get("liftRight4");
 
       liftLeft1.setPosition(.5);
       liftLeft2.setPosition(.5);
@@ -74,6 +74,30 @@ public class ServoBallLifterTest extends OpMode {
           liftRight2.setPosition(.75);
           liftRight3.setPosition(.75);
           liftRight4.setPosition(.75);
+      }
+
+      if(gamepad1.y)
+      {
+          liftLeft1.setPosition(1);
+          liftLeft2.setPosition(1);
+          liftLeft3.setPosition(1);
+          liftLeft4.setPosition(1);
+          liftRight1.setPosition(1);
+          liftRight2.setPosition(1);
+          liftRight3.setPosition(1);
+          liftRight4.setPosition(1);
+      }
+
+      if(gamepad1.dpad_right)
+      {
+          liftLeft1.setPosition(.15);
+          liftLeft2.setPosition(.15);
+          liftLeft3.setPosition(.15);
+          liftLeft4.setPosition(.15);
+          liftRight1.setPosition(.15);
+          liftRight2.setPosition(.15);
+          liftRight3.setPosition(.15);
+          liftRight4.setPosition(.15);
       }
 
   }
