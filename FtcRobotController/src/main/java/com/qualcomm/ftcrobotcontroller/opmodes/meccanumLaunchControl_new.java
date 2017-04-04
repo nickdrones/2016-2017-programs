@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-public class meccanumLaunchControl extends OpMode {
+public class meccanumLaunchControl_new extends OpMode {
     ////////////////////////////////////////////
     // This is the Teleop program for driver control.
     ////////////////////////////////////////////////
@@ -19,12 +19,14 @@ public class meccanumLaunchControl extends OpMode {
   DcMotor balllauncher2;
   Servo leftPush;
   Servo rightPush;
+  Servo collector_helper;
   float launchspeed1;
   double powerval;
   double rightVal=0;
   double leftVal=0;
   double incrementDir=0;
-  public meccanumLaunchControl() {
+  double collector_helper_position = 0;
+  public meccanumLaunchControl_new() {
   }
   @Override
   public void init() {
@@ -32,6 +34,7 @@ public class meccanumLaunchControl extends OpMode {
     telemetry.addData ("0", "I AM HERE");
     leftPush = hardwareMap.servo.get("leftPush");
     rightPush = hardwareMap.servo.get("rightPush");
+    collector_helper = hardwareMap.servo.get("collector helper");
     balllauncher1 = hardwareMap.dcMotor.get("balllauncher1");
     balllauncher1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
     balllauncher1.setDirection(DcMotor.Direction.FORWARD);
@@ -53,8 +56,10 @@ public class meccanumLaunchControl extends OpMode {
     leftRear.setDirection(DcMotor.Direction.FORWARD);
     rightRear.setDirection(DcMotor.Direction.REVERSE);
     telemetry.addData("","V 2");
+      telemetry.addData("collector helper position init: ", collector_helper.getPosition());
       leftVal=0.5;
       rightVal=0.5;
+      collector_helper.setPosition(0.5);
   }
   @Override
   public void loop() {
@@ -88,6 +93,18 @@ public class meccanumLaunchControl extends OpMode {
       collector = (float) scaleInput(collector);
       collector = Range.clip(collector, -1, 1); //To keep power value within the acceptable range.
 
+      if(gamepad2.left_bumper)
+      {
+          collector_helper.setPosition(1);
+      }
+      else if(gamepad2.right_bumper)
+      {
+          collector_helper.setPosition(0);
+      }
+      else
+      {
+          collector_helper.setPosition(0.5);
+      }
   //////////////////////////////////////////////////////////
   //////BEACON PRESSER////////////////
   /////////////////////////////////////

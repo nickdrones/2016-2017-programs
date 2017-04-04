@@ -26,5 +26,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("beacon blue auto block",beaconAutonomousBLUELinearSlideShorterRevA2_7_BLOCKS_AFTER.class);//
     manager.register("beacon red auto block",beaconAutonomousREDLinearSlideShorterRevA2_7_BLOCKS_AFTER.class);//
     manager.register("beacon red auto shoot",beaconAutonomousREDLinearSlideShorterRevA2_7_shootFirst.class);//
+    manager.register("scissor lift test program",ServoBallLifterTest.class);
+    manager.register("Teleop new", meccanumLaunchControl_new.class);
   }
 }
